@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 12:16 PM
+-- Generation Time: Jun 11, 2013 at 06:36 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `challenges` (
   PRIMARY KEY (`id`),
   KEY `level` (`level`),
   KEY `fk_category` (`fk_category`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS `programs` (
   `code` text NOT NULL,
   `code_history` text NOT NULL,
   `last_update` int(11) NOT NULL,
-  `grade` int(11) NOT NULL,
+  `grade` int(11) NOT NULL DEFAULT '-1',
   `locked` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_user` (`fk_user`,`fk_challenge`),
   KEY `fk_challenge` (`fk_challenge`),
   KEY `fk_user_2` (`fk_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   KEY `password` (`password`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Constraints for dumped tables

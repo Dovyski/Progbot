@@ -9,5 +9,6 @@ require_once dirname(__FILE__).'/db.php';
 require_once dirname(__FILE__).'/auth.php';
 require_once dirname(__FILE__).'/layout.php';
 require_once dirname(__FILE__).'/challenge.php';
+require_once dirname(__FILE__).'/code.php';
 
 ?>

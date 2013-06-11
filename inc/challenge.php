@@ -16,19 +16,6 @@ function challengeGetById($theId) {
 	return $aRet;
 }
 
-function challengeGetAnswerByUser($theChallengeId, $theUserId) {
-	global $gDb;
-	
-	$aRet = null;
-	$aQuery = $gDb->prepare("SELECT id, date, code, last_update, grade, locked FROM programs WHERE fk_challenge = ? AND fk_user = ?");
-	
-	if ($aQuery->execute(array($theChallengeId, $theUserId))) {
-		$aRet = $aQuery->fetch();
-	}
-	
-	return $aRet;
-}
-
 function challengeFindActivesByUser($theUserId) {
 	global $gDb;
 	
