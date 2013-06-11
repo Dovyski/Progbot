@@ -9,19 +9,53 @@
 		echo '<p>Lista de desafios que podem ser resolvidos.</p>';
 	echo '</div>';
 	
-	$aChallenges = $gDb->query("SELECT * FROM challenges WHERE 1");
 	
-	if ($aChallenges->rowCount() == 0) {
+	// Active challenges
+	$aChallenges = challengeFindActivesByUser($_SESSION['user']['id']);
+	
+	echo '<div class="row">';
+		echo '<div class="span12">';
+				echo '<h1>Desafios ativos</h1>';
+			echo '</div>';
+	echo '</div>';
+	
+	if (count($aChallenges) == 0) {
 		echo '<div class="row">';
 			echo '<div class="span12">';
-					echo '<p>Não há desafios cadastrados no momento</p>';
+					echo '<p>Não há desafios ativos para você no momento</p>';
 				echo '</div>';
 		echo '</div>';
 	} else {
-		while($aRow = $aChallenges->fetch()) {
+		foreach($aChallenges as $aIdChallenge => $aRow) {
 			echo '<div class="row">';
 				echo '<div class="span12">';
-						echo '<h2><a href="code.php?challenge='.$aRow['id'].'">'.$aRow['name'].'</a> <span class="label label-warning">Nível '.$aRow['level'].'</span></h2>';
+						echo '<h2><a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> <span class="label label-warning">Nível '.$aRow['level'].'</span></h2>';
+						echo '<p>'.$aRow['description'].'</p>';
+					echo '</div>';
+			echo '</div>';
+		}
+	}
+	
+	// Answered challenges
+	echo '<div class="row">';
+		echo '<div class="span12">';
+				echo '<h1>Desafios já respondidos</h1>';
+			echo '</div>';
+	echo '</div>';
+	
+	$aAnswered = challengeFindAnsweredByUser($_SESSION['user']['id']);
+	
+	if (count($aAnswered) == 0) {
+		echo '<div class="row">';
+			echo '<div class="span12">';
+					echo '<p>Você ainda não resolveu desafios.</p>';
+				echo '</div>';
+		echo '</div>';
+	} else {
+		foreach($aAnswered as $aIdChallenge => $aRow) {
+			echo '<div class="row">';
+				echo '<div class="span12">';
+						echo '<h2><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> <span class="label label-warning">Nível '.$aRow['level'].'</span></h2>';
 						echo '<p>'.$aRow['description'].'</p>';
 					echo '</div>';
 			echo '</div>';

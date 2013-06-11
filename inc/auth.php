@@ -8,7 +8,7 @@ function authIsValidUser($theUser, $thePassword) {
 }
 
 function authLogin($theUser) {
-	$_SESSION['logado'] = true;
+	$_SESSION['authenticaded'] = true;
 	$_SESSION['user'] = array('name' => 'John Doe', 'id' => 1); // TODO: fix this and get real user info.
 }
 
@@ -20,7 +20,7 @@ function authAllowNonAuthenticated() {
 }
 
 function authAllowAdmin() {
-	if(!authIsLogado()) {
+	if(!authIsauthenticaded()) {
 		header('Location: login.php');
 		exit();
 		
@@ -31,7 +31,7 @@ function authAllowAdmin() {
 }
 
 function authAllowAuthenticated() {
-	if(!authIsLogado()) {
+	if(!authIsauthenticaded()) {
 		header('Location: login.php');
 		exit();
 	}
@@ -43,7 +43,7 @@ function authLogout() {
 }
 
 function authIsAuthenticated() {
-	return isset($_SESSION['logado']) && $_SESSION['logado'];
+	return isset($_SESSION['authenticaded']) && $_SESSION['authenticaded'];
 }
 
 function authIsAdmin() {

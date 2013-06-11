@@ -3,9 +3,9 @@
 
 	layoutHeader('Inicial');
 	
-	$aChallengeId 	= isset($_GET['challenge']) ? (int)$_GET['challenge'] : 0;
-	$aChallenge 	= challengeGetById($aChallengeId);
-	
+	$aChallenge = challengeGetById($_GET['challenge']);
+	$aAnswer	= challengeGetAnswerByUser($_GET['challenge'], $_SESSION['user']['id']);
+
 	if ($aChallenge == null) {
 		echo '<div class="row">';
 			echo '<div class="span12">';
@@ -18,6 +18,13 @@
 				echo '<h1>'.$aChallenge['name'].'</h1>';
 				echo '<p>'.$aChallenge['description'].'</p>';
 			echo '</div>';
+			
+			if ($aAnswer != null) {
+				echo '<div class="span12">';
+					echo 'Resposta: <br/>';
+					var_dump($aAnswer);
+				echo '</div>';
+			}
 		echo '</div>';
 	}
 	
