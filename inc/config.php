@@ -2,12 +2,12 @@
 
 define('LAYOUT_RESPONSIVE',			false);
 
-// Informações do db
+// Database info
 define('DB_DSN',					'mysql:host=localhost;dbname=codebot');
 define('DB_USER',					'root');
 define('DB_PASSWORD',				'');
 
-// Controle do site
+// System params
 define('DEBUG_MODE', 				true);
 define('SESSION_NAME', 				'codebotsid');
 ?>

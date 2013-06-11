@@ -2,24 +2,14 @@
 
 require_once dirname(__FILE__).'/config.php';
 
-/** 
- * Efetua login de um usuário no domínio do NCC utilizando LDAP.
- * 
- * @param string $theUser nome do usuário, ex.: fernando
- * @param string $thePassword senha do usuário.
- * @return bool <code>true</code> se o usuário foi autenticado com sucesso, ou <code>false</code> caso contrário.
- */
+
 function authIsValidUser($theUser, $thePassword) {
 	return true;
 }
 
 function authLogin($theUser) {
 	$_SESSION['logado'] = true;
-	$_SESSION['user'] = array('name' => 'John Doe', 'id' => 1);
-	
-	//if(in_array($theUser, $aAdmins)) {
-	//	$_SESSION['admin'] = true;
-	//}
+	$_SESSION['user'] = array('name' => 'John Doe', 'id' => 1); // TODO: fix this and get real user info.
 }
 
 function authAllowNonAuthenticated() {

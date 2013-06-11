@@ -18,6 +18,7 @@ function layoutNavBar() {
 				echo '<div class="nav-collapse">';
 					echo '<ul class="nav">';
 						echo '<li '.($aPage == 'index.php' 			? 'class="active"' : '').'><a href="index.php">Inicial</a></li>';
+						echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
 					echo '</ul>';
 					
 					layoutUserBar();
