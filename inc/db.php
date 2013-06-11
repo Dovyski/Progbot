@@ -1,0 +1,15 @@
+<?php
+
+require_once dirname(__FILE__).'/config.php';
+
+global $gDb;
+
+try {
+    $gDb = new PDO(DB_DSN, DB_USER, DB_PASSWORD, array(PDO::ATTR_PERSISTENT => true));
+	
+} catch (PDOException $e) {
+    print "Database error! " . $e->getMessage();
+    die();
+}
+
+?>
