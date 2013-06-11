@@ -3,13 +3,30 @@
 require_once dirname(__FILE__).'/config.php';
 
 
-function authIsValidUser($theUser, $thePassword) {
-	return true;
+function authIsValidUser($theUserLogin, $thePassword) {
+	global $gDb;
+	
+	$aQuery = $gDb->prepare("SELECT id FROM users WHERE login = ? AND password = ?");
+	$aRet = false;
+	
+	if ($aQuery->execute(array($theUserLogin, $thePassword))) { // TODO: password hash!
+		$aRet = true;
+	}
+	
+	return $aRet;
 }
 
-function authLogin($theUser) {
-	$_SESSION['authenticaded'] = true;
-	$_SESSION['user'] = array('name' => 'John Doe', 'id' => 1); // TODO: fix this and get real user info.
+function authLogin($theUserLogin) {
+	global $gDb;
+	
+	$aQuery = $gDb->prepare("SELECT id, name FROM users WHERE login = ?");
+	
+	if ($aQuery->execute(array($theUserLogin))) {	
+		$aUser = $aQuery->fetch();
+		
+		$_SESSION['authenticaded'] = true;
+		$_SESSION['user'] = array('name' => $aUser['name'], 'id' => $aUser['id']);
+	}
 }
 
 function authAllowNonAuthenticated() {

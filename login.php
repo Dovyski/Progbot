@@ -5,8 +5,8 @@
 	$aErroLogin = false;
 	
 	if(count($_POST) > 0) {
-		if(isset($_POST['usuario'], $_POST['senha']) && authIsValidUser($_POST['usuario'], $_POST['senha'])) {
-			authLogin($_POST['usuario']);
+		if(isset($_POST['user'], $_POST['password']) && authIsValidUser($_POST['user'], $_POST['password'])) {
+			authLogin($_POST['user']);
 			
 			header('Location: ' . (authIsAdmin() ? 'admin.index.php' : 'index.php'));
 			exit();
@@ -17,7 +17,7 @@
 	
 	layoutHeader('Login');
 	
-	echo '<div class="hero-unit fundo-icone icone-senha">';
+	echo '<div class="hero-unit fundo-icone icone-password">';
 		echo '<h1>Login</h1>';
 		echo '<p>Acesso à administração do NCC.</p>';
 	echo '</div>';
@@ -30,12 +30,12 @@
 			          <div class="control-group '.($aErroLogin ? 'error' : '').'">
 			            <label class="control-label">Usuário</label>
 			            <div class="controls docs-input-sizes">
-			              <input name="usuario" class="span3" type="text" placeholder="Seu usuário NCC">
+			              <input name="user" class="span3" type="text" placeholder="Seu usuário NCC">
 			            </div>
-			            <label class="control-label">Senha</label>
+			            <label class="control-label">password</label>
 			            <div class="controls docs-input-sizes">
-			              <input name="senha" class="span3" type="password" placeholder="sua senha">
-						  '.($aErroLogin ? '<span class="help-inline">Usuário ou senha inválidos.</span>' : '').'
+			              <input name="password" class="span3" type="password" placeholder="sua password">
+						  '.($aErroLogin ? '<span class="help-inline">Usuário ou password inválidos.</span>' : '').'
 			            </div>
 			          </div>
 			          <div class="form-actions">
