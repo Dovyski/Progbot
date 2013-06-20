@@ -19,6 +19,7 @@ function layoutNavBar() {
 					echo '<ul class="nav">';
 						echo '<li '.($aPage == 'index.php' 			? 'class="active"' : '').'><a href="index.php">Inicial</a></li>';
 						echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
+						echo '<li '.($aPage == 'reviews.php' 		? 'class="active"' : '').'><a href="reviews.php">Correções</a></li>';
 					echo '</ul>';
 					
 					layoutUserBar();

@@ -8,6 +8,7 @@ header('Content-Type: text/javascript; charset=iso-8859-1');
 
 switch($aAction) {
 	case 'savecode':
+		// TODO: check privileges
 		$aRet = codeSave($_SESSION['user']['id'], @$_REQUEST['programId'], @$_REQUEST['code']);
 		break;
 		

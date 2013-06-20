@@ -37,6 +37,36 @@ function challengeFindActivesByUser($theUserId) {
 	return $aRet;
 }
 
+function challengeFindByGroup($theGroupId) {
+	global $gDb;
+	
+	$aRet 		= array();
+	$aQuery 	= $gDb->prepare("SELECT * FROM challenges WHERE fk_group = ?");
+	
+	if ($aQuery->execute(array($theGroupId))) {
+		while($aRow = $aQuery->fetch()) {
+			$aRet[$aRow['id']] = $aRow;
+		}
+	}
+	
+	return $aRet;
+}
+
+function challengeFindAnswersById($theChallengeId) {
+	global $gDb;
+	
+	$aRet 		= array();
+	$aQuery 	= $gDb->prepare("SELECT id, fk_user, last_update, grade, locked FROM programs WHERE fk_challenge = ?");
+	
+	if ($aQuery->execute(array($theChallengeId))) {
+		while($aRow = $aQuery->fetch()) {
+			$aRet[$aRow['id']] = $aRow;
+		}
+	}
+	
+	return $aRet;
+}
+
 function challengeFindAnsweredByUser($theUserId, $theStart = 0, $theAmount = 10) {
 	global $gDb;
 	
@@ -53,7 +83,7 @@ function challengeFindAnsweredByUser($theUserId, $theStart = 0, $theAmount = 10)
 	return $aRet;
 }
 
-function challengeCanBeViewed($theChallengeId, $theUserInfo) {
+function challengeCanBeViewedBy($theChallengeId, $theUserInfo) {
 	global $gDb;
 	
 	$aQuery = $gDb->prepare("SELECT id FROM challenges WHERE id = ? AND (fk_group = ? OR fk_group IS NULL)");
@@ -62,7 +92,22 @@ function challengeCanBeViewed($theChallengeId, $theUserInfo) {
 	return $aQuery->rowCount() != 0;
 }
 
-function challengeCanBeAnswered($theChallengeId, $theUserInfo) {
+function challengeCanBeReviewedBy($theChallengeId, $theUserInfo) {
+	global $gDb;
+	
+	$aRet = false;
+
+	if ($theUserInfo['type'] == USER_LEVEL_PROFESSOR) {
+		$aQuery = $gDb->prepare("SELECT id FROM challenges WHERE id = ? AND fk_group = ?");
+		$aQuery->execute(array($theChallengeId, (int)$theUserInfo['fk_group']));
+	
+		$aRet = $aQuery->rowCount() != 0;
+	}
+	
+	return $aRet;
+}
+
+function challengeCanBeAnsweredBy($theChallengeId, $theUserInfo) {
 	global $gDb;
 	
 	return true; // TODO: fix it. Can be answered if not locked/graded and challengeCanBeViewed().

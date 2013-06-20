@@ -21,7 +21,7 @@ function codeGetProgramByUser($theUserId, $theChallengeId) {
 	global $gDb;
 	
 	$aRet = null;
-	$aQuery = $gDb->prepare("SELECT id, date, code, last_update, grade, locked FROM programs WHERE fk_challenge = ? AND fk_user = ?");
+	$aQuery = $gDb->prepare("SELECT id, fk_user, date, code, last_update, grade, locked FROM programs WHERE fk_challenge = ? AND fk_user = ?");
 	
 	if ($aQuery->execute(array($theChallengeId, $theUserId))) {
 		$aRet = $aQuery->fetch();
