@@ -19,13 +19,13 @@ function authIsValidUser($theUserLogin, $thePassword) {
 function authLogin($theUserLogin) {
 	global $gDb;
 	
-	$aQuery = $gDb->prepare("SELECT id, name FROM users WHERE login = ?");
+	$aQuery = $gDb->prepare("SELECT id, name, type FROM users WHERE login = ?");
 	
 	if ($aQuery->execute(array($theUserLogin))) {	
 		$aUser = $aQuery->fetch();
 		
 		$_SESSION['authenticaded'] = true;
-		$_SESSION['user'] = array('name' => $aUser['name'], 'id' => $aUser['id']);
+		$_SESSION['user'] = array('name' => $aUser['name'], 'id' => $aUser['id'], 'type' => $aUser['type']);
 	}
 }
 
