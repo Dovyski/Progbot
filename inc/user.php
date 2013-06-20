@@ -6,13 +6,13 @@ define('USER_LEVEL_STUDENT', 	1);
 define('USER_LEVEL_PROFESSOR', 	2);
 define('USER_LEVEL_ADMIN', 		3);
 
-function userGetByLogin($theUserLogin) {
+function userGetById($theUserId) {
 	global $gDb;
 	
 	$aUser = null;
-	$aQuery = $gDb->prepare("SELECT id, name FROM users WHERE login = ?");
+	$aQuery = $gDb->prepare("SELECT id, fk_group, login, name, email, type FROM users WHERE id = ?");
 	
-	if ($aQuery->execute(array($theUserLogin))) {	
+	if ($aQuery->execute(array($theUserId))) {	
 		$aUser = $aQuery->fetch();
 	}
 	

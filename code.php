@@ -3,17 +3,23 @@
 
 	layoutHeader('Inicial');
 	
-	$aChallenge = challengeGetById($_GET['challenge']);
-	$aProgram	= codeGetProgramByUser($_SESSION['user']['id'], $_GET['challenge']);
+	$aChallengeId 	= $_GET['challenge'];
+	$aChallenge 	= null;
+	$aUserInfo		= userGetById($_SESSION['user']['id']);
+	
+	if (challengeCanBeViewed($aChallengeId, $aUserInfo)) {
+		$aChallenge = challengeGetById($aChallengeId);
+		$aProgram 	= codeGetProgramByUser($aUserInfo['id'], $aChallengeId);
 
-	if ($aProgram == null) {
-		$aProgram = codeCreate($_SESSION['user']['id'], $_GET['challenge']);
+		if ($aProgram == null) {
+			$aProgram = codeCreate($aUserInfo['id'], $aChallengeId);
+		}
 	}
 	
 	if ($aChallenge == null) {
 		echo '<div class="row">';
 			echo '<div class="span12">';
-				echo '<p>O desafio informado não existe.</p>';
+				echo '<p>O desafio informado não existe ou você não possui acesso a ele.</p>';
 			echo '</div>';
 		echo '</div>';
 	} else {
@@ -39,10 +45,10 @@
 				echo '</div>';
 			}
 		echo '</div>';
-	}
-	
-	if($aProgram['grade'] < 0) {
-		echo '<script type="text/javascript">CODEBOT.initAutoSave();</script>';
+		
+		if($aProgram['grade'] < 0) {
+			echo '<script type="text/javascript">CODEBOT.initAutoSave();</script>';
+		}
 	}
 	
 	layoutFooter();
