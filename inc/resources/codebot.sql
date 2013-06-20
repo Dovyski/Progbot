@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 06:36 PM
+-- Generation Time: Jun 20, 2013 at 06:58 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `codebot`
 --
+CREATE DATABASE `codebot` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `codebot`;
 
 -- --------------------------------------------------------
 
@@ -29,14 +31,28 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `challenges` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fk_category` int(11) unsigned NOT NULL,
+  `fk_group` int(11) unsigned DEFAULT NULL,
   `date` int(11) NOT NULL,
   `description` text NOT NULL,
   `name` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `level` (`level`),
-  KEY `fk_category` (`fk_category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  KEY `fk_category` (`fk_category`),
+  KEY `fk_group` (`fk_group`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `programs` (
   KEY `fk_user` (`fk_user`,`fk_challenge`),
   KEY `fk_challenge` (`fk_challenge`),
   KEY `fk_user_2` (`fk_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -68,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `programs` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_group` int(11) unsigned DEFAULT NULL,
   `login` varchar(20) NOT NULL,
   `password` varchar(32) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -75,8 +92,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
-  KEY `password` (`password`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  KEY `password` (`password`),
+  KEY `fk_group` (`fk_group`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 --
 -- Constraints for dumped tables
@@ -86,8 +104,14 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Constraints for table `programs`
 --
 ALTER TABLE `programs`
-  ADD CONSTRAINT `programs_ibfk_2` FOREIGN KEY (`fk_challenge`) REFERENCES `challenges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `programs_ibfk_1` FOREIGN KEY (`fk_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `programs_ibfk_1` FOREIGN KEY (`fk_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `programs_ibfk_2` FOREIGN KEY (`fk_challenge`) REFERENCES `challenges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fk_group`) REFERENCES `groups` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
