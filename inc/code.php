@@ -6,15 +6,18 @@ function codeSave($theUserId, $theProgramId, $theCode) {
 	global $gDb;
 
 	$aQuery = $gDb->prepare("UPDATE programs SET code = ?, last_update = ? WHERE id = ? AND fk_user = ?");
-	$aRet   = false;
-	
 	$aQuery->execute(array($theCode, time(), $theProgramId, $theUserId));
 	
-	if ($aQuery->rowCount()) {
-		$aRet = true;
-	}
+	return $aQuery->rowCount();
+}
+
+function codeGrade($theProgramId, $theGrade) {
+	global $gDb;
+
+	$aQuery = $gDb->prepare("UPDATE programs SET grade = ? WHERE id = ?");
+	$aQuery->execute(array($theGrade, $theProgramId));
 	
-	return $aRet;
+	return $aQuery->rowCount();
 }
 
 function codeGetProgramByUser($theUserId, $theChallengeId) {

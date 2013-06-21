@@ -38,6 +38,20 @@
 		echo '<div class="row">';
 			echo '<div class="span12">';
 				echo '<p>REVISANDO CÓDIGO!</p>';
+				
+				if ($aProgram != null) {
+					echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
+						echo '<input type="hidden" name="action" value="writereview" />';
+						echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+						echo '<textarea name="comment" id="comment" style="width: 100%; height: 80px;"></textarea>';
+						echo '<input type="text" name="grade" value="'.$aProgram['grade'].'" />';
+						echo '<input type="submit" name="submit" value="Enviar" />';
+					echo '</form>';
+					
+					echo 'Reviews:<br/>';
+					$aReviews = reviewFindByProgramId($aProgram['id']);
+					var_dump($aReviews);
+				}
 			echo '</div>';
 		echo '</div>';
 	}
@@ -57,7 +71,7 @@
 			
 			if ($aProgram != null) {
 				echo '<div class="span12">';
-					echo 'Resposta (by '.$aProgram['fk_user'].'): <br/>';
+					echo 'Resposta (by '.$aProgram['fk_user'].') '.($aProgram['grade'] < 0 ? '' : '<strong>NOTA:</strong> ' . $aProgram['grade']).': <br/>';
 				echo '</div>';
 				
 				echo '<div class="span12">';
