@@ -16,6 +16,32 @@ function challengeGetById($theId) {
 	return $aRet;
 }
 
+function challengeCreateOrUpdate($theChallengeId, $theData) {
+	global $gDb;
+	
+	$aRet			= false;
+	$aId 			= $theChallengeId + 0;
+	$aCategoryId 	= isset($theData['fk_category']) 	? $theData['fk_category'] 	: 0;
+	$aGroupId 		= isset($theData['fk_group']) 		? $theData['fk_group'] 		: 0;
+	$aDate 			= isset($theData['date']) 			? $theData['date'] 			: time();
+	$aDescription 	= isset($theData['description']) 	? $theData['description'] 	: '';
+	$aName 			= isset($theData['name']) 			? $theData['name'] 			: '';
+	$aLevel 		= isset($theData['level']) 			? $theData['level'] 		: 0;
+	
+	$aQuery = $gDb->prepare("INSERT INTO challenges (id, fk_category, fk_group, date, description, name, level)
+											VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE fk_category = ?, fk_group = ?, date = ?, description = ?, name = ?, level = ?");
+
+	if(strlen($aName) > 5 && strlen($aDescription) > 10) {
+		$aParams = array($aId, $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel,
+						 $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel);
+		
+		$aQuery->execute($aParams);
+		$aRet = $aQuery->rowCount();
+	}
+	
+	return $aRet;
+}
+
 function challengeFindActivesByUser($theUserId) {
 	global $gDb;
 	

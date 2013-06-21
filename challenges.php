@@ -9,7 +9,16 @@
 		echo '<p>Lista de desafios que podem ser resolvidos.</p>';
 	echo '</div>';
 	
+	$aUser = userGetById($_SESSION['user']['id']);
 	
+	if($aUser['type'] == USER_LEVEL_PROFESSOR) {
+		echo '<div class="row">';
+			echo '<div class="span12">';
+				echo '<a href="challenges-manager.php">Criar novo desafio</a><br/><br/>';				
+			echo '</div>';
+		echo '</div>';
+	}
+		
 	// Active challenges
 	$aChallenges = challengeFindActivesByUser($_SESSION['user']['id']);
 	
@@ -29,9 +38,11 @@
 		foreach($aChallenges as $aIdChallenge => $aRow) {
 			echo '<div class="row">';
 				echo '<div class="span12">';
-						echo '<h2><a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> <span class="label label-warning">Nível '.$aRow['level'].'</span></h2>';
-						echo '<p>'.$aRow['description'].'</p>';
-					echo '</div>';
+					echo '<h2><a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a>';
+					echo '<span class = "label label-warning" > Nível '.$aRow['level'].' </span> '; // TODO: create some standart way to print challenges.
+					echo '<a href="challenges-manager.php?id='.$aIdChallenge.'"><span class = "label label-info">Editar</span></a></h2 > ';
+					echo '<p>'.$aRow['description'].'</p>';
+				echo '</div>';
 			echo '</div>';
 		}
 	}
@@ -55,9 +66,11 @@
 		foreach($aAnswered as $aIdChallenge => $aRow) {
 			echo '<div class="row">';
 				echo '<div class="span12">';
-						echo '<h2><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> <span class="label label-warning">Nível '.$aRow['level'].'</span></h2>';
-						echo '<p>'.$aRow['description'].'</p>';
-					echo '</div>';
+					echo '<h2><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a>';
+					echo '<span class = "label label-warning" > Nível '.$aRow['level'].' </span> '; // TODO: create some standart way to print challenges.
+					echo '<a href="challenges-manager.php?id='.$aIdChallenge.'"><span class = "label label-info">Editar</span></a></h2 > ';
+					echo '<p>'.$aRow['description'].'</p>';
+				echo '</div>';
 			echo '</div>';
 		}
 	}
