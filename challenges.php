@@ -10,11 +10,12 @@
 	echo '</div>';
 	
 	$aUser = userGetById($_SESSION['user']['id']);
+	$aIsProfessor = $aUser['type'] == USER_LEVEL_PROFESSOR;
 	
-	if($aUser['type'] == USER_LEVEL_PROFESSOR) {
+	if($aIsProfessor) {
 		echo '<div class="row">';
-			echo '<div class="span12">';
-				echo '<a href="challenges-manager.php">Criar novo desafio</a><br/><br/>';				
+			echo '<div class="span2 offset10">';
+				echo '<a href="challenges-manager.php"><i class="icon-plus-sign"></i> Novo desafio</a><br/><br/>';				
 			echo '</div>';
 		echo '</div>';
 	}
@@ -22,58 +23,90 @@
 	// Active challenges
 	$aChallenges = challengeFindActivesByUser($_SESSION['user']['id']);
 	
-	echo '<div class="row">';
-		echo '<div class="span12">';
-				echo '<h1>Desafios ativos</h1>';
-			echo '</div>';
-	echo '</div>';
+	echo '<div class="bloco-desafios"><h4><i class="icon-book"></i> Desafios não resolvidos</h4></div>';
 	
-	if (count($aChallenges) == 0) {
-		echo '<div class="row">';
-			echo '<div class="span12">';
-					echo '<p>Não há desafios ativos para você no momento</p>';
-				echo '</div>';
-		echo '</div>';
-	} else {
-		foreach($aChallenges as $aIdChallenge => $aRow) {
-			echo '<div class="row">';
-				echo '<div class="span12">';
-					echo '<h2><a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a>';
-					echo '<span class = "label label-warning" > Nível '.$aRow['level'].' </span> '; // TODO: create some standart way to print challenges.
-					echo '<a href="challenges-manager.php?id='.$aIdChallenge.'"><span class = "label label-info">Editar</span></a></h2 > ';
-					echo '<p>'.$aRow['description'].'</p>';
-				echo '</div>';
+	echo '<div class="bloco-desafios">';
+		if (count($aChallenges) == 0) {
+			echo '<p>Você resolveu todos os desafios existentes :)</p>';
+			
+		} else {
+			echo '<table class="table table-hover">';
+				echo '<tbody>';
+					foreach($aChallenges as $aIdChallenge => $aRow) {
+						echo '<tr>';
+							echo '<td><i class="icon-list-alt"></i></td>';
+							echo '<td>';
+								echo '<a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> ';
+								echo '<span class = "label label-warning" > '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
+								if($aIsProfessor) {
+									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';
+								}
+								echo '<p>'.$aRow['description'].'</p>';
+							echo '</td>';
+						echo '</tr>';
+					}
+				echo '</tbody>';
+			echo '</table>';
+			
+			// Pagination
+			echo '<div class="pagination">';
+				echo '<ul>';
+				echo '<li><a href="#">Anterior</a></li>';
+				echo '<li><a href="#">1</a></li>';
+				echo '<li><a href="#">2</a></li>';
+				echo '<li><a href="#">3</a></li>';
+				echo '<li><a href="#">4</a></li>';
+				echo '<li><a href="#">5</a></li>';
+				echo '<li><a href="#">Próximo</a></li>';
+				echo '</ul>';
 			echo '</div>';
 		}
-	}
+		//echo '<div class="bloco-desafios-legenda">Desafios não resolvidos</div>';
+	echo '</div>';
+	
+	echo '<div class="bloco-desafios"><h4><i class="icon-ok-circle"></i> Desafios já resolvidos</h4></div>';
 	
 	// Answered challenges
-	echo '<div class="row">';
-		echo '<div class="span12">';
-				echo '<h1>Desafios já respondidos</h1>';
-			echo '</div>';
-	echo '</div>';
+	$aChallenges = challengeFindAnsweredByUser($_SESSION['user']['id']);
 	
-	$aAnswered = challengeFindAnsweredByUser($_SESSION['user']['id']);
-	
-	if (count($aAnswered) == 0) {
-		echo '<div class="row">';
-			echo '<div class="span12">';
-					echo '<p>Você ainda não resolveu desafios.</p>';
-				echo '</div>';
-		echo '</div>';
-	} else {
-		foreach($aAnswered as $aIdChallenge => $aRow) {
-			echo '<div class="row">';
-				echo '<div class="span12">';
-					echo '<h2><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a>';
-					echo '<span class = "label label-warning" > Nível '.$aRow['level'].' </span> '; // TODO: create some standart way to print challenges.
-					echo '<a href="challenges-manager.php?id='.$aIdChallenge.'"><span class = "label label-info">Editar</span></a></h2 > ';
-					echo '<p>'.$aRow['description'].'</p>';
-				echo '</div>';
+	echo '<div class="bloco-desafios">';
+		if (count($aChallenges) == 0) {
+			echo '<p>Você ainda não resolveu um desafio.</p>';
+			
+		} else {
+			echo '<table class="table table-hover">';
+				echo '<tbody>';
+					foreach($aChallenges as $aIdChallenge => $aRow) {
+						echo '<tr>';
+							echo '<td><i class="icon-list-alt"></i></td>';
+							echo '<td>';
+								echo '<a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> ';
+								echo '<span class = "label label-warning" > '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
+								if($aIsProfessor) {
+									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';
+								}
+								echo '<p>'.$aRow['description'].'</p>';
+							echo '</td>';
+						echo '</tr>';
+					}
+				echo '</tbody>';
+			echo '</table>';
+			
+			// Pagination
+			echo '<div class="pagination">';
+				echo '<ul>';
+				echo '<li><a href="#">Anterior</a></li>';
+				echo '<li><a href="#">1</a></li>';
+				echo '<li><a href="#">2</a></li>';
+				echo '<li><a href="#">3</a></li>';
+				echo '<li><a href="#">4</a></li>';
+				echo '<li><a href="#">5</a></li>';
+				echo '<li><a href="#">Próximo</a></li>';
+				echo '</ul>';
 			echo '</div>';
 		}
-	}
+		//echo '<div class="bloco-desafios-legenda">Desafios já resolvidos</div>';
+	echo '</div>';
 	
 	layoutFooter();
 ?>

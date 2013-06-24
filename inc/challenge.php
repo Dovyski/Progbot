@@ -2,6 +2,19 @@
 
 require_once dirname(__FILE__).'/config.php';
 
+define('CHALLENGE_LEVEL_EASY', 		0);
+define('CHALLENGE_LEVEL_MEDIUM', 	1);
+define('CHALLENGE_LEVEL_HARD', 		2);
+
+function challengeLevelToString($theChallengeLevel) {
+	$aNames = array(
+		CHALLENGE_LEVEL_EASY 	=> 'Fácil',
+		CHALLENGE_LEVEL_MEDIUM 	=> 'Médio',
+		CHALLENGE_LEVEL_HARD 	=> 'Difícil',
+	);
+	
+	return isset($aNames[$theChallengeLevel]) ? $aNames[$theChallengeLevel] : 'Level ' . $theChallengeLevel;
+}
 
 function challengeGetById($theId) {
 	global $gDb;

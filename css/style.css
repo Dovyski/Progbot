@@ -3,36 +3,6 @@ body {
 	padding-bottom: 40px;
 }
 
-#mandamentos div {
-	margin-top: 15px;	
-}
-
-.membro-equipe {
-  float: left;
-  width: 350px;
-  height: 70px;
-  padding: 20px;
-  margin: 15px;
-  background-color: #f5f5f5;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px; 
-}
-.membro-equipe h1 {
-  margin-bottom: 0;
-  font-size: 18px;
-}
-.membro-equipe p {
-  font-size: 14px;
-  font-weight: 200;
-  line-height: 10px;
-}
-
-.fundo-icone {
-	background-repeat: no-repeat;
-	background-position: 95% 50%;
-}
-
 .icone-ubuntu 			{ background-image: url('../img/headers/ubuntu.png'); }
 .icone-windows 			{ background-image: url('../img/headers/windows.png');}
 .icone-sobre 			{ background-image: url('../img/headers/robo.png');}
@@ -40,50 +10,34 @@ body {
 .icone-armazenamento 	{ background-image: url('../img/headers/armazenamento.png');}
 .icone-senha 			{ background-image: url('../img/headers/chave.png');}
 
-.img-armazenamento {
-	padding: 20px;
-	margin: 0 auto;
-	text-align: center;
-	display:block; 
-}
-
-.img-armazenamento-small {
-	width: 70%;
-	height: auto; 
-}
-
-.aura-bloco {
+.bloco-desafios {
   position: relative;
-  text-align: center;
-  height: 180px;
-  padding-top: 20px;
-  background-color: #f5f5f5;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px; 
+  margin: 15px 0;
+  padding: 15px 19px 14px;
+  *padding-top: 19px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }
 
-.aura-bloco img {
-  margin: 0 auto;
-}
-
-.aura-bloco p {
-  font-size: 15px;
-  /*font-weight: bold;*/
-}
-
-.aura-bloco-opts {
+/* Echo out a label for the example */
+.bloco-desafios-legenda {
   position: absolute;
-  right: 0;
-  top: 0;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  -webkit-border-radius: 4px 0 4px 0;
+     -moz-border-radius: 4px 0 4px 0;
+          border-radius: 4px 0 4px 0;
 }
 
-.aura-resposta-console {
-  text-align: left;
-  padding: 10px;
-  margin-top: 5px;
-  background-color: #f5f5f5;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px; 
+.hero-unit {
+	
 }
