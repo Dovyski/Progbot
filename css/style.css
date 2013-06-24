@@ -22,7 +22,6 @@ body {
           border-radius: 4px;
 }
 
-/* Echo out a label for the example */
 .bloco-desafios-legenda {
   position: absolute;
   top: -1px;
@@ -38,6 +37,12 @@ body {
           border-radius: 4px 0 4px 0;
 }
 
-.hero-unit {
-	
+.tab-content {
+	height: 600px;
+}
+
+/* Editor de código */
+.CodeMirror {
+	border: 2px inset #dee;
+	height: 600px !important;
 }
