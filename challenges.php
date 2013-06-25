@@ -23,7 +23,7 @@
 	// Active challenges
 	$aChallenges = challengeFindActivesByUser($_SESSION['user']['id']);
 	
-	echo '<div class="bloco-desafios"><h4><i class="icon-book"></i> Desafios não resolvidos</h4></div>';
+	echo '<h4><i class="icon-book"></i> Desafios não resolvidos</h4>';
 	
 	echo '<div class="bloco-desafios">';
 		if (count($aChallenges) == 0) {
@@ -64,7 +64,7 @@
 		//echo '<div class="bloco-desafios-legenda">Desafios não resolvidos</div>';
 	echo '</div>';
 	
-	echo '<div class="bloco-desafios"><h4><i class="icon-thumbs-up"></i> Desafios já resolvidos</h4></div>';
+	echo '<h4 style="margin-top: 30px;"><i class="icon-thumbs-up"></i> Desafios já resolvidos</h4>';
 	
 	// Answered challenges
 	$aChallenges = challengeFindAnsweredByUser($_SESSION['user']['id']);

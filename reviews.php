@@ -29,7 +29,7 @@
 			echo '</div>';
 		echo '</div>';
 		
-		echo '<div class="bloco-desafios"><h4><i class="icon-eye-open"></i> Respostas para desafio "'.$aChallenge['name'].'"</h4></div>';
+		echo '<h4><i class="icon-eye-open"></i> Respostas para "'.$aChallenge['name'].'"</h4>';
 		
 		echo '<div class="bloco-desafios">';
 			if (count($aAnswers) == 0) {
@@ -68,7 +68,7 @@
 		// Showing all challenges of user's group
 		$aChallenges = challengeFindByGroup($aUserInfo['fk_group']);
 		
-		echo '<div class="bloco-desafios"><h4><i class="icon-eye-open"></i> Desafios disponíveis para revisão</h4></div>';
+		echo '<h4><i class="icon-eye-open"></i> Desafios disponíveis para revisão</h4>';
 		
 		echo '<div class="bloco-desafios">';
 			if (count($aChallenges) == 0) {
