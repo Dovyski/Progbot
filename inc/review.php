@@ -10,7 +10,7 @@ function reviewFindByProgramId($theProgramId) {
 	
 	if ($aQuery->execute(array($theProgramId))) {	
 		while ($aRow = $aQuery->fetch()) {
-			$aReviews[$aRow['id']] = $aRow;
+			$aReviews[] = $aRow;
 		}
 	}
 	

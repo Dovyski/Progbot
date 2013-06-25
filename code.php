@@ -45,8 +45,19 @@
 	} else {
 	
 		echo '<div class="row">';
-			echo '<div class="span12">';
+			echo '<div class="span7">';
 				echo '<h2>'.$aChallenge['name'].'</h2><br/>';
+			echo '</div>';
+			echo '<div class="span3">';
+				layoutPrintUser($aUserInfo['id'], $aUserInfo);
+			echo '</div>';
+			echo '<div class="span2">';
+				if ($aProgram != null) {
+					echo '<div class="grade-info">';
+						echo '<a href="#revisoes"><strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong></a>';
+						echo '<div class="grade-info-title">Nota</div>';
+					echo '</div>';
+				}
 			echo '</div>';
 		echo '</div>';
 		
@@ -68,10 +79,6 @@
 							echo '</form>'; 
 						echo '</div>';
 						
-						echo '<div>';
-							echo 'Resposta (by '.$aProgram['fk_user'].') '.($aProgram['grade'] < 0 ? '' : '<strong>NOTA:</strong> ' . $aProgram['grade']).': <br/>';
-						echo '</div>';
-						
 					} else {
 						echo '<div class="span12">';
 							echo 'Não foi possível obter informações sobre a resposta<br/>';
@@ -87,25 +94,65 @@
 			echo '</div>';
 		echo '</div>';
 		
+		$aReviews = reviewFindByProgramId($aProgram['id']);
+		
 		// Code review
-		if($aIsReviewing) {
-			echo '<div class="row">';
-				echo '<div class="span12">';
-					echo '<p>REVISANDO CÓDIGO!</p>';
-					
-					if ($aProgram != null) {
+		if ($aIsReviewing && $aProgram != null) {
+			echo '<div class="bloco-desafios" style="margin-bottom: 30px;">';
+				echo '<h4><i class="icon-comment"></i> Painel de revisão</h4>';
+
+				echo '<div class="row">';
+					echo '<div class="span12">';
 						echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
-							echo '<input type="hidden" name="action" value="writereview" />';
-							echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
-							echo '<textarea name="comment" id="comment" style="width: 100%; height: 80px;"></textarea>';
-							echo '<input type="text" name="grade" value="'.$aProgram['grade'].'" />';
-							echo '<input type="submit" name="submit" value="Enviar" />';
+							echo '<div class="tabbable">';
+								echo '<ul class="nav nav-tabs">';
+									echo '<li class="active"><a href="#rev-tab1" data-toggle="tab">Comentário</a></li>';
+									echo '<li><a href="#rev-tab2" data-toggle="tab">Visualização</a></li>';
+								echo '</ul>';
+								echo '<div class="tab-content" style="height: 200px;">';
+									echo '<div class="tab-pane active" id="rev-tab1">';
+										echo '<input type="hidden" name="action" value="writereview" />';
+										echo '<input type="hidden" name="id" value="'.@$aReviews[0]['id'].'" />';
+										echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+										echo '<textarea name="comment" id="comment" style="width: 95%; height: 150px;">'.@$aReviews[0]['comment'].'</textarea>';
+									echo '</div>';
+									echo '<div class="tab-pane" id="rev-tab2">';
+										echo 'A visualização não está disponível ainda. Desculpe!';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+							echo '<div class="input-prepend">';
+								echo '<span class="add-on">Nota</span>';
+								echo '<input type="text" name="grade" value="'.($aProgram['grade'] < 0 ? '' : $aProgram['grade']).'" class="span2" placeholder="" />';
+							echo '</div>';
+							echo ' <input type="submit" name="submit" value="Salvar" class="btn btn-primary" />';
 						echo '</form>';
-						
-						echo 'Reviews:<br/>';
-						$aReviews = reviewFindByProgramId($aProgram['id']);
-						var_dump($aReviews);
-					}
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
+		}
+
+		echo '<h4><i class="icon-zoom-in"></i> Revisões<a href="#" id="revisoes"></a></h4>';
+		
+		if (count($aReviews) > 0) {
+			foreach($aReviews as $aReview) {
+				echo '<div class="bloco-desafios">';
+					echo '<div class="row">';
+						echo '<div class="span11">';
+							echo nl2br($aReview['comment']);
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="row" style="margin-top: 20px;">';
+						echo '<div class="span3 offset8">';
+							layoutPrintUser($aReview['fk_user']);
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			}
+		} else {
+			echo '<div class="row">';
+				echo '<div class="span12">';	
+					echo 'Nenhuma revisão foi feita ainda.';
 				echo '</div>';
 			echo '</div>';
 		}

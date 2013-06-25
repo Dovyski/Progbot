@@ -132,4 +132,21 @@ function layoutFooter($theBaseUrl = '.') {
 	echo '</html>';
 }
 
+function layoutPrintUser($theUserId, $theUserInfo = null, $theBadge = true) {
+	$theUserInfo = !isset($theUserInfo) ? userGetById($theUserId) : $theUserInfo;
+	
+	if ($theUserInfo != null) {
+		echo '<div class="user-info">';
+			echo '<img src="http://avatars.io/twitter/as3gamegears" class="img-circle" title="'.$theUserInfo['name'].'"/>';
+			echo '<strong>'.$theUserInfo['name'] . '</strong><br/>';
+			
+			if($theUserInfo['type'] == USER_LEVEL_PROFESSOR) {
+				echo '<span class="label label-info">Prof</span> ';
+			}
+			
+			echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
+		echo '</div>';
+	}
+}
+
 ?>
