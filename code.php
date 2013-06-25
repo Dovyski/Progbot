@@ -104,23 +104,12 @@
 				echo '<div class="row">';
 					echo '<div class="span12">';
 						echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
-							echo '<div class="tabbable">';
-								echo '<ul class="nav nav-tabs">';
-									echo '<li class="active"><a href="#rev-tab1" data-toggle="tab">Comentário</a></li>';
-									echo '<li><a href="#rev-tab2" data-toggle="tab">Visualização</a></li>';
-								echo '</ul>';
-								echo '<div class="tab-content" style="height: 200px;">';
-									echo '<div class="tab-pane active" id="rev-tab1">';
-										echo '<input type="hidden" name="action" value="writereview" />';
-										echo '<input type="hidden" name="id" value="'.@$aReviews[0]['id'].'" />';
-										echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
-										echo '<textarea name="comment" id="comment" style="width: 95%; height: 150px;">'.@$aReviews[0]['comment'].'</textarea>';
-									echo '</div>';
-									echo '<div class="tab-pane" id="rev-tab2">';
-										echo 'A visualização não está disponível ainda. Desculpe!';
-									echo '</div>';
-								echo '</div>';
-							echo '</div>';
+							echo '<input type="hidden" name="action" value="writereview" />';
+							echo '<input type="hidden" name="id" value="'.@$aReviews[0]['id'].'" />';
+							echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+							
+							layoutPrintMarkdownTextarea('comment', @$aReviews[0]['comment']);
+
 							echo '<div class="input-prepend">';
 								echo '<span class="add-on">Nota</span>';
 								echo '<input type="text" name="grade" value="'.($aProgram['grade'] < 0 ? '' : $aProgram['grade']).'" class="span2" placeholder="" />';

@@ -154,4 +154,23 @@ function layoutTextToMarkdown($theText) {
 	return MarkdownExtended($theText);
 }
 
+function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '') {
+	echo '<div class="tabbable">';
+		echo '<ul class="nav nav-tabs">';
+			echo '<li class="active"><a href="#'.$theFieldName.'-tab-markdown" data-toggle="tab">Comentário</a></li>';
+			echo '<li><a href="#'.$theFieldName.'-tab-view-markdown" data-toggle="tab">Visualização</a></li>';
+		echo '</ul>';
+		echo '<div class="tab-content" style="height: 320px;">';
+			echo '<div class="tab-pane active" id="'.$theFieldName.'-tab-markdown">';
+				echo '<textarea name="comment" id="'.$theFieldName.'" style="width: 95%; height: 300px;">'.$theInitialText.'</textarea>';
+			echo '</div>';
+			echo '<div class="tab-pane" id="'.$theFieldName.'-tab-view-markdown">';
+				echo 'A visualização não está disponível ainda. Desculpe!';
+			echo '</div>';
+		echo '</div>';
+	echo '</div>';
+	
+	echo '<script type="text/javascript">CODEBOT.createMarkdownTextarea(\''.$theFieldName.'\');</script>';
+}
+
 ?>

@@ -41,7 +41,7 @@
 								if($aIsProfessor) {
 									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';
 								}
-								echo '<p>'.$aRow['description'].'</p>';
+								echo '<p>'.layoutTextToMarkdown($aRow['description']).'</p>';
 							echo '</td>';
 						echo '</tr>';
 					}
@@ -85,7 +85,7 @@
 								if($aIsProfessor) {
 									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';
 								}
-								echo '<p>'.$aRow['description'].'</p>';
+								echo '<p>'.layoutTextToMarkdown($aRow['description']).'</p>';
 							echo '</td>';
 						echo '</tr>';
 					}
