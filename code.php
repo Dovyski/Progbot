@@ -1,7 +1,9 @@
 <?php 
 	require_once dirname(__FILE__).'/inc/globals.php';
 
-	layoutHeader('Inicial');
+	authAllowAuthenticated();
+	
+	layoutHeader('Resolução de desafio');
 	
 	$aIsReviewing = false;
 	$aChallengeId = $_GET['challenge'];	

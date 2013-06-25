@@ -1,15 +1,21 @@
 <?php 
 	require_once dirname(__FILE__).'/inc/globals.php';
 	
-	// TODO: allow authenticated users only and professors or TA
-	layoutHeader('Reviews');
+	authAllowAuthenticated();
+	
+	$aUser = userGetById($_SESSION['user']['id']);
+	if (!userIsLevel($aUser, USER_LEVEL_PROFESSOR)) {
+		header("restricted.php");
+	}
+	
+	layoutHeader('Revisões');
 
 	$aChallengeId 		= isset($_GET['challenge']) ? $_GET['challenge'] : 0;
 	$aUserInfo	 		= userGetById($_SESSION['user']['id']);
 	
 	echo '<div class="hero-unit">';
-		echo '<h1>Reviews</h1>';
-		echo '<p>Revisão de trabalhos.</p>';
+		echo '<h1>Revisão</h1>';
+		echo '<p>Avaliação de respostas.</p>';
 	echo '</div>';
 	
 	if ($aChallengeId != 0) {

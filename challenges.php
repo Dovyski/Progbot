@@ -1,7 +1,7 @@
 <?php 
 	require_once dirname(__FILE__).'/inc/globals.php';
 	
-	// TODO: allow authenticated users only
+	authAllowAuthenticated();
 	layoutHeader('Start');
 	
 	echo '<div class="hero-unit">';

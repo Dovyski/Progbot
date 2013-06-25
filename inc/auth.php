@@ -37,18 +37,18 @@ function authAllowNonAuthenticated() {
 }
 
 function authAllowAdmin() {
-	if(!authIsauthenticaded()) {
+	if(!authIsAuthenticated()) {
 		header('Location: login.php');
 		exit();
 		
 	} else if(!authIsAdmin()){
-		header('Location: restrito.php');
+		header('Location: restricted.php');
 		exit();
 	}
 }
 
 function authAllowAuthenticated() {
-	if(!authIsauthenticaded()) {
+	if(!authIsAuthenticated()) {
 		header('Location: login.php');
 		exit();
 	}

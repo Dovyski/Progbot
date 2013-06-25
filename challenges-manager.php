@@ -1,10 +1,20 @@
 <?php 
 	require_once dirname(__FILE__).'/inc/globals.php';
 	
-	// TODO: allow authenticated users and professors only
-	layoutHeader('Start');
+	authAllowAuthenticated();
 	
-	$aChallengeId = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+	$aUser 			= userGetById($_SESSION['user']['id']);
+	$aIsProfessor 	= userIsLevel($aUser, USER_LEVEL_PROFESSOR);
+	$aChallengeId 	= isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+	
+	if (!$aIsProfessor || ($aChallengeId != 0 && !challengeCanBeReviewedBy($aChallengeId, $aUser))) {
+		header("Location: restricted.php");
+		exit();
+	}
+	
+	layoutHeader('Editor de desafios');
+	
+	
 	$aChallengeInfo = challengeGetById($aChallengeId);
 	
 	echo '<div class="hero-unit">';
@@ -13,7 +23,6 @@
 	echo '</div>';
 	
 	if (isset($_POST['hasValue'])) {
-		// TODO: check for privileges to create or update challenge
 		$aOk = challengeCreateOrUpdate($aChallengeId, $_POST);
 		if ($aOk) {
 			echo '<div class="alert alert-success"><strong>Tudo certo!</strong> Desafio alterado com sucesso!</div>';
@@ -54,7 +63,6 @@
 						echo '<option value="1">Programação Avançada</option>';
 						echo '<option value="2">Estrutura de Dados</option>';
 					echo '</select>';
-					$aUser = userGetById($_SESSION['user']['id']);
 					echo '<input type="hidden" name="fk_group" value="'.$aUser['fk_group'].'" />'; // TODO: add dropdown
 					echo '<input type="hidden" name="fk_category" value="0" />'; // TODO: add dropdown
 				echo '</div>';

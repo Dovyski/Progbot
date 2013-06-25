@@ -19,4 +19,8 @@ function userGetById($theUserId) {
 	return $aUser;
 }
 
+function userIsLevel($theUserInfo, $theLevel) {
+	return $theUserInfo['type'] == $theLevel;
+}
+
 ?>

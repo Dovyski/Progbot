@@ -1,6 +1,8 @@
 <?php 
 require_once dirname(__FILE__).'/inc/globals.php';
 
+authAllowAuthenticated();
+
 $aAction = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 $aRet = false;
 
