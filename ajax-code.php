@@ -17,7 +17,7 @@ switch($aAction) {
 	case 'writereview':
 		// TODO: check privileges
 		codeGrade(@$_REQUEST['programId'], @$_REQUEST['grade']); // TODO: make grade separated from review saving.
-		$aRet = reviewSave(@$_REQUEST['programId'], $_SESSION['user']['id'], '0', @$_REQUEST['comment']);
+		$aRet = reviewCreateOrUpdate(@$_REQUEST['id'], @$_REQUEST['programId'], $_SESSION['user']['id'], '0', @$_REQUEST['comment']);
 		break;
 		
 	default:

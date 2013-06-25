@@ -17,11 +17,11 @@ function reviewFindByProgramId($theProgramId) {
 	return $aReviews;
 }
 
-function reviewSave($theProgramId, $theUserId, $theMeta, $theComment) {
+function reviewCreateOrUpdate($theReviewId, $theProgramId, $theUserId, $theMeta, $theComment) {
 	global $gDb;
 	
-	$aQuery = $gDb->prepare("INSERT INTO reviews (id, fk_program, fk_user, meta, comment) VALUES (NULL, ?, ?, ?, ?)");
-	$aQuery->execute(array($theProgramId, $theUserId, $theMeta, $theComment));
+	$aQuery = $gDb->prepare("INSERT INTO reviews (id, fk_program, fk_user, meta, comment) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE fk_program = ?, fk_user = ?, meta = ?, comment = ?");
+	$aQuery->execute(array((int)$theReviewId, $theProgramId, $theUserId, $theMeta, $theComment, $theProgramId, $theUserId, $theMeta, $theComment));
 	
 	return $aQuery->rowCount();
 }

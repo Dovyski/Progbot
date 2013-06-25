@@ -54,7 +54,7 @@
 			echo '<div class="span2">';
 				if ($aProgram != null) {
 					echo '<div class="grade-info">';
-						echo '<a href="#revisoes"><strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong></a>';
+						echo '<a href="#revisions"><strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong></a>';
 						echo '<div class="grade-info-title">Nota</div>';
 					echo '</div>';
 				}
@@ -132,14 +132,14 @@
 			echo '</div>';
 		}
 
-		echo '<h4><i class="icon-zoom-in"></i> Revisões<a href="#" id="revisoes"></a></h4>';
+		echo '<h4><i class="icon-zoom-in"></i> Revisões<a href="#" id="revisions"></a></h4>';
 		
 		if (count($aReviews) > 0) {
 			foreach($aReviews as $aReview) {
 				echo '<div class="bloco-desafios">';
 					echo '<div class="row">';
 						echo '<div class="span11">';
-							echo nl2br($aReview['comment']);
+							echo layoutTextToMarkdown($aReview['comment']);
 						echo '</div>';
 					echo '</div>';
 					echo '<div class="row" style="margin-top: 20px;">';
@@ -157,9 +157,9 @@
 			echo '</div>';
 		}
 		
-		if($aProgram['grade'] < 0 && !$aIsReviewing) {
-			echo '<script type="text/javascript">CODEBOT.initAutoSave();</script>';
-		}
+		$aShouldAutoSave = $aProgram['grade'] < 0 && !$aIsReviewing;
+		echo '<script type="text/javascript">CODEBOT.initCodePage('.($aShouldAutoSave ? 'true' : 'false').');</script>';
+		
 		
 		// Codemirror stuff
 		echo '<style>@import url("./js/codemirror/lib/codemirror.css");</style>';

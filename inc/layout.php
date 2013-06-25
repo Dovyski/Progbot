@@ -137,7 +137,8 @@ function layoutPrintUser($theUserId, $theUserInfo = null, $theBadge = true) {
 	
 	if ($theUserInfo != null) {
 		echo '<div class="user-info">';
-			echo '<img src="http://avatars.io/twitter/as3gamegears" class="img-circle" title="'.$theUserInfo['name'].'"/>';
+			// TODO: use user data to show profile image
+			echo '<img src="'.(DEBUG_MODE ? '' : 'http://avatars.io/twitter/as3gamegears').'" class="img-circle" title="'.$theUserInfo['name'].'"/>';
 			echo '<strong>'.$theUserInfo['name'] . '</strong><br/>';
 			
 			if($theUserInfo['type'] == USER_LEVEL_PROFESSOR) {
@@ -147,6 +148,10 @@ function layoutPrintUser($theUserId, $theUserInfo = null, $theBadge = true) {
 			echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
 		echo '</div>';
 	}
+}
+
+function layoutTextToMarkdown($theText) {
+	return MarkdownExtended($theText);
 }
 
 ?>

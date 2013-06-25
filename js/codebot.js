@@ -30,11 +30,38 @@ var CODEBOT = new function() {
 		}
 	};
 	
-	this.initAutoSave = function() {
-		$('#code').on('keydown', function() {
-			mAutoSaveDirty = true;
-		});
+	this.initCodePage = function(theShouldAutoSave) {
+		if(theShouldAutoSave) {
+			$('#code').on('keydown', function() {
+				mAutoSaveDirty = true;
+			});
+			
+			setInterval(autoSaveCode, 1000);
+		}
 		
-		setInterval(autoSaveCode, 1000);
-	}
+		$('#formReview').on('submit', function() {
+			$.ajax({
+			  type: 'POST',
+			  url: 'ajax-code.php',
+			  dataType: 'json',
+			  data: $('#formReview').serialize()
+			})
+			.done(function( msg ) {
+				console.log( "Data Saved: " + msg );
+				window.location.reload(true);
+			})
+			.fail(function(jqXHR, textStatus) {
+				console.log( "Request failed: " + textStatus );
+			});
+			
+			return false;
+		});
+	};
+	
+	this.createMarkdownTextare = function() {
+		$('a[data-toggle="tab"]').on('shown', function (e) {
+			alert(e.target) // activated tab
+			alert(e.relatedTarget) // previous tab
+		});
+	};
 };
