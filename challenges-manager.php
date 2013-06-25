@@ -14,9 +14,6 @@
 	
 	layoutHeader('Editor de desafios');
 	
-	
-	$aChallengeInfo = challengeGetById($aChallengeId);
-	
 	echo '<div class="hero-unit">';
 		echo '<h1>Editor de desafios</h1>';
 		echo '<p>Adicionar e editar desafios.</p>';
@@ -31,6 +28,8 @@
 			echo '<div class="alert alert-error"><strong>Oops!</strong> Alguma coisa saiu errada.</div>';
 		}
 	}
+	
+	$aChallengeInfo = challengeGetById($aChallengeId);
 	
 	echo '<form action="challenges-manager.php" method="post" name="formChallenges" id="formChallenges" class="form-horizontal">';
 		echo '<div class="row">';
@@ -72,22 +71,7 @@
 		echo '<div class="row">';
 			echo '<div class="span12">';
 				echo '<label>Descrição</label>';
-				echo '<div class="tabbable">';
-					echo '<ul class="nav nav-tabs">';
-						echo '<li class="active"><a href="#tab1" data-toggle="tab">Texto</a></li>';
-						echo '<li><a href="#tab2" data-toggle="tab">Visualização</a></li>';
-					echo '</ul>';
-					echo '<div class="tab-content challenge-tab">';
-						echo '<div class="tab-pane active" id="tab1">';
-							echo '<textarea name="description" id="description" style="width: 98%; height: 280px;">'.@$aChallengeInfo['description'].'</textarea>';
-							echo '<small>OBS: o texto pode ser escrito em Markdown. Para colocar imagens, arraste ela para o texto.</small>';
-						echo '</div>';
-						echo '<div class="tab-pane" id="tab2">';
-							echo 'A visualização não está disponível ainda. Desculpe!';
-						echo '</div>';
-					echo '</div>';
-				echo '</div>';
-				
+				layoutPrintMarkdownTextarea('description', @$aChallengeInfo['description'], array('Texto'));
 				echo '<input type="submit" name="submit" value="Salvar" class="btn btn-primary" />';
 			echo '</div>';
 		echo '</div>';
