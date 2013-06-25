@@ -89,7 +89,7 @@
 					echo '<p>O terminal ainda não está em funcionamento. Teste seu programa offline.</p>';
 				echo '</div>';
 				echo '<div class="tab-pane" id="tab3">';
-					echo '<p>'.$aChallenge['description'].'</p>';
+					echo '<p>'.layoutTextToMarkdown($aChallenge['description']).'</p>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
