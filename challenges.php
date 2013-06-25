@@ -64,7 +64,7 @@
 		//echo '<div class="bloco-desafios-legenda">Desafios não resolvidos</div>';
 	echo '</div>';
 	
-	echo '<div class="bloco-desafios"><h4><i class="icon-ok-circle"></i> Desafios já resolvidos</h4></div>';
+	echo '<div class="bloco-desafios"><h4><i class="icon-thumbs-up"></i> Desafios já resolvidos</h4></div>';
 	
 	// Answered challenges
 	$aChallenges = challengeFindAnsweredByUser($_SESSION['user']['id']);
@@ -78,7 +78,7 @@
 				echo '<tbody>';
 					foreach($aChallenges as $aIdChallenge => $aRow) {
 						echo '<tr>';
-							echo '<td><i class="icon-list-alt"></i></td>';
+							echo '<td><i class="icon-ok-circle"></i></td>';
 							echo '<td>';
 								echo '<a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> ';
 								echo '<span class = "label label-warning" > '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.

@@ -6,14 +6,15 @@ define('CHALLENGE_LEVEL_EASY', 		0);
 define('CHALLENGE_LEVEL_MEDIUM', 	1);
 define('CHALLENGE_LEVEL_HARD', 		2);
 
+$gChallengeLevels = array(
+	CHALLENGE_LEVEL_EASY 	=> 'Fácil',
+	CHALLENGE_LEVEL_MEDIUM 	=> 'Médio',
+	CHALLENGE_LEVEL_HARD 	=> 'Difícil',
+);
+
 function challengeLevelToString($theChallengeLevel) {
-	$aNames = array(
-		CHALLENGE_LEVEL_EASY 	=> 'Fácil',
-		CHALLENGE_LEVEL_MEDIUM 	=> 'Médio',
-		CHALLENGE_LEVEL_HARD 	=> 'Difícil',
-	);
-	
-	return isset($aNames[$theChallengeLevel]) ? $aNames[$theChallengeLevel] : 'Level ' . $theChallengeLevel;
+	global $gChallengeLevels;
+	return isset($gChallengeLevels[$theChallengeLevel]) ? $gChallengeLevels[$theChallengeLevel] : 'Level ' . $theChallengeLevel;
 }
 
 function challengeGetById($theId) {

@@ -37,8 +37,16 @@ body {
           border-radius: 4px 0 4px 0;
 }
 
-.tab-content {
-	height: 600px;
+.code-tab {
+	height: 650px;
+}
+
+.challenge-tab {
+	min-height: 320px;
+}
+
+.challenge-tab small {
+	color: #9f9f9f;
 }
 
 /* Editor de código */

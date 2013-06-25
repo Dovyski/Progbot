@@ -54,7 +54,7 @@
 				echo '<li><a href="#tab2" data-toggle="tab">Terminal</a></li>';
 				echo '<li><a href="#tab3" data-toggle="tab">Descrição</a></li>';
 			echo '</ul>';
-			echo '<div class="tab-content">';
+			echo '<div class="tab-content code-tab">';
 				echo '<div class="tab-pane active" id="tab1">';
 					if ($aProgram != null) {
 						echo '<div>';
