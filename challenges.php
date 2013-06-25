@@ -15,7 +15,7 @@
 	if($aIsProfessor) {
 		echo '<div class="row">';
 			echo '<div class="span2 offset10">';
-				echo '<a href="challenges-manager.php"><i class="icon-plus-sign"></i> Novo desafio</a><br/><br/>';				
+				echo '<a href="challenges-manager.php"><i class="icon-plus-sign"></i> Criar desafio</a><br/><br/>';				
 			echo '</div>';
 		echo '</div>';
 	}

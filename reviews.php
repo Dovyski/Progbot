@@ -70,15 +70,19 @@
 				
 			} else {
 				echo '<table class="table table-hover">';
+					echo '<thead>';
+						echo '<th style="width: 5%;"></th>';
+						echo '<th style="width: 80%;">Título</th>';
+						echo '<th>Respostas</th>';
+					echo '</thead>';
 					echo '<tbody>';
 						foreach($aChallenges as $aIdChallenge => $aRow) {
 							echo '<tr>';
-								echo '<td style="width: 5%;"><i class="icon-list-alt"></i></td>';
+								echo '<td><i class="icon-list-alt"></i></td>';
 								echo '<td>';
 									echo '<a href="reviews.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> ';
-									echo '<span class = "label label-warning" > '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
-									//echo '<p>'.$aRow['description'].'</p>';
 								echo '</td>';
+								echo '<td>N/A</td>';
 							echo '</tr>';
 						}
 					echo '</tbody>';

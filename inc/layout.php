@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/config.php';
 function layoutNavBar() {
 	$aPage = basename($_SERVER['PHP_SELF']);
 	
-	echo '<div class="navbar navbar-fixed-top">';
+	echo '<div class="navbar navbar-fixed-top navbar-inverse">';
 		echo '<div class="navbar-inner">';
 			echo '<div class="container">';
 				echo '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">';
@@ -17,9 +17,7 @@ function layoutNavBar() {
 			
 				echo '<div class="nav-collapse">';
 					echo '<ul class="nav">';
-						echo '<li '.($aPage == 'index.php' 			? 'class="active"' : '').'><a href="index.php">Inicial</a></li>';
 						echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
-						echo '<li '.($aPage == 'reviews.php' 		? 'class="active"' : '').'><a href="reviews.php">Correções</a></li>';
 					echo '</ul>';
 					
 					layoutUserBar();
@@ -38,11 +36,12 @@ function layoutAdminNavBar() {
 	
 	echo '<ul class="nav pull-right">';
 		echo '<li class="dropdown pull-right">';
-			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Administração <b class="caret"></b></a>';
+			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Professor <b class="caret"></b></a>';
 			echo '<ul class="dropdown-menu">';
-				echo '<li><a href="oops.php">Dashboard</a></li>';
+				echo '<li><a href="challenges-manager.php">Criar desafio</a></li>';
+				echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 				//echo '<li class="divider"></li>';
-				//echo '<li><a href="#">Separated link</a></li>';
+				//echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 			echo '</ul>';
 		echo '</li>';
 	echo '</ul>';
@@ -113,7 +112,7 @@ function layoutFooter($theBaseUrl = '.') {
 		echo '<hr>';
 		
 		echo '<footer>';
-			echo '<p style="float:left;">Copyright note - Codebot</p>';
+			echo '<p style="float:left;">&copy; 2013 - Codebot. Desenvolvido pelo curso de <a href="http://cc.uffs.edu.br" target="_blank">Ciência da Computação</a> - <a href="http://uffs.edu.br" target="_blank">UFFS</a>.</p>';
 		echo '</footer>';
 		
 	if(DEBUG_MODE) {

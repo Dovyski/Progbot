@@ -51,7 +51,7 @@
 		echo '<div class="tabbable">';
 			echo '<ul class="nav nav-tabs">';
 				echo '<li class="active"><a href="#tab1" data-toggle="tab">Código</a></li>';
-				echo '<li><a href="#tab2" data-toggle="tab">Terminal</a></li>';
+				echo '<li><a href="#tab2" data-toggle="tab">Testar</a></li>';
 				echo '<li><a href="#tab3" data-toggle="tab">Descrição</a></li>';
 			echo '</ul>';
 			echo '<div class="tab-content code-tab">';
