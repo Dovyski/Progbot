@@ -34,6 +34,11 @@ function layoutNavBar() {
 function layoutAdminNavBar() {
 	$aPage = basename($_SERVER['PHP_SELF']);
 	
+	$aUser = userGetById($_SESSION['user']['id']);
+	if (!userIsLevel($aUser, USER_LEVEL_PROFESSOR)) {
+		return;
+	}
+	
 	echo '<ul class="nav pull-right">';
 		echo '<li class="dropdown pull-right">';
 			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Professor <b class="caret"></b></a>';

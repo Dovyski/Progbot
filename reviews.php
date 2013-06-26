@@ -5,7 +5,8 @@
 	
 	$aUser = userGetById($_SESSION['user']['id']);
 	if (!userIsLevel($aUser, USER_LEVEL_PROFESSOR)) {
-		header("restricted.php");
+		header("Location: restricted.php");
+		exit();
 	}
 	
 	layoutHeader('Revisões');
