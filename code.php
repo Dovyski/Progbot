@@ -54,7 +54,15 @@
 			echo '<div class="span2">';
 				if ($aProgram != null) {
 					echo '<div class="grade-info">';
-						echo '<a href="#revisions"><strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong></a>';
+						echo ($aIsReviewing ? '<a href="#" id="changeGradeLink" title="Clique para editar a nota">' : '').'<strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong>' . ($aIsReviewing ? '<i class="icon-edit"></i></a>' : '');
+						echo '<div id="changeGradePanel" style="display:none;">';
+							echo '<form action="" method="post" name="formChangeGrade" id="formChangeGrade">';
+								echo '<input type="hidden" name="action" value="changegrade" />';
+								echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+								echo '<input type="text" name="grade" value="'.($aProgram['grade'] < 0 ? '' : $aProgram['grade']).'" class="span1" placeholder="" />';
+								echo '<input type="submit" name="submit" value="Ok" class="btn btn-primary" />';
+							echo '</form>';
+						echo '</div>';
 						echo '<div class="grade-info-title">Nota</div>';
 					echo '</div>';
 				}

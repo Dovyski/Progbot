@@ -61,6 +61,36 @@ var CODEBOT = new function() {
 			
 			return false;
 		});
+		
+		$('#changeGradeLink').on('click', function() {
+			$('#changeGradeLink').hide();
+			$('#changeGradePanel').show();
+		});
+		
+		$('#formChangeGrade').on('submit', function() {
+			$.ajax({
+			  type: 'POST',
+			  url: 'ajax-code.php',
+			  dataType: 'json',
+			  data: $('#formChangeGrade').serialize()
+			})
+			.done(function( msg ) {
+				$('#changeGradeLink strong').html(msg.grade);
+				$('#changeGradeLink').show();
+				$('#changeGradePanel').hide();
+				
+				console.log( "Grade changed: " + msg );
+			})
+			.fail(function(jqXHR, textStatus) {
+				$('#changeGradeLink strong').html('Erro');
+				$('#changeGradeLink').show();
+				$('#changeGradePanel').hide();
+				
+				console.log( "Request failed grade: " + textStatus );
+			});
+			
+			return false;
+		});
 	};
 	
 	this.createMarkdownTextarea = function(theTextId) {

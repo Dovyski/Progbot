@@ -50,12 +50,14 @@ body {
 }
 
 .grade-info {
-  font-size: 20px;
+  float: right;
+  width: 120px;
+  height: 35px;
   font-weight: bold;
   position: relative;
   margin: 1px 0;
-  padding: 15px 5px 10px 60px;
-  *padding-top: 30px;
+  padding-top: 35px;
+  text-align: center;
   background-color: #fff;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -70,9 +72,10 @@ body {
 
 .grade-info-title {
   position: absolute;
+  width: 80px;
   top: -1px;
   left: -1px;
-  padding: 3px 7px;
+  text-align: center;
   font-size: 12px;
   font-weight: bold;
   background-color: #f5f5f5;
