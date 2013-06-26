@@ -13,8 +13,9 @@ switch($aAction) {
 		$aProgram 	= codeGetById(@$_REQUEST['programId']);
 		$aUser		= userGetById($_SESSION['user']['id']);
 		$aIsOwner	= $aUser['id'] == $aProgram['fk_user'];
+		$aCanEdit	= $aProgram['grade'] < 0 && !$aProgram['locked'];
 		
-		if($aIsOwner && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
+		if($aIsOwner && $aCanEdit && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
 			$aRet['status'] = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
 		}
 		break;
