@@ -38,7 +38,8 @@ body {
 }
 
 .code-tab {
-	height: 650px;
+	min-height: 660px;
+	overflow: auto;
 }
 
 .challenge-tab {

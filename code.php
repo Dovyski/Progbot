@@ -77,12 +77,15 @@
 			echo '</ul>';
 			echo '<div class="tab-content code-tab">';
 				echo '<div class="tab-pane active" id="tab1">';
+					if($aProgram['grade'] >= 0) {
+						echo '<div class="alert alert-error"><strong>Atenção!</strong> Você não pode mais alterar o código porque ele já recebeu uma nota.</div>';
+					}
+					
 					if ($aProgram != null) {
 						echo '<div>';
 							echo '<form action="code.php" method="post" name="formCode" id="formCode">';
 								echo '<input type="hidden" name="action" value="savecode" />';
 								echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
-								// TODO: deny edition if program has already received any grades.
 								echo '<textarea name="code" id="code" style="width: 100%; height: 600px;">'.$aProgram['code'].'</textarea>';
 							echo '</form>'; 
 						echo '</div>';
@@ -160,6 +163,7 @@
 			matchBrackets: true,
 			mode: "text/x-csrc",
 			electricChars : false,
+			readOnly: '.($aProgram['grade'] < 0 ? 'false' : 'true').',
 			onKeyEvent: CODEBOT.onCodingKeyEvent
 		  });
 		</script>';
