@@ -146,11 +146,4 @@ function challengeCanBeReviewedBy($theChallengeId, $theUserInfo) {
 	
 	return $aRet;
 }
-
-function challengeCanBeAnsweredBy($theChallengeId, $theUserInfo) {
-	global $gDb;
-	
-	return true; // TODO: fix it. Can be answered if not locked/graded and challengeCanBeViewed().
-}
-
 ?>

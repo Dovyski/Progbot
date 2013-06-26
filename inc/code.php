@@ -33,6 +33,19 @@ function codeGetProgramByUser($theUserId, $theChallengeId) {
 	return $aRet;
 }
 
+function codeGetById($theProgramId, $theComplete = false) {
+	global $gDb;
+	
+	$aRet = null;
+	$aQuery = $gDb->prepare("SELECT ".($theComplete ? "*" : "id, fk_user, fk_challenge, date, last_update, grade, locked")." FROM programs WHERE id = ?");
+	
+	if ($aQuery->execute(array($theProgramId))) {
+		$aRet = $aQuery->fetch();
+	}
+	
+	return $aRet;
+}
+
 function codeCreate($theUserId, $theChallengeId) {
 	global $gDb;
 

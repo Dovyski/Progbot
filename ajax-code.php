@@ -10,14 +10,23 @@ header('Content-Type: text/javascript; charset=iso-8859-1');
 
 switch($aAction) {
 	case 'savecode':
-		// TODO: check privileges and grant saving only if there is no grade.
-		$aRet = codeSave($_SESSION['user']['id'], @$_REQUEST['programId'], @$_REQUEST['code']);
+		$aProgram 	= codeGetById(@$_REQUEST['programId']);
+		$aUser		= userGetById($_SESSION['user']['id']);
+		$aIsOwner	= $aUser['id'] == $aProgram['fk_user'];
+		
+		if($aIsOwner && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
+			$aRet = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
+		}
 		break;
 		
 	case 'writereview':
-		// TODO: check privileges
-		codeGrade(@$_REQUEST['programId'], @$_REQUEST['grade']); // TODO: make grade separated from review saving.
-		$aRet = reviewCreateOrUpdate(@$_REQUEST['id'], @$_REQUEST['programId'], $_SESSION['user']['id'], '0', @$_REQUEST['comment']);
+		$aProgram 	= codeGetById(@$_REQUEST['programId']);
+		$aUser		= userGetById($_SESSION['user']['id']);
+		
+		if(challengeCanBeReviewedBy($aProgram['fk_challenge'], $aUser)) {
+			codeGrade(@$_REQUEST['programId'], @$_REQUEST['grade']); // TODO: make grade separated from review saving.
+			$aRet = reviewCreateOrUpdate(@$_REQUEST['id'], $aProgram['id'], $aUser['id'], '0', @$_REQUEST['comment']);
+		}
 		break;
 		
 	default:
