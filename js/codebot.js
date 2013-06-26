@@ -9,10 +9,12 @@ var CODEBOT = new function() {
 	
 	var autoSaveCode = function() {
 		var aNow = new Date().getTime();
-		
+
 		if(aNow - mAutoSaveLast >= 2000 && mAutoSaveDirty) {
 			mAutoSaveDirty = false;
 			mAutoSaveLast = aNow;
+			
+			$('#info-overlay').html('Salvando...').fadeIn();
 
 			$.ajax({
 			  type: 'POST',
@@ -21,22 +23,25 @@ var CODEBOT = new function() {
 			  data: $('#formCode').serialize()
 			})
 			.done(function( msg ) {
-			  console.log( "Data Saved: " + msg );
-			  
+				$('#info-overlay').html('Ok, salvo!').delay(1000).fadeOut();
 			})
 			.fail(function(jqXHR, textStatus) {
-			  console.log( "Request failed: " + textStatus );
+				$('#info-overlay').html('Oops, não salvou!').delay(1000).fadeOut();
 			});
 		}
 	};
 	
+	this.onCodingKeyEvent = function(editor, e) {
+		if(e.type == "keydown") {
+			mAutoSaveDirty = true;
+		}
+		
+		editor.save();
+	};
+	
 	this.initCodePage = function(theShouldAutoSave) {
 		if(theShouldAutoSave) {
-			$('#code').on('keydown', function() {
-				mAutoSaveDirty = true;
-			});
-			
-			setInterval(autoSaveCode, 1000);
+			setInterval(autoSaveCode, 5000);
 		}
 		
 		$('#formReview').on('submit', function() {

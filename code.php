@@ -149,7 +149,6 @@
 		$aShouldAutoSave = $aProgram['grade'] < 0 && !$aIsReviewing;
 		echo '<script type="text/javascript">CODEBOT.initCodePage('.($aShouldAutoSave ? 'true' : 'false').');</script>';
 		
-		
 		// Codemirror stuff
 		echo '<style>@import url("./js/codemirror/lib/codemirror.css");</style>';
 		echo '<script src="./js/codemirror/lib/codemirror.js"></script>';
@@ -161,10 +160,11 @@
 		  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			lineNumbers: true,
 			matchBrackets: true,
-			mode: "text/x-csrc"
+			mode: "text/x-csrc",
+			electricChars : false,
+			onKeyEvent: CODEBOT.onCodingKeyEvent
 		  });
 		</script>';
-		
 	}
 	
 	layoutFooter();

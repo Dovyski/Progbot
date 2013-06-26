@@ -115,6 +115,8 @@ function layoutFooter($theBaseUrl = '.') {
 			echo '<p style="float:left;">&copy; 2013 - Codebot. Desenvolvido pelo curso de <a href="http://cc.uffs.edu.br" target="_blank">Ciência da Computação</a> - <a href="http://uffs.edu.br" target="_blank">UFFS</a>.</p>';
 		echo '</footer>';
 		
+		echo '<div id="info-overlay">Salvando...</div>';
+		
 	if(DEBUG_MODE) {
 		echo '<div class="row" style="margin-top: 80px;">';
 			echo '<div class="span12">';
@@ -160,7 +162,7 @@ function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTa
 			echo '<li class="active"><a href="#'.$theFieldName.'-tab-markdown" data-toggle="tab">'.(isset($theTabsText[0]) ? $theTabsText[0] : 'Comentário').'</a></li>';
 			echo '<li><a href="#'.$theFieldName.'-tab-view-markdown" data-toggle="tab">'.(isset($theTabsText[1]) ? $theTabsText[1] : 'Visualização').'</a></li>';
 		echo '</ul>';
-		echo '<div class="tab-content" style="height: 320px; width: 95%;">';
+		echo '<div class="tab-content" style="height: 320px; width: 100%;">';
 			echo '<div class="tab-pane active" id="'.$theFieldName.'-tab-markdown">';
 				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 95%; height: 300px;">'.$theInitialText.'</textarea>';
 			echo '</div>';

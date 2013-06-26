@@ -90,6 +90,20 @@ body {
 	margin-right: 5px;
 }
 
+#info-overlay {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 0;
+	width: 150px;
+	background: #0f0f0f;
+	border: solid 2px #000;
+	color: #fff;
+	font-size: 11px;
+	padding: 5px;
+}
+
+
 /* Editor de código */
 .CodeMirror {
 	border: 2px inset #dee;
