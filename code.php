@@ -103,31 +103,6 @@
 		echo '</div>';
 		
 		$aReviews = reviewFindByProgramId($aProgram['id']);
-		
-		// Code review
-		if ($aIsReviewing && $aProgram != null) {
-			echo '<div class="bloco-desafios" style="margin-bottom: 30px;">';
-				echo '<h4><i class="icon-comment"></i> Painel de revisão</h4>';
-
-				echo '<div class="row">';
-					echo '<div class="span12">';
-						echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
-							echo '<input type="hidden" name="action" value="writereview" />';
-							echo '<input type="hidden" name="id" value="'.@$aReviews[0]['id'].'" />';
-							echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
-							
-							layoutPrintMarkdownTextarea('comment', @$aReviews[0]['comment']);
-
-							echo '<div class="input-prepend">';
-								echo '<span class="add-on">Nota</span>';
-								echo '<input type="text" name="grade" value="'.($aProgram['grade'] < 0 ? '' : $aProgram['grade']).'" class="span2" placeholder="" />';
-							echo '</div>';
-							echo ' <input type="submit" name="submit" value="Salvar" class="btn btn-primary" />';
-						echo '</form>';
-					echo '</div>';
-				echo '</div>';
-			echo '</div>';
-		}
 
 		echo '<h4><i class="icon-zoom-in"></i> Revisões<a href="#" id="revisions"></a></h4>';
 		
@@ -150,6 +125,21 @@
 			echo '<div class="row">';
 				echo '<div class="span12">';	
 					echo 'Nenhuma revisão foi feita ainda.';
+				echo '</div>';
+			echo '</div>';
+		}
+		
+		// Code review
+		if ($aIsReviewing && $aProgram != null) {
+			echo '<div class="row">';
+				echo '<div class="span12">';
+					echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
+						echo '<input type="hidden" name="action" value="writereview" />';
+						echo '<input type="hidden" name="id" value="" />';
+						echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+						layoutPrintMarkdownTextarea('comment', '');
+						echo ' <input type="submit" name="submit" value="Salvar" class="btn btn-primary" />';
+					echo '</form>';
 				echo '</div>';
 			echo '</div>';
 		}
