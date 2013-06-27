@@ -34,7 +34,7 @@
 			
 			if($aHasAccount) {
 				authLogin($aUser);
-				header('Location: index.php');
+				header('Location: challenges.php');
 				exit();
 			}
 		} else {
@@ -50,18 +50,18 @@
 	echo '</div>';
 	
 	echo '<div class="row">';
-		echo '<div class="span9">';
+		echo '<div class="span12">';
 			echo '<form class="form-horizontal" action="login.php" method="post">
 			        <fieldset>
-			          <legend>Login</legend>
+			          <legend>Informações de login</legend>
 			          <div class="control-group '.($aLoginError ? 'error' : '').'">
-			            <label class="control-label">Usuário</label>
+			            <label class="control-label">CPF</label>
 			            <div class="controls docs-input-sizes">
-			              <input name="user" class="span3" type="text" placeholder="Seu usuário NCC">
+			              <input name="user" class="span3" type="text" placeholder="Informe seu CPF">
 			            </div>
-			            <label class="control-label">password</label>
+			            <label class="control-label">Senha do Moodle</label>
 			            <div class="controls docs-input-sizes">
-			              <input name="password" class="span3" type="password" placeholder="sua password">
+			              <input name="password" class="span3" type="password" placeholder="Sua senha usada no Moodle">
 						  '.($aLoginError ? '<span class="help-inline">Usuário ou password inválidos.</span>' : '').'
 			            </div>
 			          </div>

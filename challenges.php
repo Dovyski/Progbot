@@ -71,7 +71,7 @@
 	
 	echo '<div class="bloco-desafios">';
 		if (count($aChallenges) == 0) {
-			echo '<p>Você ainda não resolveu um desafio.</p>';
+			echo '<p>Você ainda não resolveu desafios.</p>';
 			
 		} else {
 			echo '<table class="table table-hover">';
