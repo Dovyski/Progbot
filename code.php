@@ -97,7 +97,7 @@
 					}
 				echo '</div>';
 				echo '<div class="tab-pane" id="tab2">';
-					echo '<p>O terminal ainda não está em funcionamento. Teste seu programa offline.</p>';
+					echo '<iframe src="'.TESTING_TTY_URL.'" class="terminal-frame" seamless="seamless"></iframe>';
 				echo '</div>';
 				echo '<div class="tab-pane" id="tab3">';
 					echo '<p>'.layoutTextToMarkdown($aChallenge['description']).'</p>';

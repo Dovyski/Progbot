@@ -107,6 +107,12 @@ body {
 	padding: 5px;
 }
 
+.terminal-frame {
+	width: 100%;
+	height: 600px;
+	border: 0;
+}
+
 
 /* Editor de código */
 .CodeMirror {
