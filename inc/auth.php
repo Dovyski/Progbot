@@ -73,12 +73,12 @@ function authCreateLocalAccountUsingLoginMoodle($theUserInfo, $theCpf, $thePassw
 	global $gDb;
 	
 	$aUser = null;
-	$aQuery = $gDb->prepare("INSERT INTO users (fk_group, login, password, name, email, type) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE password = ?"); // TODO: fix this!
+	$aQuery = $gDb->prepare("INSERT INTO users (fk_group, login, password, name, email, type) VALUES (NULL, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE password = ?"); // TODO: fix this!
 	
 	$aEmail = $theCpf . '@moodle';
 	$aPwd	= authHash($thePassword);
 	
-	$aQuery->execute(array(1, $theCpf, $aPwd, $theUserInfo['user'], $aEmail, USER_LEVEL_STUDENT, $aPwd));
+	$aQuery->execute(array($theCpf, $aPwd, $theUserInfo['user'], $aEmail, USER_LEVEL_STUDENT, $aPwd));
 	return $aQuery->rowCount() != 0;
 }
 
