@@ -1,5 +1,6 @@
 <?php
 
+@include_once dirname(__FILE__).'/config.local.php';
 require_once dirname(__FILE__).'/config.php';
 
 session_start();
