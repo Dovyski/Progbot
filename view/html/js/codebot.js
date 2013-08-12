@@ -100,9 +100,9 @@ var CODEBOT = new function() {
 			
 			aActiveTab 		= aActiveTab.substr(aActiveTab.lastIndexOf('#'));
 			aOldTab 		= aOldTab.substr(aOldTab.lastIndexOf('#'));
-			
+
 			if(aActiveTab.indexOf('view-markdown') != -1) {
-				$(aActiveTab).html('<img src="./img/ajax-loader.gif" title="Loading" align="absmiddle"> Loading...');
+				$(aActiveTab).html('<img src="./ajax-loader.gif" title="Loading" align="absmiddle"> Loading...');
 
 				$.ajax({
 				  type: 'POST',

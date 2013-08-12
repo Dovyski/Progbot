@@ -42,9 +42,9 @@ function layoutAdminNavBar() {
 			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Professor <b class="caret"></b></a>';
 			echo '<ul class="dropdown-menu">';
 				echo '<li><a href="challenges-manager.php">Criar desafio</a></li>';
-				echo '<li><a href="relayouts.php">Revisar respostas</a></li>';
+				echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 				//echo '<li class="divider"></li>';
-				//echo '<li><a href="relayouts.php">Revisar respostas</a></li>';
+				//echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 			echo '</ul>';
 		echo '</li>';
 	echo '</ul>';
@@ -155,33 +155,23 @@ function layoutPrintUser($theUserId, $theUserInfo = null, $theBadge = true) {
 	}
 }
 
-function layoutTextToMarkdown($theText) {
-	return MarkdownExtended($theText);
-}
-
 function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTabsText = array()) {
 	echo '<div class="tabbable">';
 		echo '<ul class="nav nav-tabs">';
 			echo '<li class="active"><a href="#'.$theFieldName.'-tab-markdown" data-toggle="tab">'.(isset($theTabsText[0]) ? $theTabsText[0] : 'Comentário').'</a></li>';
-			echo '<li><a href="#'.$theFieldName.'-tab-layout-markdown" data-toggle="tab">'.(isset($theTabsText[1]) ? $theTabsText[1] : 'Visualização').'</a></li>';
+			echo '<li><a href="#'.$theFieldName.'-tab-view-markdown" data-toggle="tab">'.(isset($theTabsText[1]) ? $theTabsText[1] : 'Visualização').'</a></li>';
 		echo '</ul>';
 		echo '<div class="tab-content" style="height: 320px; width: 100%;">';
 			echo '<div class="tab-pane active" id="'.$theFieldName.'-tab-markdown">';
 				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 95%; height: 300px;">'.$theInitialText.'</textarea>';
 			echo '</div>';
-			echo '<div class="tab-pane" id="'.$theFieldName.'-tab-layout-markdown">';
+			echo '<div class="tab-pane" id="'.$theFieldName.'-tab-view-markdown">';
 				echo 'A visualização não está disponível ainda. Desculpe!';
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';
 	
 	echo '<script type="text/javascript">CODEBOT.createMarkdownTextarea(\''.$theFieldName.'\');</script>';
-}
-
-function layout($theFile, $theOutput = 'html') {
-	// TODO: add support for more output formats.
-	// TODO: check if file is valid
-	require_once dirname(__FILE__).'/../layout/'.$theOutput.'/'.$theFile.'.php';
 }
 
 ?>
