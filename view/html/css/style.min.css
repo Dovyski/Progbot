@@ -1,0 +1,19 @@
+body{padding-top:60px;padding-bottom:40px;}
+.icone-ubuntu{background-image:url('../img/headers/ubuntu.png');}
+.icone-windows{background-image:url('../img/headers/windows.png');}
+.icone-sobre{background-image:url('../img/headers/robo.png');}
+.icone-guia{background-image:url('../img/headers/guia.png');}
+.icone-armazenamento{background-image:url('../img/headers/armazenamento.png');}
+.icone-senha{background-image:url('../img/headers/chave.png');}
+.bloco-desafios{position:relative;margin:15px 0;padding:15px 19px 14px;*padding-top:19px;background-color:#fff;border:1px solid #ddd;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.bloco-desafios-legenda{position:absolute;top:-1px;left:-1px;padding:3px 7px;font-size:12px;font-weight:bold;background-color:#f5f5f5;border:1px solid #ddd;color:#9da0a4;-webkit-border-radius:4px 0 4px 0;-moz-border-radius:4px 0 4px 0;border-radius:4px 0 4px 0;}
+.code-tab{min-height:660px;overflow:auto;}
+.challenge-tab{min-height:320px;}
+.challenge-tab small{color:#9f9f9f;}
+.grade-info{float:right;width:120px;height:35px;font-weight:bold;position:relative;margin:1px 0;padding-top:35px;text-align:center;background-color:#fff;border:1px solid #ddd;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.grade-info strong{font-size:30px;font-weight:bold;}
+.grade-info-title{position:absolute;width:80px;top:-1px;left:-1px;text-align:center;font-size:12px;font-weight:bold;background-color:#f5f5f5;border:1px solid #ddd;color:#9da0a4;-webkit-border-radius:4px 0 4px 0;-moz-border-radius:4px 0 4px 0;border-radius:4px 0 4px 0;}
+.user-info img{float:left;width:40px;height:40px;margin-right:5px;}
+#info-overlay{display:none;position:fixed;bottom:20px;right:0;width:150px;background:#0f0f0f;border:solid 2px #000;color:#fff;font-size:11px;padding:5px;}
+.terminal-frame{width:100%;height:600px;border:0;}
+.CodeMirror{border:2px inset #dee;height:600px!important;}
