@@ -45,12 +45,12 @@
 		
 		echo '<div class="tabbable">';
 			echo '<ul class="nav nav-tabs">';
-				echo '<li class="active"><a href="#tab1" data-toggle="tab">Código</a></li>';
-				echo '<li><a href="#tab2" data-toggle="tab">Testar</a></li>';
-				echo '<li><a href="#tab3" data-toggle="tab">Descrição</a></li>';
+				echo '<li class="active"><a href="#tab-code-ide" data-toggle="tab" class="codeTab">Código</a></li>';
+				echo '<li><a href="#tab-code-test" data-toggle="tab" class="codeTab">Testar</a></li>';
+				echo '<li><a href="#tab-code-desc" data-toggle="tab" class="codeTab">Descrição</a></li>';
 			echo '</ul>';
 			echo '<div class="tab-content code-tab">';
-				echo '<div class="tab-pane active" id="tab1">';
+				echo '<div class="tab-pane active" id="tab-code-ide">';
 					if($aProgram['grade'] >= 0) {
 						echo '<div class="alert alert-error"><strong>Atenção!</strong> Você não pode mais alterar o código porque ele já recebeu uma nota.</div>';
 					}
@@ -70,14 +70,16 @@
 						echo '</div>';
 					}
 				echo '</div>';
-				echo '<div class="tab-pane" id="tab2">';
+				echo '<div class="tab-pane" id="tab-code-test">';
+					echo '<div id="build-info" class="alert alert-info"><strong>Atenção!</strong> Você não pode mais alterar o código porque ele já recebeu uma nota.</div>';
 					echo '<iframe src="'.TESTING_TTY_URL.'" class="terminal-frame" seamless="seamless"></iframe>';
 				echo '</div>';
-				echo '<div class="tab-pane" id="tab3">';
+				echo '<div class="tab-pane" id="tab-code-desc">';
 					echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
+		echo '<script type="text/javascript">CODEBOT.initCodeTabs();</script>';
 		
 		$aReviews = $aData['reviews'];
 

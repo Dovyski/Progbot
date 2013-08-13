@@ -37,6 +37,13 @@ switch($aAction) {
 		}
 		break;
 		
+	case 'build':
+		// TODO: implement this
+		$aRet['status'] = true;
+		$aRet['file'] 	= 'test.c';
+		$aRet['path'] 	= '/home/alunos/fernando/';
+		break;
+		
 	default:
 		echo 'Unknown ajax option: ' + $aAction;
 }

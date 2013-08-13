@@ -118,4 +118,31 @@ var CODEBOT = new function() {
 			}
 		});
 	};
+	
+	this.initCodeTabs = function() {
+		$('.codeTab[data-toggle="tab"]').on('shown', function (e) {
+			var aActiveTab 	= e.target + '';
+			var aOldTab 	= e.relatedTarget + '';
+			
+			aActiveTab 		= aActiveTab.substr(aActiveTab.lastIndexOf('#'));
+			aOldTab 		= aOldTab.substr(aOldTab.lastIndexOf('#'));
+
+			if(aActiveTab == '#tab-code-test') {
+				$('#build-info').attr('class', 'alert alert-warning').html('<strong>Atenção!</strong> Seu código está sendo salvo... <img src="./ajax-loader.gif" title="Loading" align="absmiddle">');
+
+				$.ajax({
+				  type: 'POST',
+				  url: 'ajax-code.php',
+				  dataType: 'json',
+				  data: {'programId': $('#formCode input[name=programId]').val(), 'action': 'build' }
+				})
+				.done(function( msg ) {
+					$('#build-info').attr('class', 'alert alert-success').html('<strong>Pronto!</strong> Seu código foi salvo no arquivo <code>'+msg.file+'</code> na pasta <code>'+msg.path+'</code>.');
+				})
+				.fail(function(jqXHR, textStatus) {
+					$('#build-info').attr('class', 'alert alert-error').html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');
+				});
+			}
+		});
+	};
 };
