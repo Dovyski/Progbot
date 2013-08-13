@@ -146,6 +146,37 @@ body {
 	padding-top: 90px;
 	text-align: center;
 }
+
+.featurette-divider {
+  margin: 10px 0 20px 0; /* Space out the Bootstrap <hr> more */
+}
+.featurette {
+  padding-top: 20px; /* Vertically center images part 1: add padding above and below text. */
+  overflow: hidden; /* Vertically center images part 2: clear their floats. */
+}
+.featurette-image {
+  margin-top: 10px;
+  padding: 10px 0 0 20px;
+  width: 420px;
+  height: auto;
+}
+.featurette-image.pull-left {
+  margin-right: 10px;
+}
+.featurette-image.pull-right {
+  margin-left: 10px;
+}
+.featurette-heading {
+  font-size: 50px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -5px;
+}
+.featurette .lead {
+	font-size: 18px;
+	line-height: 1.5;
+}
+
 .footer p {
 	float: left;
 	font-size: 12px;
