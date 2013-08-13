@@ -71,7 +71,7 @@
 					}
 				echo '</div>';
 				echo '<div class="tab-pane" id="tab2">';
-					//echo '<iframe src="'.TESTING_TTY_URL.'" class="terminal-frame" seamless="seamless"></iframe>';
+					echo '<iframe src="'.TESTING_TTY_URL.'" class="terminal-frame" seamless="seamless"></iframe>';
 				echo '</div>';
 				echo '<div class="tab-pane" id="tab3">';
 					echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
