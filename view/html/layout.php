@@ -1,6 +1,6 @@
 <?php
 
-function layoutNavBar() {
+function layoutNavBar($theBaseUrl) {
 	$aPage = basename($_SERVER['PHP_SELF']);
 	
 	echo '<div class="navbar navbar-fixed-top navbar-inverse">';
@@ -11,7 +11,7 @@ function layoutNavBar() {
 					echo '<span class="icon-bar"></span>';
 					echo '<span class="icon-bar"></span>';
 				echo '</a>';
-				echo '<a class="brand" href="index.php">Codebot</a>';
+				echo '<a class="brand" href="index.php"><img src="'.$theBaseUrl.'/img/codebot_logo_small_white.png" title="Ir para página inicial"/></a>';
 			
 				echo '<div class="nav-collapse">';
 					echo '<ul class="nav">';
@@ -106,16 +106,17 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 	
 	echo '<body>';
 	
-	layoutNavBar();
+	layoutNavBar($theBaseUrl);
 	
 	echo '<div class="container">';
 }
 
 function layoutFooter($theBaseUrl = '.') {
 		echo '<hr>';
-		
-		echo '<footer>';
-			echo '<p style="float:left;">&copy; 2013 - Codebot. Desenvolvido pelo curso de <a href="http://cc.uffs.edu.br" target="_blank">Ciência da Computação</a> - <a href="http://uffs.edu.br" target="_blank">UFFS</a>.</p>';
+		echo '<footer class="footer">';
+			echo '<a href="http://fronteiratec.com" target="_blank"><img src="'.$theBaseUrl.'/img/logo_fronteiratec_small.png"/></a>';
+			echo '<a href="http://cc.uffs.edu.br" target="_blank"><img src="'.$theBaseUrl.'/img/logo_cc_bw.png"/></a>';
+			echo '<p>&copy; 2013 - FronteiraTec - Todos os direitos reservados.</p>';
 		echo '</footer>';
 		
 		echo '<div id="info-overlay">Salvando...</div>';

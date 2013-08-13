@@ -108,5 +108,5 @@
 		//echo '<div class="bloco-desafios-legenda">Desafios já resolvidos</div>';
 	echo '</div>';
 	
-	layoutFooter();
+	layoutFooter(View::baseUrl());
 ?>

@@ -92,5 +92,5 @@
 		echo '</div>';
 	}
 	
-	layoutFooter();
+	layoutFooter(View::baseUrl());
 ?>

@@ -145,5 +145,5 @@
 		</script>';
 	}
 	
-	layoutFooter();
+	layoutFooter(View::baseUrl());
 ?>

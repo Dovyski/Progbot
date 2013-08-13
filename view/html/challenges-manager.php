@@ -69,5 +69,5 @@
 		echo '</div>';
 	echo '</form>';
 	
-	layoutFooter();
+	layoutFooter(View::baseUrl());
 ?>

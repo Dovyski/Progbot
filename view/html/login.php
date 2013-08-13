@@ -35,5 +35,5 @@
 		echo '</div>';
 	echo '</div>';
 	
-	layoutFooter();
+	layoutFooter(View::baseUrl());
 ?>

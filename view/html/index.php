@@ -25,6 +25,6 @@
 			echo '<p>Código e feedback dado pelo professor são tratados de forma integrada: feedback junto ao código, porém sem modificá-lo.</p>';
 		echo '</div>';
 	echo '</div>';
-	
-	layoutFooter();
+
+	layoutFooter(View::baseUrl());
 ?>
