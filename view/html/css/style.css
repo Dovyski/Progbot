@@ -113,6 +113,34 @@ body {
 	border: 0;
 }
 
+.hero-unit {
+	background-image: url('../img/heroes/hero_index.jpg');
+	color: #fff;
+	height: 160px;
+}
+.hero-unit h1 {
+	font-size: 50px;
+}
+.index-hero1 h2,
+.index-hero2 h2,
+.index-hero3 h2 {
+	font-size: 20px;
+}
+.index-hero1 {
+	background: url('../img/icos/gear.png') no-repeat center -10px;
+	padding-top: 90px;
+	text-align: center;
+}
+.index-hero2 {
+	background: url('../img/icos/document.png') no-repeat center -10px;
+	padding-top: 90px;
+	text-align: center;
+}
+.index-hero3 {
+	background: url('../img/icos/chat.png') no-repeat center -10px;
+	padding-top: 90px;
+	text-align: center;
+}
 
 /* Editor de código */
 .CodeMirror {
