@@ -142,8 +142,8 @@ var CODEBOT = new function() {
 		});
 	};
 	
-	this.openEditor = function() {
-		window.open('', '_blank', 'toolbar=0,location=0,menubar=0,width=800,height=600');
+	this.openEditor = function(theChallengeId) {
+		window.open('ide.php?challenge=' + theChallengeId, '_blank', 'toolbar=0,location=0,menubar=0,width=1024,height=768');
 	};
 	
 	this.openTerminal = function() {
