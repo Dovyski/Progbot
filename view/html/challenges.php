@@ -36,7 +36,7 @@
 						echo '<tr>';
 							echo '<td style="width: 5%;"><i class="icon-list-alt"></i></td>';
 							echo '<td>';
-								echo '<a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> ';
+								echo '<a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> ';
 								echo '<span class="label label-warning"> '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
 								if($aIsProfessor) {
 									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';
@@ -80,7 +80,7 @@
 						echo '<tr>';
 							echo '<td><i class="icon-ok-circle"></i></td>';
 							echo '<td>';
-								echo '<a href="code.php?challenge='.$aIdChallenge.'" target="_blank">'.$aRow['name'].'</a> ';
+								echo '<a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> ';
 								echo '<span class = "label label-warning" > '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
 								if($aIsProfessor) {
 									echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><i class="icon-edit"></i></a>';

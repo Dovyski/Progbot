@@ -39,11 +39,7 @@ var CODEBOT = new function() {
 		editor.save();
 	};
 	
-	this.initCodePage = function(theShouldAutoSave) {
-		if(theShouldAutoSave) {
-			setInterval(autoSaveCode, 5000);
-		}
-		
+	this.initCodePage = function() {
 		$('#formReview').on('submit', function() {
 			$.ajax({
 			  type: 'POST',
@@ -144,5 +140,13 @@ var CODEBOT = new function() {
 				});
 			}
 		});
+	};
+	
+	this.openEditor = function() {
+		window.open('', '_blank', 'toolbar=0,location=0,menubar=0,width=800,height=600');
+	};
+	
+	this.openTerminal = function() {
+		window.open('', '_blank', 'toolbar=0,location=0,menubar=0,width=800,height=600');
 	};
 };
