@@ -1,0 +1,5 @@
+body{padding:0;margin:0;overflow:hidden;}
+#info-overlay{display:none;position:fixed;bottom:20px;right:0;width:150px;background:#0f0f0f;border:solid 2px #000;color:#fff;font-size:11px;padding:5px;}
+#container{float:left;clear:both;}
+#toolbar{width:100%;height:25px;background:#303030;clear:both;}
+.CodeMirror{border:2px inset #dee;width:99.5%;min-height:760px;}

@@ -7,6 +7,7 @@
 	$aIsReviewing = false;
 	$aChallengeId = $_GET['challenge'];	
 	$aChallenge   = null;
+	$aProgram	  = null;
 	$aUserId	  = 0;
 	
 	if (isset($_GET['user'])) {
@@ -39,9 +40,10 @@
 	$aData['challenge'] 		= $aChallenge;
 	$aData['challengeId'] 		= $aChallengeId;
 	$aData['program'] 			= $aProgram;
-	$aData['reviews'] 			= reviewFindByProgramId($aProgram['id']);
+	$aData['reviews'] 			= $aProgram != null ? reviewFindByProgramId($aProgram['id']) : null;
 	$aData['isReviewing'] 		= $aIsReviewing;
-	$aData['shouldAutosave'] 	= $aProgram['grade'] < 0 && !$aIsReviewing;;
+	$aData['shouldAutosave'] 	= $aProgram != null && $aProgram['grade'] < 0 && !$aIsReviewing;
+	$aData['tty'] 				= TESTING_TTY_URL;
 	
 	View::render('code', $aData);
 ?>

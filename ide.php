@@ -16,9 +16,14 @@
 		$aChallenge = challengeGetById($aChallengeId);
 		$aProgram 	= codeGetProgramByUser($aUserInfo['id'], $aChallengeId);
 
-		if ($aProgram == null) {
+		if ($aChallenge != null && $aProgram == null) {
 			$aProgram = codeCreate($aUserInfo['id'], $aChallengeId);
 		}
+	}
+	
+	if ($aChallenge == null) {
+		header('Location: restricted.php');
+		exit();
 	}
 	
 	$aData['user'] 				= $aUserInfo;
@@ -27,5 +32,5 @@
 	$aData['program'] 			= $aProgram;
 	$aData['shouldAutosave'] 	= $aProgram != null && @$aProgram['grade'] < 0;
 	
-	View::render('ide', $aData);
+	View::render('ide/index', $aData);
 ?>

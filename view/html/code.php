@@ -9,6 +9,7 @@
 	$aChallenge   = $aData['challenge'];
 	$aUserInfo	  = $aData['user'];
 	$aProgram	  = $aData['program'];
+	$aTtyUrl 	  = $aData['tty'];
 	
 	if ($aChallenge == null) {
 		echo '<div class="row">';
@@ -30,7 +31,7 @@
 				echo '<li><a href="#tab-code-code" data-toggle="tab" class="codeTab">Código</a></li>';
 				echo '<li><a href="#tab-code-review" data-toggle="tab" class="codeTab">Revisão</a></li>';
 
-				echo '<li style="width: 100px; text-align: right; float: right;"><p><a href="javascript:void(0);" onclick="CODEBOT.openEditor('.$aChallengeId.');">[E]</a> <a href="javascript:void(0);" onclick="CODEBOT.openTerminal();">[T]</a></p></li>';
+				echo '<li style="width: 100px; text-align: right; float: right;"><p><a href="javascript:void(0);" onclick="CODEBOT.openEditor('.$aChallengeId.');">[E]</a> <a href="javascript:void(0);" onclick="CODEBOT.openTerminal(\''.$aTtyUrl.'\');">[T]</a></p></li>';
 			echo '</ul>';
 			echo '<div class="tab-content code-tab">';
 				// Description tab
@@ -150,10 +151,10 @@
 		
 		// Codemirror stuff
 		// TODO: replace with syntax highlighter?
-		echo '<style>@import url("'.$aBaseUrl.'/js/codemirror/lib/codemirror.css");</style>';
-		echo '<script src="'.$aBaseUrl.'/js/codemirror/lib/codemirror.js"></script>';
-		echo '<script src="'.$aBaseUrl.'/js/codemirror/addon/edit/matchbrackets.js"></script>';
-		echo '<script src="'.$aBaseUrl.'/js/codemirror/mode/clike/clike.js"></script>';
+		echo '<style>@import url("'.$aBaseUrl.'/ide/js/codemirror/lib/codemirror.css");</style>';
+		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/lib/codemirror.js"></script>';
+		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/addon/edit/matchbrackets.js"></script>';
+		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/mode/clike/clike.js"></script>';
 			
 		echo '
 		<script>

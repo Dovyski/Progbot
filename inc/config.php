@@ -14,6 +14,6 @@
 @define('PASSWORD_SALT', 			'dlaejhdwieugr34712-13fkj3-122045*&@#$)*&Gkdf*%$@I&$fdfd');
 
 // System params
-@define('DEBUG_MODE', 				true);
+@define('DEBUG_MODE', 				false);
 @define('SESSION_NAME', 			'codebotsid');
 ?>
