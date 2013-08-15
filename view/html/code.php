@@ -31,7 +31,7 @@
 				echo '<li><a href="#tab-code-code" data-toggle="tab" class="codeTab">Código</a></li>';
 				echo '<li><a href="#tab-code-review" data-toggle="tab" class="codeTab">Revisão</a></li>';
 
-				echo '<li style="width: 100px; text-align: right; float: right;"><p><a href="javascript:void(0);" onclick="CODEBOT.openEditor('.$aChallengeId.');">[E]</a> <a href="javascript:void(0);" onclick="CODEBOT.openTerminal(\''.$aTtyUrl.'\');">[T]</a></p></li>';
+				echo '<li style="width: 100px; text-align: right; float: right;"><p><a href="javascript:void(0);" onclick="CODEBOT.openEditor('.$aChallengeId.');">[E]</a></p></li>';
 			echo '</ul>';
 			echo '<div class="tab-content code-tab">';
 				// Description tab

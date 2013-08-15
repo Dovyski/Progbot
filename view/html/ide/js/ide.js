@@ -62,8 +62,8 @@ var IDE = new function() {
 		});
 	};
 	
-	this.openTerminal = function() {
-		window.open('', '_blank', 'toolbar=0,location=0,menubar=0,width=800,height=600');
+	this.openTerminal = function(theUrl) {
+		window.open(theUrl, '_blank', 'toolbar=0,location=0,menubar=0,width=600,height=400');
 	};
 };
 
