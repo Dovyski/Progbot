@@ -18,7 +18,7 @@ body {
 }
 
 #container {
-	float: left;
+	position: relative;
 	clear: both;
 }
 
@@ -27,6 +27,28 @@ body {
 	height: 25px;
 	background: #303030;
 	clear: both;
+}
+
+.ide-button {
+	width: 20px;
+	height: 20px;
+	background: #cfcfcf;
+	padding: 2px;
+	float: left;
+	margin-right: 2px;
+}
+
+#build-info {
+	display: none;
+	position: absolute;
+	top: 27px;
+	right: 0;
+	background: #cfcfcf;
+	z-index: 10;
+	overflow: auto;
+	padding: 3px;
+	text-align: right;
+	
 }
 
 /* Code editor */
