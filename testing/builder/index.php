@@ -18,21 +18,18 @@ if (isset($_REQUEST['hash']) && $_REQUEST['hash']) {
 	$aContent 		= $aCode . $aFile . $aPath;
 	$aExpectedHash 	= md5($aContent . PASSWORD);
 	
-	if ($aHash == $aExpectedHash || true) {
+	if ($aHash == $aExpectedHash || IGNORE_HASH) {
 		if ($aPath != '' && $aFile != '') {
-			$aPath = $aPath[strlen($aPath) - 1] != '/' ? $aPath . '/' : $aPath;
+			$aPath 			= $aPath[strlen($aPath) - 1] != '/' ? $aPath . '/' : $aPath;
+			$aRet['path'] 	= DEPLOY_DIR . $aPath;
+			$aRet['status'] = true;
+			$aRet['file'] 	= $aFile;
+			
 			$aPath = dirname(__FILE__) . '/tmp/' . $aPath;
 			
-			//system('mkdir ' . $aPath);
-			echo 'mkdir ' . $aPath;
-			echo $aPath . $aFile;
-			//file_put_contents($aPath . $aFile, $aCode);
-			
-			system(dirname(__FILE__) . '/mv.php');
-			
-			$aRet['status'] = true;
-			$aRet['file'] = $aFile;
-			$aRet['path'] = $aPath;
+			system('mkdir ' . $aPath);
+			file_put_contents($aPath . $aFile, $aCode);
+			system('sudo ' . dirname(__FILE__) . '/mv.php');
 			
 		} else {
 			$aRet['msg'] = 'Invalid value for file name or path (file='.$aFile.', path='.$aPath.').';
