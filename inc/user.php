@@ -23,4 +23,16 @@ function userIsLevel($theUserInfo, $theLevel) {
 	return $theUserInfo['type'] == $theLevel;
 }
 
+function userLoginfyName($theName) {
+	$aParts = explode(' ', strtolower($theName));
+	$aName  = '';
+	
+	for ($i = 0; $i < count($aParts) - 1; $i++) {
+		$aName .= strlen($aParts[$i]) >= 1 ? $aParts[$i][0] : '';
+	}
+	
+	$aName .= $aParts[$i];
+	return $aName;
+}
+
 ?>

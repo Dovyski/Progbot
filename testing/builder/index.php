@@ -27,7 +27,7 @@ if (isset($_REQUEST['hash']) && $_REQUEST['hash']) {
 			
 			$aPath = dirname(__FILE__) . '/tmp/' . $aPath;
 			
-			system('mkdir ' . $aPath);
+			system('mkdir -p ' . $aPath);
 			file_put_contents($aPath . $aFile, $aCode);
 			system('sudo ' . dirname(__FILE__) . '/mv.php');
 			

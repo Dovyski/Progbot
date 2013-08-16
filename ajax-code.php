@@ -44,7 +44,7 @@ switch($aAction) {
 		if ($aProgram != null && challengeCanBeReviewedBy($aProgram['fk_challenge'], $aUser)) {
 			$aCode = $aProgram['code'];
 			$aFile = 'prog.c';
-			$aPath = $aUser['login'] . '-' . $aProgram['id'] . '/';
+			$aPath = userLoginfyName($aUser['name']) . '/' . $aProgram['id'] . '/';
 			$aHash = md5($aCode . $aFile . $aPath . TESTING_TTY_PASSWORD);
 
 			$aRet = buildSendRequest(TESTING_TTY_DEPLOY_URL, $aCode, $aFile, $aPath, $aHash);
