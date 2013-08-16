@@ -18,15 +18,17 @@ if (isset($_REQUEST['hash']) && $_REQUEST['hash']) {
 	$aContent 		= $aCode . $aFile . $aPath;
 	$aExpectedHash 	= md5($aContent . PASSWORD);
 	
-	if ($aHash == $aExpectedHash) {
+	if ($aHash == $aExpectedHash || true) {
 		if ($aPath != '' && $aFile != '') {
 			$aPath = $aPath[strlen($aPath) - 1] != '/' ? $aPath . '/' : $aPath;
+			$aPath = dirname(__FILE__) . '/tmp/' . $aPath;
+			
 			//system('mkdir ' . $aPath);
 			echo 'mkdir ' . $aPath;
 			echo $aPath . $aFile;
 			//file_put_contents($aPath . $aFile, $aCode);
-			//system('chown '.TEST_USER.':'.TEST_USER_GROUP.' ' . $aPath);
-			echo 'chown '.TEST_USER.':'.TEST_USER_GROUP.' ' . $aPath;
+			
+			system(dirname(__FILE__) . '/mv.php');
 			
 			$aRet['status'] = true;
 			$aRet['file'] = $aFile;
@@ -45,5 +47,5 @@ if (isset($_REQUEST['hash']) && $_REQUEST['hash']) {
 	$aRet['error'] = 1;
 }
 
-echo json_encode($aRet);
+echo serialize($aRet);
 ?>
