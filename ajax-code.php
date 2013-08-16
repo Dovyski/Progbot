@@ -38,10 +38,18 @@ switch($aAction) {
 		break;
 		
 	case 'build':
-		// TODO: implement this
-		$aRet['status'] = true;
-		$aRet['file'] 	= 'test.c';
-		$aRet['path'] 	= '/home/alunos/fernando/';
+		$aProgram 	= codeGetById(@$_REQUEST['programId'], true);
+		$aUser		= userGetById($_SESSION['user']['id']);
+		
+		if ($aProgram != null && challengeCanBeReviewedBy($aProgram['fk_challenge'], $aUser)) {
+			$aCode = $aProgram['code'];
+			$aFile = 'prog.c';
+			$aPath = $aUser['login'] . '-' . $aProgram['id'] . '/';
+			$aHash = md5($aCode . $aFile . $aPath . TESTING_TTY_PASSWORD);
+
+			$aRet = buildSendRequest(TESTING_TTY_DEPLOY_URL, $aCode, $aFile, $aPath, $aHash);
+			$aRet = @unserialize($aRet);
+		}
 		break;
 		
 	default:
