@@ -142,6 +142,22 @@ var CODEBOT = new function() {
 		});
 	};
 	
+	this.loadChallenges = function(theContainerId, theType, thePage) {
+		$('#' + theContainerId).html('Carregando... <img src="./ajax-loader.gif" title="Loading" align="absmiddle">');
+
+		$.ajax({
+		  type: 'POST',
+		  url: 'ajax-challenges.php',
+		  data: {'type': theType, 'page' : thePage }
+		})
+		.done(function( msg ) {
+			$('#' + theContainerId).html(msg);
+		})
+		.fail(function(jqXHR, textStatus) {
+			$('#' + theContainerId).html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');
+		});
+	};
+	
 	this.openEditor = function(theChallengeId) {
 		window.open('ide.php?challenge=' + theChallengeId, '_blank', 'toolbar=0,location=0,menubar=0,width=1024,height=768');
 	};

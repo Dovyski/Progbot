@@ -56,11 +56,13 @@ function challengeCreateOrUpdate($theChallengeId, $theData) {
 	return $aRet;
 }
 
-function challengeFindActivesByUser($theUserId) {
+function challengeFindActivesByUser($theUserId, $thePage, $thePageSize, & $theTotalChallenges) {
 	global $gDb;
 	
+	$thePage	= (int)$thePage;
+	$thePageSize= (int)$thePageSize;
 	$aRet 		= array();
-	$aQuery 	= $gDb->prepare("SELECT * FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL)");
+	$aQuery 	= $gDb->prepare("SELECT COUNT(*) AS count FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL)");
 	$aUserInfo	= userGetById($theUserId); // TODO: optimize it!
 	$aGroupId	= 0;
 	
@@ -68,9 +70,19 @@ function challengeFindActivesByUser($theUserId) {
 		$aGroupId = $aUserInfo['fk_group'];
 	}
 	
+	$theTotalChallenges = 0;
+	$thePage = $thePage * $thePageSize;
+	
 	if ($aQuery->execute(array($theUserId, $aGroupId))) {
-		while($aRow = $aQuery->fetch()) {
-			$aRet[$aRow['id']] = $aRow;
+		$aRow = $aQuery->fetch();
+		$theTotalChallenges = $aRow['count'];
+	
+		$aQuery = $gDb->prepare("SELECT * FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL) LIMIT ".$thePage."," . $thePageSize);
+		
+		if ($aQuery->execute(array($theUserId, $aGroupId))) {
+			while($aRow = $aQuery->fetch()) {
+				$aRet[$aRow['id']] = $aRow;
+			}
 		}
 	}
 	
@@ -107,16 +119,28 @@ function challengeFindAnswersById($theChallengeId) {
 	return $aRet;
 }
 
-function challengeFindAnsweredByUser($theUserId, $theStart = 0, $theAmount = 10) {
+function challengeFindAnsweredByUser($theUserId, $thePage, $thePageSize, & $theTotalChallenges) {
 	global $gDb;
 	
-	$aRet = array();
+	$thePage		= (int)$thePage;
+	$thePageSize	= (int)$thePageSize;
+	$aRet 			= array();
 	// TODO: filter by group?
-	$aQuery = $gDb->prepare("SELECT c.id as challenge_id, c.fk_category, c.description, c.name, c.level, p.id as program_id, p.fk_user, p.date, p.last_update, p.grade FROM challenges AS c JOIN programs AS p ON c.id = p.fk_challenge WHERE p.fk_user = ? AND p.grade >= 0");
+	$aQuery = $gDb->prepare("SELECT COUNT(*) AS count FROM challenges AS c JOIN programs AS p ON c.id = p.fk_challenge WHERE p.fk_user = ? AND p.grade >= 0");
+	
+	$theTotalChallenges = 0;
+	$thePage = $thePage * $thePageSize;
 	
 	if ($aQuery->execute(array($theUserId))) {
-		while($aRow = $aQuery->fetch()) {
-			$aRet[$aRow['challenge_id']] = $aRow;
+		$aRow = $aQuery->fetch();
+		$theTotalChallenges = $aRow['count'];
+	
+		$aQuery = $gDb->prepare("SELECT c.id as challenge_id, c.fk_category, c.description, c.name, c.level, p.id as program_id, p.fk_user, p.date, p.last_update, p.grade FROM challenges AS c JOIN programs AS p ON c.id = p.fk_challenge WHERE p.fk_user = ? AND p.grade >= 0 LIMIT ".$thePage.",".$thePageSize);
+		
+		if ($aQuery->execute(array($theUserId))) {
+			while($aRow = $aQuery->fetch()) {
+				$aRet[$aRow['challenge_id']] = $aRow;
+			}
 		}
 	}
 	
