@@ -6,9 +6,11 @@
 	$aData 			= View::data();
 	$aIsProfessor 	= $aData['isProfessor'];
 	
-	echo '<div class="hero-unit">';
-		echo '<h1>Desafios</h1>';
-		echo '<p>Lista de desafios que podem ser resolvidos.</p>';
+	echo '<div class="jumbotron">';
+		echo '<div class="container">';
+			echo '<h1>Desafios</h1>';
+			echo '<p>Lista de desafios que podem ser resolvidos.</p>';
+		echo '</div>';
 	echo '</div>';
 	
 	if($aIsProfessor) {

@@ -1,4 +1,4 @@
-body{padding-top:60px;padding-bottom:40px;}
+body{padding-top:70px;padding-bottom:40px;}
 .icone-ubuntu{background-image:url('../img/headers/ubuntu.png');}
 .icone-windows{background-image:url('../img/headers/windows.png');}
 .icone-sobre{background-image:url('../img/headers/robo.png');}
@@ -16,13 +16,13 @@ body{padding-top:60px;padding-bottom:40px;}
 .user-info img{float:left;width:40px;height:40px;margin-right:5px;}
 #info-overlay{display:none;position:fixed;bottom:20px;right:0;width:150px;background:#0f0f0f;border:solid 2px #000;color:#fff;font-size:11px;padding:5px;}
 .terminal-frame{width:100%;height:600px;border:0;}
-.hero-unit{background-image:url('../img/heroes/hero_index.jpg');color:#fff;height:160px;}
-.hero-unit h1{font-size:50px;}
-.hero-unit-challenges{background-image:url('../img/heroes/hero_index.jpg');}
-.hero-unit-challenges-manager{background-image:url('../img/heroes/hero_index.jpg');}
-.hero-unit-review{background-image:url('../img/heroes/hero_index.jpg');}
-.hero-unit-oops{background-image:url('../img/heroes/hero_index.jpg');}
-.hero-unit-restricted{background-image:url('../img/heroes/hero_index.jpg');}
+.jumbotron{background:url('../img/heroes/hero_index.jpg') 50px -45px;color:#fff;height:200px;}
+.jumbotron h1{font-size:50px;}
+.jumbotron-challenges{background-image:url('../img/heroes/hero_index.jpg');}
+.jumbotron-challenges-manager{background-image:url('../img/heroes/hero_index.jpg');}
+.jumbotron-review{background-image:url('../img/heroes/hero_index.jpg');}
+.jumbotron-oops{background-image:url('../img/heroes/hero_index.jpg');}
+.jumbotron-restricted{background-image:url('../img/heroes/hero_index.jpg');}
 .index-hero1 h2,.index-hero2 h2,.index-hero3 h2{font-size:20px;}
 .index-hero1{background:url('../img/icos/gear.png') no-repeat center -10px;padding-top:90px;text-align:center;}
 .index-hero2{background:url('../img/icos/document.png') no-repeat center -10px;padding-top:90px;text-align:center;}

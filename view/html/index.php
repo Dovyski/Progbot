@@ -3,24 +3,26 @@
 	
 	layoutHeader('Start', View::baseUrl());
 	
-	echo '<div class="hero-unit">';
-		echo '<h1>Codebot</h1>';
-		echo '<p>Ensine e aprenda programação. Ponto.</p>';
-		//echo '<p><a href="oops.php" class="btn btn-primary btn-large">Saber mais &raquo;</a></p>';
+	echo '<div class="jumbotron">';
+		echo '<div class="container">';
+			echo '<h1>Codebot</h1>';
+			echo '<p>Ensine e aprenda programação. Ponto.</p>';
+			//echo '<p><a href="oops.php" class="btn btn-primary btn-large">Saber mais &raquo;</a></p>';
+		echo '</div>';
 	echo '</div>';
 	
 	echo '<div class="row">';
-		echo '<div class="span4 index-hero1">';
+		echo '<div class="col-md-4 index-hero1">';
 			echo '<h2>Planejado</h2>';
 			echo '<p>Um ambiente criado desde o princípio com foco no ensino de programação.</p>';
 		echo '</div>';
 		
-		echo '<div class="span4 index-hero2">';
+		echo '<div class="col-md-4 index-hero2">';
 			echo '<h2>Dados na núvem</h2>';
 			echo '<p>Códigos e programas são armazenados e rodados na núvem.</p>';
 		echo '</div>';
 		
-		echo '<div class="span4 index-hero3">';
+		echo '<div class="col-md-4 index-hero3">';
 			echo '<h2>Expansível</h2>';
 			echo '<p>Novas linguanges de programação podem ser acopladas facilmente.</p>';
 		echo '</div>';

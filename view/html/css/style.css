@@ -1,5 +1,5 @@
 body {
-	padding-top: 60px;
+	padding-top: 70px;
 	padding-bottom: 40px;
 }
 
@@ -113,19 +113,19 @@ body {
 	border: 0;
 }
 
-.hero-unit {
-	background-image: url('../img/heroes/hero_index.jpg');
+.jumbotron {
+	background: url('../img/heroes/hero_index.jpg') 50px -45px;
 	color: #fff;
-	height: 160px;
+	height: 200px;
 }
-.hero-unit h1 {
+.jumbotron h1 {
 	font-size: 50px;
 }
-.hero-unit-challenges 			{ background-image: url('../img/heroes/hero_index.jpg'); }
-.hero-unit-challenges-manager 	{ background-image: url('../img/heroes/hero_index.jpg'); }
-.hero-unit-review 				{ background-image: url('../img/heroes/hero_index.jpg'); }
-.hero-unit-oops 				{ background-image: url('../img/heroes/hero_index.jpg'); }
-.hero-unit-restricted 			{ background-image: url('../img/heroes/hero_index.jpg'); }
+.jumbotron-challenges 			{ background-image: url('../img/heroes/hero_index.jpg'); }
+.jumbotron-challenges-manager 	{ background-image: url('../img/heroes/hero_index.jpg'); }
+.jumbotron-review 				{ background-image: url('../img/heroes/hero_index.jpg'); }
+.jumbotron-oops 				{ background-image: url('../img/heroes/hero_index.jpg'); }
+.jumbotron-restricted 			{ background-image: url('../img/heroes/hero_index.jpg'); }
 .index-hero1 h2,
 .index-hero2 h2,
 .index-hero3 h2 {
