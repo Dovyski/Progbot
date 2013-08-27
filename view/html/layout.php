@@ -159,7 +159,7 @@ function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTa
 		echo '</ul>';
 		echo '<div class="tab-content" style="height: 320px; width: 100%;">';
 			echo '<div class="tab-pane active" id="'.$theFieldName.'-tab-markdown">';
-				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 95%; height: 300px;">'.$theInitialText.'</textarea>';
+				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 100%; height: 300px;">'.$theInitialText.'</textarea>';
 			echo '</div>';
 			echo '<div class="tab-pane" id="'.$theFieldName.'-tab-view-markdown">';
 				echo 'A visualização não está disponível ainda. Desculpe!';

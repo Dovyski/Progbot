@@ -90,10 +90,10 @@ var CODEBOT = new function() {
 	};
 	
 	this.createMarkdownTextarea = function(theTextId) {
-		$('a[data-toggle="tab"]').on('shown', function (e) {
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var aActiveTab 	= e.target + '';
 			var aOldTab 	= e.relatedTarget + '';
-			
+
 			aActiveTab 		= aActiveTab.substr(aActiveTab.lastIndexOf('#'));
 			aOldTab 		= aOldTab.substr(aOldTab.lastIndexOf('#'));
 
@@ -116,7 +116,7 @@ var CODEBOT = new function() {
 	};
 	
 	this.initCodeTabs = function() {
-		$('.codeTab[data-toggle="tab"]').on('shown', function (e) {
+		$('.codeTab[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var aActiveTab 	= e.target + '';
 			var aOldTab 	= e.relatedTarget + '';
 			

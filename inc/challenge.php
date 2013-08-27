@@ -45,7 +45,7 @@ function challengeCreateOrUpdate($theChallengeId, $theData) {
 	$aQuery = $gDb->prepare("INSERT INTO challenges (id, fk_category, fk_group, date, description, name, level)
 											VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE fk_category = ?, fk_group = ?, date = ?, description = ?, name = ?, level = ?");
 
-	if(strlen($aName) > 5 && strlen($aDescription) > 10) {
+	if(strlen($aName) > 0 && strlen($aDescription) > 0) {
 		$aParams = array($aId, $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel,
 						 $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel);
 		
