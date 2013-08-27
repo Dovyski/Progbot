@@ -20,7 +20,7 @@
 			echo '<tbody>';
 				foreach($aChallenges as $aIdChallenge => $aRow) {
 					echo '<tr>';
-						echo '<td style="width: 5%;"><i class="icon-list-'.($aType == 'actives' ? 'alt' : 'circle').'"></i></td>';
+						echo '<td style="width: 4%; text-align: center;"><span class="glyphicon glyphicon-list-'.($aType == 'actives' ? 'alt' : 'circle').'"></span></td>';
 						echo '<td>';
 							echo '<a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> ';
 							echo '<span class="label label-warning"> '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
@@ -37,18 +37,18 @@
 		$aBlock = $aType == 'actives' ? 'active-challenges' : 'answered-challenges';
 		
 		// Pagination
-		if($aMaxPages > 1) {
-			echo '<div class="pagination">';
-				echo '<ul>';
-				if($aPage > 0) {
-					echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage - 1).');">Anterior</a></li>';
-				}
-				for ($i = 0; $i < $aMaxPages; $i++ ) {
-					echo '<li class="'.($aPage == $i ? 'active' : '').'"><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.$i.');">'.($i + 1).'</a></li>';
-				}
-				if($aPage < $aMaxPages - 1) {
-					echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage + 1).');">Próxima</a></li>';
-				}
+		if ($aMaxPages > 1) {
+			echo '<div class="pagination-block">';
+				echo '<ul class="pagination">';
+					if($aPage > 0) {
+						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage - 1).');">Anterior</a></li>';
+					}
+					for ($i = 0; $i < $aMaxPages; $i++ ) {
+						echo '<li class="'.($aPage == $i ? 'active' : '').'"><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.$i.');">'.($i + 1).'</a></li>';
+					}
+					if($aPage < $aMaxPages - 1) {
+						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage + 1).');">Próxima</a></li>';
+					}
 				echo '</ul>';
 			echo '</div>';
 		}

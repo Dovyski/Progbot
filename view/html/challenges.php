@@ -15,18 +15,24 @@
 	
 	if($aIsProfessor) {
 		echo '<div class="row">';
-			echo '<div class="span2 offset10">';
-				echo '<a href="challenges-manager.php"><i class="icon-plus-sign"></i> Criar desafio</a><br/><br/>';				
+			echo '<div class="col-md-2 col-md-offset-10">';
+				echo '<a href="challenges-manager.php" class="pull-right"><span class="glyphicon glyphicon-plus-sign"></span> Criar desafio</a>';
 			echo '</div>';
 		echo '</div>';
 	}
 		
-	// Active challenges	
-	echo '<h4><i class="icon-book"></i> Desafios não resolvidos</h4>';
-	echo '<div id="active-challenges" class="bloco-desafios"><script>CODEBOT.loadChallenges(\'active-challenges\', \'actives\', 0);</script></div>';
+	// Challenges
+	echo '<div class="panel panel-primary">';
+		echo '<div class="panel-heading"><span class="glyphicon glyphicon-book"></span> Desafios não resolvidos</div>';
+		echo '<div id="active-challenges"><script>CODEBOT.loadChallenges(\'active-challenges\', \'actives\', 0);</script></div>';
+		echo '<div class="panel-footer"></div>';
+	echo '</div>';
 	
-	echo '<h4 style="margin-top: 30px;"><i class="icon-thumbs-up"></i> Desafios já resolvidos</h4>';
-	echo '<div id="answered-challenges" class="bloco-desafios"><script>CODEBOT.loadChallenges(\'answered-challenges\', \'answered\', 0);</script></div>';	
+	echo '<div class="panel panel-primary">';
+		echo '<div class="panel-heading"><span class="glyphicon glyphicon-thumbs-up"></span> Desafios já resolvidos</div>';
+		echo '<div id="answered-challenges"><script>CODEBOT.loadChallenges(\'answered-challenges\', \'answered\', 0);</script></div>';
+		echo '<div class="panel-footer"></div>';
+	echo '</div>';
 	
 	layoutFooter(View::baseUrl());
 ?>
