@@ -14,6 +14,8 @@
 		echo '</div>';
 	echo '</div>';
 	
+	echo '<div class="container">';
+	
 	if (isset($aData['createdOrUpdated'])) {
 		if ($aData['createdOrUpdated'] == true) {
 			echo '<div class="alert alert-success"><strong>Tudo certo!</strong> Desafio alterado com sucesso!</div>';
@@ -62,10 +64,12 @@
 			echo '<div class="col-md-12">';
 				echo '<label class="control-label">Descrição</label>';
 				layoutPrintMarkdownTextarea('description', @$aChallengeInfo['description'], array('Texto'));
-				echo '<input type="submit" name="submit" value="Salvar" class="btn btn-primary" />';
+				echo '<input type="submit" name="submit" value="Salvar" class="btn btn-success" />';
 			echo '</div>';
 		echo '</div>';
 	echo '</form>';
+	
+	echo '</div>';	
 	
 	layoutFooter(View::baseUrl());
 ?>

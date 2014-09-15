@@ -38,6 +38,10 @@ a:visited {
 	text-align: left;
 }
 
+.bloco-desafios p {
+	padding: 10px;
+}
+
 .grade-info {
   float: right;
   width: 120px;
@@ -95,7 +99,7 @@ a:visited {
 	padding: 5px;
 }
 
-.challenges-container .panel-heading {
+.panel-heading {
 	font-weight: bold;
 }
 
