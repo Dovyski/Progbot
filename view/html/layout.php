@@ -3,25 +3,23 @@
 function layoutNavBar($theBaseUrl) {
 	$aPage = basename($_SERVER['PHP_SELF']);
 	
-	echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
-		echo '<div class="navbar-header">';
-			echo '<button type="button" class="navbar-toggle" data-toggle="collapse">';
-				echo '<span class="sr-only">Toggle navigation</span>';
-				echo '<span class="icon-bar"></span>';
-				echo '<span class="icon-bar"></span>';
-			echo '</button>';
-			echo '<a class="navbar-brand" href="index.php"><img src="'.$theBaseUrl.'/img/codebot_logo_small_white.png" title="Ir para página inicial"/></a>';
-		echo '</div>';
-		
-		echo '<div class="collapse navbar-collapse">';
-			echo '<ul class="nav navbar-nav">';
-				echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
-				layoutUserBar();
+	echo '<nav class="navbar navbar-default" role="navigation">';
+		echo '<div class="container">';
+			echo '<div class="navbar-header">';
+				echo '<a class="navbar-brand" href="index.php"><img src="'.$theBaseUrl.'/img/codebot_logo_small_white.png" title="Ir para página inicial"/></a>';
+			echo '</div>';
+			
+			echo '<div class="collapse navbar-collapse">';
+				echo '<ul class="nav navbar-nav">';
+					echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
+				echo '</ul>';
 				
+				layoutUserBar();
+					
 				if(authIsAuthenticated()) {
 					layoutAdminNavBar();
 				}
-			echo '</ul>';
+			echo '</div>';
 		echo '</div>';
 	echo '</nav>';
 }
@@ -34,22 +32,22 @@ function layoutAdminNavBar() {
 		return;
 	}
 	
-	echo '<div class="navbar-text navbar-right">';
+	echo '<ul class="nav navbar-nav navbar-right">';
 		echo '<li class="dropdown">';
 			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Professor <b class="caret"></b></a>';
-			echo '<ul class="dropdown-menu">';
+			echo '<ul class="dropdown-menu" role="menu">';
 				echo '<li><a href="challenges-manager.php">Criar desafio</a></li>';
 				echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 				//echo '<li class="divider"></li>';
 				//echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 			echo '</ul>';
 		echo '</li>';
-	echo '</div>';
+	echo '</ul>';
 }
 
 function layoutUserBar() {
 	$aClassLink	  = authIsAdmin() ? 'btn-danger' : 'btn-primary';
-	echo '<div class="navbar-text navbar-right">';
+	echo '<ul class="nav navbar-nav navbar-right">';
 		echo '<li class="dropdown">';
 			if (authIsAuthenticated()) {
 				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$_SESSION['user']['name'].' <b class="caret"></b></a>';
@@ -58,10 +56,10 @@ function layoutUserBar() {
 					echo '<li><a href="logout.php"><i class="icon-remove"></i> Sair</a></li>';
 				echo '</ul>';				
 			} else {
-				echo '<a class="btn '.$aClassLink.'" href="login.php"><i class="icon-user icon-white"></i> Login</a>';
+				echo '<a href="login.php"><span class="glyphicon glyphicon-user"></span> Login</a>';
 			}
 		echo '</li>';
-	echo '</div>';
+	echo '</ul>';
 }
 
 function layoutHeader($theTitle, $theBaseUrl = '.') {
@@ -83,10 +81,6 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 		echo '<!-- Le styles -->';
 		echo '<link href="'.$theBaseUrl.'/css/bootstrap.css" rel="stylesheet">';
 		echo '<link href="'.$theBaseUrl.'/css/style.css'.$aRandURLs.'" rel="stylesheet">';
-		
-		if(LAYOUT_RESPONSIVE) {
-			echo '<link href="'.$theBaseUrl.'/css/bootstrap-responsive.css" rel="stylesheet">';
-		}
 		
 		echo '<!-- Le fav and touch icons -->';
 		echo '<link rel="shortcut icon" href="img/favicon.ico">';

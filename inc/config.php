@@ -1,7 +1,5 @@
 <?php
 
-@define('LAYOUT_RESPONSIVE',		false);
-
 // Database info
 @define('DB_DSN',					'mysql:host=localhost;dbname=codebot');
 @define('DB_USER',					'root');
