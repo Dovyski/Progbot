@@ -1,10 +1,12 @@
-body{padding-top:0px;padding-bottom:40px;}
+body{padding:0px;}
 .icone-ubuntu{background-image:url('../img/headers/ubuntu.png');}
 .icone-windows{background-image:url('../img/headers/windows.png');}
 .icone-sobre{background-image:url('../img/headers/robo.png');}
 .icone-guia{background-image:url('../img/headers/guia.png');}
 .icone-armazenamento{background-image:url('../img/headers/armazenamento.png');}
 .icone-senha{background-image:url('../img/headers/chave.png');}
+a:link,a:active,a:hover,a:visited{color:#000;}
+.navbar{margin-bottom:0px;}
 .code-tab{min-height:660px;overflow:auto;}
 .challenge-tab{min-height:320px;}
 .challenge-tab small{color:#9f9f9f;}
@@ -14,8 +16,10 @@ body{padding-top:0px;padding-bottom:40px;}
 .grade-info-title{position:absolute;width:80px;top:-1px;left:-1px;text-align:center;font-size:12px;font-weight:bold;background-color:#f5f5f5;border:1px solid #ddd;color:#9da0a4;-webkit-border-radius:4px 0 4px 0;-moz-border-radius:4px 0 4px 0;border-radius:4px 0 4px 0;}
 .user-info img{float:left;width:40px;height:40px;margin-right:5px;}
 #info-overlay{display:none;position:fixed;bottom:20px;right:0;width:150px;background:#0f0f0f;border:solid 2px #000;color:#fff;font-size:11px;padding:5px;}
+.challenges-container .panel-heading{font-weight:bold;}
 .terminal-frame{width:100%;height:600px;border:0;}
-.jumbotron{background:url('../img/heroes/hero_index.jpg') 50px -45px;color:#fff;height:200px;}
+.jumbotron{background:#00733C;color:#fff;height:150px;margin:0px 0px 20px 0px;}
+.jumbotron .container{margin-top:-40px;}
 .jumbotron h1{font-size:50px;}
 .jumbotron-challenges{background-image:url('../img/heroes/hero_index.jpg');}
 .jumbotron-challenges-manager{background-image:url('../img/heroes/hero_index.jpg');}
@@ -32,7 +36,7 @@ body{padding-top:0px;padding-bottom:40px;}
 .featurette-image.pull-left{margin-right:10px;}
 .featurette-image.pull-right{margin-left:10px;}
 .featurette-heading{font-size:50px;font-weight:200;line-height:1;letter-spacing:-5px;}
-.featurette .lead{font-size:18px;line-height:1.5;}
+.featurette .lead{font-size:17px;line-height:1.5;}
 .footer p{float:left;font-size:12px;color:#9f9f9f;}
 .footer img{float:right;margin-left:20px;}
 .CodeMirror{border:2px inset #dee;height:600px!important;}

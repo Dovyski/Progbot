@@ -13,19 +13,22 @@
 	$aPage 			= $aData['page'];
 
 	if (count($aChallenges) == 0) {
-		echo '<p>'.($aType == 'actives' ? 'Não existem desafios ativos no momento.' : 'Você não resolveu desafios até agora.').'</p>';
+		echo '<p style="padding: 15px;">'.($aType == 'actives' ? 'Não existem desafios ativos no momento.' : 'Você não resolveu desafios até agora.').'</p>';
 		
 	} else {
 		echo '<table class="table table-hover">';
 			echo '<tbody>';
 				foreach($aChallenges as $aIdChallenge => $aRow) {
 					echo '<tr>';
-						echo '<td style="width: 4%; text-align: center;"><span class="glyphicon glyphicon-list-'.($aType == 'actives' ? 'alt' : 'circle').'"></span></td>';
-						echo '<td>';
-							echo '<a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a> ';
+						echo '<td style="width: 4%; text-align: center;">';
+							echo '<i class = "fa fa-'.($aType == 'actives' ? 'book' : 'circle').'" > </i>';
 							echo '<span class="label label-warning"> '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
+						echo '</td>';
+						echo '<td>';
+							echo '<strong><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a></strong>';
+							
 							if($aIsProfessor) {
-								echo '<a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="glyphicon glyphicon-edit"></span></a>';
+								echo ' <a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="fa fa-edit"></span></a>';
 							}
 							echo '<p>'.MarkdownExtended($aRow['description']).'</p>';
 						echo '</td>';

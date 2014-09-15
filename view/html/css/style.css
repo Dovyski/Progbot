@@ -1,6 +1,5 @@
 body {
-	padding-top: 0px;
-	padding-bottom: 40px;
+	padding: 0px;
 }
 
 .icone-ubuntu 			{ background-image: url('../img/headers/ubuntu.png'); }
@@ -9,6 +8,17 @@ body {
 .icone-guia 			{ background-image: url('../img/headers/guia.png');}
 .icone-armazenamento 	{ background-image: url('../img/headers/armazenamento.png');}
 .icone-senha 			{ background-image: url('../img/headers/chave.png');}
+
+a:link,
+a:active,
+a:hover,
+a:visited {
+	color: #000;
+}
+
+.navbar {
+	margin-bottom: 0px;
+}
 
 .code-tab {
 	min-height: 660px;
@@ -85,6 +95,10 @@ body {
 	padding: 5px;
 }
 
+.challenges-container .panel-heading {
+	font-weight: bold;
+}
+
 .terminal-frame {
 	width: 100%;
 	height: 600px;
@@ -92,10 +106,16 @@ body {
 }
 
 .jumbotron {
-	background: url('../img/heroes/hero_index.jpg') 50px -45px;
+	background: #00733C;
 	color: #fff;
-	height: 200px;
+	height: 150px;
+	margin: 0px 0px 20px 0px;
 }
+
+.jumbotron .container {
+	margin-top: -40px;
+}
+
 .jumbotron h1 {
 	font-size: 50px;
 }
@@ -151,7 +171,7 @@ body {
   letter-spacing: -5px;
 }
 .featurette .lead {
-	font-size: 18px;
+	font-size: 17px;
 	line-height: 1.5;
 }
 

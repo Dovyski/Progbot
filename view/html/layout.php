@@ -88,6 +88,9 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 		echo '<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png">';
 		echo '<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png">';
 		
+		echo '<!-- FontAwesome -->';
+		echo '<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">';
+		
 		echo '<script src="'.$theBaseUrl.'/js/jquery.js'.$aRandURLs.'"></script>';
 		echo '<script src="'.$theBaseUrl.'/js/bootstrap.js'.$aRandURLs.'"></script>';
 		echo '<script src="'.$theBaseUrl.'/js/codebot.js'.$aRandURLs.'"></script>';
@@ -96,33 +99,31 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 	echo '<body>';
 	
 	layoutNavBar($theBaseUrl);
-	
-	echo '<div class="container">';
 }
 
 function layoutFooter($theBaseUrl = '.') {
-		echo '<hr>';
-		echo '<footer class="footer">';
-			echo '<a href="http://fronteiratec.com" target="_blank"><img src="'.$theBaseUrl.'/img/logo_fronteiratec_small.png"/></a>';
-			echo '<a href="http://cc.uffs.edu.br" target="_blank"><img src="'.$theBaseUrl.'/img/logo_cc_bw.png"/></a>';
-			echo '<p>&copy; 2013 - FronteiraTec - Todos os direitos reservados.</p>';
-		echo '</footer>';
-		
-		echo '<div id="info-overlay">Salvando...</div>';
-		
-	if(DEBUG_MODE) {
-		echo '<div class="row" style="margin-top: 80px;">';
-			echo '<div class="span12">';
-				echo '<h2>Debug</h2>';
-				echo 'IP <pre>'.$_SERVER['REMOTE_ADDR'].'</pre>';
-				echo 'Sessão ';
-				var_dump($_SESSION);
+		echo '<div class="container">';
+			echo '<hr>';
+			echo '<footer class="footer">';
+				echo '<a href="http://fronteiratec.com" target="_blank"><img src="'.$theBaseUrl.'/img/logo_fronteiratec_small.png"/></a>';
+				echo '<a href="http://cc.uffs.edu.br" target="_blank"><img src="'.$theBaseUrl.'/img/logo_cc_bw.png"/></a>';
+				echo '<p>&copy; '.date('Y').' - FronteiraTec - Todos os direitos reservados.</p>';
+			echo '</footer>';
+			
+			echo '<div id="info-overlay">Salvando...</div>';
+			
+		if(DEBUG_MODE) {
+			echo '<div class="row" style="margin-top: 80px;">';
+				echo '<div class="span12">';
+					echo '<h2>Debug</h2>';
+					echo 'IP <pre>'.$_SERVER['REMOTE_ADDR'].'</pre>';
+					echo 'Sessão ';
+					var_dump($_SESSION);
+				echo '</div>';
 			echo '</div>';
+		}
 		echo '</div>';
-	}
-	
-	echo '</div> <!-- /container -->';
-	
+		
 	echo '</body>';
 	echo '</html>';
 }

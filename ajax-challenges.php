@@ -5,7 +5,7 @@ authAllowAuthenticated();
 
 $aChallenges 		= array();
 $aMaxPages 			= 0;
-$aPageSize 			= 5;
+$aPageSize 			= 10;
 $aPage 				= isset($_REQUEST['page']) ? $_REQUEST['page'] : 0;
 $aType				= isset($_REQUEST['type']) ? $_REQUEST['type'] : 'actives';
 $aTotalChallenges	= 0;
