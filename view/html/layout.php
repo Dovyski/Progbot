@@ -10,9 +10,11 @@ function layoutNavBar($theBaseUrl) {
 			echo '</div>';
 			
 			$aAssignmentCount = 0;
+			$aUserInfo = null;
 			
 			if (authIsAuthenticated()) {
-				$aAssignmentCount = assigmentCountActivesByUserId($_SESSION['user']['id']);
+				$aUserInfo = userGetById($_SESSION['user']['id']);
+				$aAssignmentCount = assigmentCountActivesByUser($aUserInfo);
 			}
 			
 			echo '<div class="collapse navbar-collapse">';
@@ -21,21 +23,20 @@ function layoutNavBar($theBaseUrl) {
 					echo '<li '.($aPage == 'assignments.php' 	? 'class="active"' : '').'><a href="assignments.php">Trabalhos '.($aAssignmentCount != 0 ? '<span class="badge alert-danger">'.$aAssignmentCount.'</span>' : '').'</a></li>';
 				echo '</ul>';
 				
-				layoutUserBar();
+				layoutUserBar($aUserInfo);
 					
 				if(authIsAuthenticated()) {
-					layoutAdminNavBar();
+					layoutAdminNavBar($aUserInfo);
 				}
 			echo '</div>';
 		echo '</div>';
 	echo '</nav>';
 }
 
-function layoutAdminNavBar() {
+function layoutAdminNavBar($theUserInfo) {
 	$aPage = basename($_SERVER['PHP_SELF']);
 	
-	$aUser = userGetById($_SESSION['user']['id']);
-	if (!userIsLevel($aUser, USER_LEVEL_PROFESSOR)) {
+	if (!userIsLevel($theUserInfo, USER_LEVEL_PROFESSOR)) {
 		return;
 	}
 	
@@ -43,21 +44,25 @@ function layoutAdminNavBar() {
 		echo '<li class="dropdown">';
 			echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Professor <b class="caret"></b></a>';
 			echo '<ul class="dropdown-menu" role="menu">';
+				echo '<li role="presentation" class="dropdown-header">Desafio</li>';
 				echo '<li><a href="challenges-manager.php">Criar desafio</a></li>';
 				echo '<li><a href="reviews.php">Revisar respostas</a></li>';
-				//echo '<li class="divider"></li>';
-				//echo '<li><a href="reviews.php">Revisar respostas</a></li>';
+				
+				echo '<li class="divider"></li>';
+				echo '<li role="presentation" class="dropdown-header">Trabalhos</li>';
+				echo '<li><a href="reviews.php">Criar trabalho</a></li>';
+				echo '<li><a href="reviews.php">Revisar respostas</a></li>';
 			echo '</ul>';
 		echo '</li>';
 	echo '</ul>';
 }
 
-function layoutUserBar() {
-	$aClassLink	  = authIsAdmin() ? 'btn-danger' : 'btn-primary';
+function layoutUserBar($theUserInfo) {
+	$aClassLink	= authIsAdmin() ? 'btn-danger' : 'btn-primary';
 	echo '<ul class="nav navbar-nav navbar-right">';
 		if (authIsAuthenticated()) {
 			echo '<li style="margin-top: -5px;">';
-				layoutPrintUser($_SESSION['user']['id'], null, true);
+				layoutPrintUser($theUserInfo['id'], $theUserInfo, true);
 			echo '</li>';
 			echo '<li class="dropdown">';
 				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i><b class="caret"></b></a>';

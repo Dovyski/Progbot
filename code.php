@@ -36,6 +36,10 @@
 		}
 	}
 	
+	// Get information related to assignment for this challenge.
+	$aAssignment 	= assigmentGetByChallengeAndGroup($aChallengeId, $aUserInfo['fk_group']);
+	$aHasAssignment = !assigmentIsClosed($aAssignment);	
+	
 	$aData['user'] 				= $aUserInfo;
 	$aData['challenge'] 		= $aChallenge;
 	$aData['challengeId'] 		= $aChallengeId;
@@ -44,6 +48,8 @@
 	$aData['isReviewing'] 		= $aIsReviewing;
 	$aData['shouldAutosave'] 	= $aProgram != null && $aProgram['grade'] < 0 && !$aIsReviewing;
 	$aData['tty'] 				= TESTING_TTY_URL;
+	$aData['assignment']		= $aAssignment;
+	$aData['hasAssignment']		= $aHasAssignment;
 	
 	View::render('code', $aData);
 ?>

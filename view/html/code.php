@@ -27,14 +27,26 @@
 			echo '</div>';
 		echo '</div>';
 		
+		if ($aData['hasAssignment']) {
+			echo '<div class="row">';
+				echo '<div class="col-md-12">';
+					echo '<div class="alert alert-info" role="alert">Esse desafio está vinculado a um trabalho que você precisa entregar. O prazo de entrega é até <strong>'.date('d/m/Y - h:i', $aData['assignment']['deadline_date']).'</strong>.</div>';
+				echo '</div>';
+			echo '</div>';		
+		}
+		
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
 				echo '<div class="tabbable">';
 					echo '<ul class="nav nav-tabs">';
 						echo '<li class="active"><a href="#tab-code-desc" data-toggle="tab" class="codeTab">Descrição</a></li>';
-						echo '<li><a href="#tab-code-review" data-toggle="tab" class="codeTab">Revisão</a></li>';
+						echo '<li><a href="#tab-code-review" data-toggle="tab" class="codeTab">Entrega e Revisão</a></li>';
 
-						echo '<li style="width: 100px; text-align: right; float: right;"><p><a href="javascript:void(0);" onclick="CODEBOT.openEditor('.$aChallengeId.');">[E]</a></p></li>';
+						echo '<li style="width: 200px; text-align: right; float: right;">';
+							echo '<button type="button" class="btn btn-success" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
+								echo '<i class="fa fa-paper-plane"></i> Enviar código';
+							echo '</button>';
+						echo '</li>';
 					echo '</ul>';
 					
 					echo '<div class="tab-content code-tab">';
@@ -79,13 +91,13 @@
 							// Student's code 
 							echo '<h4>Solução enviada<a href="#" id="code-review"></a></h4>';
 							
-							if ($aProgram != null) {
+							if ($aProgram != null && $aProgram['code'] != '') {
 								echo '<div>';
 									echo '<textarea name="code" id="code">'.$aProgram['code'].'</textarea>';
 								echo '</div>';
 							} else {
 								echo '<div>';
-									echo 'Você ainda não criou um programa para resolver esse desafio.';
+									echo '<div class="alert alert-warning" role="alert">Você ainda não criou um programa para resolver esse desafio.</div>';
 								echo '</div>';
 							}
 							
