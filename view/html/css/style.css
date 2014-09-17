@@ -80,6 +80,15 @@ a:visited {
 	font-size: 1.8em;
 }
 
+
+.assignment-container h4 {
+	margin: 50px 0 20px 0;
+}
+
+.assignment-container h4:first-child {
+	margin: 0px 0 20px 0;
+}
+
 .tabbable {
 	width: 95%;
 }

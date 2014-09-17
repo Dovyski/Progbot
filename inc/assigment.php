@@ -39,6 +39,10 @@ function assigmentFindByUser($theUser) {
 	return $aRet;
 }
 
+function assigmentIsClosed($theAssignmentInfo) {
+	return time() >= $theAssignmentInfo['deadline_date'];
+}
+
 function assigmentCountActivesByUserId($theUserId) {
 	// TODO: implement this!
 	return 1;

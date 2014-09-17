@@ -9,7 +9,11 @@ function layoutNavBar($theBaseUrl) {
 				echo '<a class="navbar-brand" href="index.php" title="Ir para página inicial"><i class="fa fa-home"/></i></a>';
 			echo '</div>';
 			
-			$aAssignmentCount = assigmentCountActivesByUserId($_SESSION['user']['id']);
+			$aAssignmentCount = 0;
+			
+			if (authIsAuthenticated()) {
+				$aAssignmentCount = assigmentCountActivesByUserId($_SESSION['user']['id']);
+			}
 			
 			echo '<div class="collapse navbar-collapse">';
 				echo '<ul class="nav navbar-nav">';

@@ -17,6 +17,11 @@
 		
 		// Fetch challenge info from db
 		$aChallenges = challengeFindByIdBulk(array_keys($aChallengeIds));
+		
+		foreach($aChallenges as $aChallengeId => $aChallengeInfo) {
+			// TODO: improve this (too many queries).
+			$aChallenges[$aChallengeId]['hasAnswer'] = codeGetProgramByUser($aUser['id'], $aChallengeId) != null;
+		}
 	}
 	
 	View::render('assignments', array(
