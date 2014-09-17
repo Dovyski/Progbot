@@ -104,6 +104,22 @@ function challengeFindByGroup($theGroupId) {
 	return $aRet;
 }
 
+function challengeFindByIdBulk($theChallengeIds) {
+	global $gDb;
+	
+	$aRet 		= array();
+	$aIds		= implode(',', $theChallengeIds); // TODO: sanitize this!
+	$aQuery 	= $gDb->prepare("SELECT * FROM challenges WHERE id IN (".$aIds.")");
+
+	if ($aQuery->execute()) {
+		while($aRow = $aQuery->fetch()) {
+			$aRet[$aRow['id']] = $aRow;
+		}
+	}
+	
+	return $aRet;
+}
+
 function challengeFindAnswersById($theChallengeId) {
 	global $gDb;
 	

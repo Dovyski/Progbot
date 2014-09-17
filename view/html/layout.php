@@ -9,9 +9,12 @@ function layoutNavBar($theBaseUrl) {
 				echo '<a class="navbar-brand" href="index.php" title="Ir para página inicial"><i class="fa fa-home"/></i></a>';
 			echo '</div>';
 			
+			$aAssignmentCount = assigmentCountActivesByUserId($_SESSION['user']['id']);
+			
 			echo '<div class="collapse navbar-collapse">';
 				echo '<ul class="nav navbar-nav">';
 					echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';
+					echo '<li '.($aPage == 'assignments.php' 	? 'class="active"' : '').'><a href="assignments.php">Trabalhos '.($aAssignmentCount != 0 ? '<span class="badge alert-danger">'.$aAssignmentCount.'</span>' : '').'</a></li>';
 				echo '</ul>';
 				
 				layoutUserBar();
