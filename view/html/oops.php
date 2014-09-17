@@ -3,13 +3,18 @@
 
 	layoutHeader('Oops!', View::baseUrl());
 	
-	echo '<div class="hero-unit">';
-		echo '<h1>Oops!</h1>';
-		echo '<p>Você acessou uma página inexistente ou que está temporariamente indisponível.</p>';
+	echo '<div class="jumbotron">';
+		echo '<div class="container">';
+			echo '<h1>Oops!</h1>';
+			echo '<p>Você acessou uma página inexistente ou que está temporariamente indisponível.</p>';
+		echo '</div>';
 	echo '</div>';
 
-	echo '<div class="row">';
-		echo '<div class="span12">';
+	echo '<div class="container">';
+		echo '<div class="row">';
+			echo '<div class="col-md-12">';
+				echo '<p></p>';
+			echo '</div>';
 		echo '</div>';
 	echo '</div>';
 	
