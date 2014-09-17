@@ -61,6 +61,7 @@ var CODEBOT = new function() {
 		$('#changeGradeLink').on('click', function() {
 			$('#changeGradeLink').hide();
 			$('#changeGradePanel').show();
+			$('#gradeInput').focus().select();
 		});
 		
 		$('#formChangeGrade').on('submit', function() {

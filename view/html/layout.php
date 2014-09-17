@@ -128,33 +128,38 @@ function layoutFooter($theBaseUrl = '.') {
 	echo '</html>';
 }
 
-function layoutPrintUser($theUserId, $theUserInfo = null, $theBadge = true) {
+function layoutPrintUser($theUserId, $theUserInfo = null, $theSimplified = false) {
 	$theUserInfo = !isset($theUserInfo) ? userGetById($theUserId) : $theUserInfo;
 	
 	if ($theUserInfo != null) {
-		echo '<div class="user-info">';
-			// TODO: use user data to show profile image
-			echo '<img src="'.(DEBUG_MODE ? '' : 'http://avatars.io/twitter/as3gamegears').'" class="img-circle" title="'.$theUserInfo['name'].'"/>';
-			echo '<strong>'.$theUserInfo['name'] . '</strong><br/>';
+		$aRole = $theUserInfo['type'] == USER_LEVEL_PROFESSOR ? '<span class="label label-info">Prof</span> ' : '';
+		$aAvatar = '<img src="'.(DEBUG_MODE ? '' : 'http://avatars.io/twitter/as3gamegears').'" class="img-circle" title="'.$theUserInfo['name'].'" style="'.($theSimplified ? 'width: 25px;' : '').'" />';
+	
+		if ($theSimplified) {
+			echo $aAvatar . ' ' . $aRole . '<strong>'.$theUserInfo['name'].'</strong>';
 			
-			if($theUserInfo['type'] == USER_LEVEL_PROFESSOR) {
-				echo '<span class="label label-info">Prof</span> ';
-			}
-			
-			echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
-		echo '</div>';
+		} else {
+			echo '<div class="user-info">';
+				// TODO: use user data to show profile image
+				echo $aAvatar;
+				echo '<strong>'.$theUserInfo['name'] . '</strong><br/>';
+				echo $aRole;
+				
+				echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
+			echo '</div>';
+		}
 	}
 }
 
-function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTabsText = array()) {
-	echo '<div class="tabbable">';
+function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTabsText = array(), $theTextAreaHeight = '300px') {
+	echo '<div class="tabbable markdown-panel">';
 		echo '<ul class="nav nav-tabs">';
 			echo '<li class="active"><a href="#'.$theFieldName.'-tab-markdown" data-toggle="tab">'.(isset($theTabsText[0]) ? $theTabsText[0] : 'Comentário').'</a></li>';
 			echo '<li><a href="#'.$theFieldName.'-tab-view-markdown" data-toggle="tab">'.(isset($theTabsText[1]) ? $theTabsText[1] : 'Visualização').'</a></li>';
 		echo '</ul>';
-		echo '<div class="tab-content" style="height: 320px; width: 100%;">';
+		echo '<div class="tab-content" style="height: '.$theTextAreaHeight.'; width: 100%;">';
 			echo '<div class="tab-pane active" id="'.$theFieldName.'-tab-markdown">';
-				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 100%; height: 300px; border-top: none; padding-top: 5px">'.$theInitialText.'</textarea>';
+				echo '<textarea name="'.$theFieldName.'" id="'.$theFieldName.'" style="width: 100%; height: '.$theTextAreaHeight.'; border-top: none; padding-top: 5px">'.$theInitialText.'</textarea>';
 			echo '</div>';
 			echo '<div class="tab-pane" id="'.$theFieldName.'-tab-view-markdown" style="padding: 7px 5px 5px 3px;">';
 				echo 'A visualização não está disponível ainda. Desculpe!';

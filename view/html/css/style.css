@@ -42,14 +42,67 @@ a:visited {
 	padding: 10px;
 }
 
+.bloco-comentario-autor {
+	float: right;
+}
+
+.markdown-panel {
+	width: 100% !important;
+	margin-bottom: 3px;
+}
+
+.review-work-info {
+	background: #f9f9f9;
+	padding: 5px 0px 1px 10px;
+	border: 1px solid #cfcfcf;
+	overflow: auto;
+	margin-top: 15px;
+}
+
+.review-work-info li {
+	float: left;
+	margin-right: 35px;
+	list-style-type: none;
+}
+
+.review-work-info li:first-child {
+	margin-top: 10px;
+}
+
+.review-work-info li:last-child {
+	float: right;
+	margin-right: 0;
+	margin-top: -5px;
+}
+
+.review-work-info li p:last-child {
+	font-weight: bold;
+	font-size: 1.8em;
+}
+
+.tabbable {
+	width: 95%;
+}
+
+/* Editor de código */
+.tabbable .CodeMirror {
+	border: 1px inset #dee;
+	height: 600px;
+	width: 100%;
+}
+
+.tab-pane h4{
+	margin-top: 25px;
+}
+
 .grade-info {
   float: right;
   width: 120px;
-  height: 35px;
+  height: 70px;
   font-weight: bold;
   position: relative;
   margin: 1px 0;
-  padding-top: 35px;
+  padding-top: 20px;
   text-align: center;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -61,6 +114,12 @@ a:visited {
 .grade-info strong {
 	font-size: 30px;
 	font-weight: bold;
+}
+
+.grade-info input {
+	width: 50%;
+	font-size: 30px;
+	text-align: center;
 }
 
 .grade-info-title {
@@ -97,10 +156,6 @@ a:visited {
 	color: #fff;
 	font-size: 11px;
 	padding: 5px;
-}
-
-.panel-heading {
-	font-weight: bold;
 }
 
 .terminal-frame {
