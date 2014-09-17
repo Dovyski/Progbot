@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2013 at 01:01 PM
--- Server version: 5.5.20
--- PHP Version: 5.3.10
+-- Generation Time: Sep 17, 2014 at 08:28 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `codebot`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignments`
+--
+
+CREATE TABLE IF NOT EXISTS `assignments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_challenge` int(10) unsigned NOT NULL,
+  `fk_group` int(10) unsigned NOT NULL,
+  `date` int(11) NOT NULL,
+  `start_date` int(11) NOT NULL,
+  `deadline_date` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `start_date` (`start_date`),
+  KEY `deadline_date` (`deadline_date`),
+  KEY `fk_challenge` (`fk_challenge`),
+  KEY `fk_group` (`fk_group`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -114,6 +134,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `assignments`
+--
+ALTER TABLE `assignments`
+  ADD CONSTRAINT `fk_group` FOREIGN KEY (`fk_group`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_challenge` FOREIGN KEY (`fk_challenge`) REFERENCES `challenges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `programs`
