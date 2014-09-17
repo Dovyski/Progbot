@@ -53,7 +53,7 @@
 									echo '</td>';
 									echo '<td>'.date('d/m/Y H:i:s', $aRow['last_update']).'</td>';
 									echo '<td>'.($aRow['grade'] < 0 ? 'N/A' : $aRow['grade']).'</td>';
-									echo '<td><a href="code.php?challenge='.$aChallengeId.'&user='.$aRow['fk_user'].'"><i class="icon-zoom-in"></i>Revisar</a></td>';
+									echo '<td><a href="code.php?challenge='.$aChallengeId.'&user='.$aRow['fk_user'].'&tab=1"><i class="icon-zoom-in"></i>Revisar</a></td>';
 								echo '</tr>';
 							}
 						echo '</tbody>';

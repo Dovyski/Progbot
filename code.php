@@ -50,6 +50,7 @@
 	$aData['tty'] 				= TESTING_TTY_URL;
 	$aData['assignment']		= $aAssignment;
 	$aData['hasAssignment']		= $aHasAssignment;
+	$aData['tab']				= isset($_GET['tab']) ? (int)$_GET['tab'] : 0;
 	
 	View::render('code', $aData);
 ?>
