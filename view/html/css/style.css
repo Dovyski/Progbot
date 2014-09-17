@@ -171,6 +171,19 @@ a:visited {
 	margin: 0px 0px 20px 0px;
 }
 
+.jumbotron-user-profile {
+	background: #00733C;
+}
+.jumbotron-user-profile p {
+	font-weight: normal;
+	font-size: 1.2em;
+}
+.jumbotron-user-profile img {
+	width: 130px;
+	float: left;
+	margin-right: 15px;
+}
+
 .jumbotron .container {
 	margin-top: -40px;
 }

@@ -6,7 +6,7 @@ function layoutNavBar($theBaseUrl) {
 	echo '<nav class="navbar navbar-default" role="navigation">';
 		echo '<div class="container">';
 			echo '<div class="navbar-header">';
-				echo '<a class="navbar-brand" href="index.php"><img src="'.$theBaseUrl.'/img/codebot_logo_small_white.png" title="Ir para página inicial"/></a>';
+				echo '<a class="navbar-brand" href="index.php" title="Ir para página inicial"><i class="fa fa-home"/></i></a>';
 			echo '</div>';
 			
 			echo '<div class="collapse navbar-collapse">';
@@ -48,17 +48,21 @@ function layoutAdminNavBar() {
 function layoutUserBar() {
 	$aClassLink	  = authIsAdmin() ? 'btn-danger' : 'btn-primary';
 	echo '<ul class="nav navbar-nav navbar-right">';
-		echo '<li class="dropdown">';
-			if (authIsAuthenticated()) {
-				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$_SESSION['user']['name'].' <b class="caret"></b></a>';
-					
+		if (authIsAuthenticated()) {
+			echo '<li style="margin-top: -5px;">';
+				layoutPrintUser($_SESSION['user']['id'], null, true);
+			echo '</li>';
+			echo '<li class="dropdown">';
+				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i><b class="caret"></b></a>';
 				echo '<ul class="dropdown-menu" role="menu">';
-					echo '<li><a href="logout.php"><i class="icon-remove"></i> Sair</a></li>';
+					echo '<li><a href="logout.php"><i class="fa fa-sign-out"></i> Sair</a></li>';
 				echo '</ul>';				
-			} else {
-				echo '<a href="login.php"><span class="glyphicon glyphicon-user"></span> Login</a>';
-			}
-		echo '</li>';
+			echo '</li>';
+		} else {
+			echo '<li class="dropdown">';
+			echo '<a href="login.php"><span class="glyphicon glyphicon-user"></span> Login</a>';
+			echo '</li>';
+		}
 	echo '</ul>';
 }
 
@@ -129,6 +133,7 @@ function layoutFooter($theBaseUrl = '.') {
 }
 
 function layoutPrintUser($theUserId, $theUserInfo = null, $theSimplified = false) {
+	$theUserId = (int)$theUserId;
 	$theUserInfo = !isset($theUserInfo) ? userGetById($theUserId) : $theUserInfo;
 	
 	if ($theUserInfo != null) {
@@ -136,13 +141,13 @@ function layoutPrintUser($theUserId, $theUserInfo = null, $theSimplified = false
 		$aAvatar = '<img src="'.(DEBUG_MODE ? '' : 'http://avatars.io/twitter/as3gamegears').'" class="img-circle" title="'.$theUserInfo['name'].'" style="'.($theSimplified ? 'width: 25px;' : '').'" />';
 	
 		if ($theSimplified) {
-			echo $aAvatar . ' ' . $aRole . '<strong>'.$theUserInfo['name'].'</strong>';
+			echo '<a href="user.php?id='.$theUserId.'">'. $aAvatar . ' ' . $aRole . '<strong>'.$theUserInfo['name'].'</strong></a>';
 			
 		} else {
 			echo '<div class="user-info">';
 				// TODO: use user data to show profile image
 				echo $aAvatar;
-				echo '<strong>'.$theUserInfo['name'] . '</strong><br/>';
+				echo '<a href="user.php?id='.$theUserId.'"><strong>'.$theUserInfo['name'] . '</strong></a><br/>';
 				echo $aRole;
 				
 				echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
