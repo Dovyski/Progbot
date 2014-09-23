@@ -14,7 +14,7 @@ var IDE = new function() {
 			mAutoSaveDirty = false;
 			mAutoSaveLast = aNow;
 			
-			$('#info-overlay').html('Salvando...').fadeIn();
+			$('#info-overlay').html('<i class="fa fa-circle-o-notch fa-spin"></i>').fadeIn();
 
 			$.ajax({
 			  type: 'POST',
@@ -23,10 +23,10 @@ var IDE = new function() {
 			  data: $('#formCode').serialize()
 			})
 			.done(function( msg ) {
-				$('#info-overlay').html('Ok, salvo!').delay(1000).fadeOut();
+				$('#info-overlay').html('<i class="fa fa-check-circle-o fa-lg"></i>').delay(1000).fadeOut();
 			})
 			.fail(function(jqXHR, textStatus) {
-				$('#info-overlay').html('Oops, não salvou!').delay(1000).fadeOut();
+				$('#info-overlay').html('<i class="fa fa-exclamation-triangle fa-lg"></i>').delay(1000).fadeOut();
 			});
 		}
 	};
@@ -38,7 +38,7 @@ var IDE = new function() {
 	this.onCodingKeyEvent = function(editor, e) {
 		if(e.type == "keydown") {
 			mAutoSaveDirty = true;
-			$('#btn-save').html('[B*]');
+			$('#btn-save').attr('class', 'ide-button ide-button-dirty');
 		}
 		
 		editor.save();
@@ -54,8 +54,8 @@ var IDE = new function() {
 		  data: {'programId': $('#formCode input[name=programId]').val(), 'action': 'build' }
 		})
 		.done(function( msg ) {
-			$('#build-info').attr('class', 'alert alert-success').html('Salvo no arquivo <code>'+msg.file+'</code> na pasta <code>'+msg.path+'</code>');
-			$('#btn-save').html('[B]');
+			$('#build-info').attr('class', 'alert-success').html(msg.status ? 'O código foi salvo com sucesso!' : 'O código não foi salvo.');
+			$('#btn-save').attr('class', 'ide-button');
 		})
 		.fail(function(jqXHR, textStatus) {
 			$('#build-info').attr('class', 'alert alert-error').html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');

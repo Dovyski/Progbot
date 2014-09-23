@@ -22,6 +22,8 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 		echo '<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png">';
 		echo '<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png">';
 		
+		echo '<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">';
+		
 		echo '<!-- Le styles -->';
 		echo '<style>@import url("'.$theBaseUrl.'/js/codemirror/lib/codemirror.css");</style>';
 		echo '<link href="'.$theBaseUrl.'/style.css'.$aRandURLs.'" rel="stylesheet">';
@@ -61,8 +63,8 @@ function layoutFooter($theBaseUrl = '.') {
 function layoutToolBar() {
 	echo '<div id="toolbar">';
 		// TODO: add buttons using a generic approach
-		echo '<a href="#" id="btn-save" class="ide-button" onclick="IDE.build();">[S]</a>';
-		echo '<a href="#" id="btn-tty" class="ide-button" onclick="IDE.openTerminal(\''.TESTING_TTY_URL.'\');">[T]</a>';
+		echo '<a href="#" id="btn-save" class="ide-button" onclick="IDE.build();"><i class="fa fa-save"></i> Salvar</a>';
+		//echo '<a href="#" id="btn-tty" class="ide-button" onclick="IDE.openTerminal(\''.TESTING_TTY_URL.'\');">[T]</a>';
 		echo '<div id="build-info">AAAA</div>';
 	echo '</div>';
 }

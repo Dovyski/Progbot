@@ -29,8 +29,9 @@
 	$aData['user'] 				= $aUserInfo;
 	$aData['challenge'] 		= $aChallenge;
 	$aData['challengeId'] 		= $aChallengeId;
+	$aData['isAssignment'] 		= $aChallenge['assignment'] != 0;
 	$aData['program'] 			= $aProgram;
-	$aData['shouldAutosave'] 	= $aProgram != null && @$aProgram['grade'] < 0;
+	$aData['canEdit'] 			= true || $aProgram != null && @$aProgram['grade'] < 0 && (!$aData['isAssignment'] || !challengeIsAssignmentClosed($aChallenge));
 	
 	View::render('ide/index', $aData);
 ?>

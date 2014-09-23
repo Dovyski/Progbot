@@ -11,9 +11,11 @@
 	$aChallenge   = $aData['challenge'];
 	$aUserInfo	  = $aData['user'];
 	$aProgram	  = $aData['program'];
+	$aIsAssignment= $aData['isAssignment'];
+	$aCanEdit	  = $aData['canEdit'];
 	
-	if($aProgram['grade'] >= 0) { 
-		echo '<div class="alert alert-warning"><strong>Atenção!</strong> Você não pode mais alterar o código porque ele já recebeu uma nota.</div>';
+	if(!$aCanEdit) { 
+		echo '<div class="alert alert-warning"><strong>Atenção!</strong> Você não pode mais alterar o código '.($aIsAssignment ? 'porque o prazo de entrega desse trabalho já passou.' : 'porque ele já recebeu uma nota').'</div>';
 	}
 		
 	echo '<form action="code.php" method="post" name="formCode" id="formCode">';
@@ -29,7 +31,7 @@
 		matchBrackets: true,
 		mode: "text/x-csrc",
 		electricChars : false,
-		readOnly: '.($aProgram['grade'] < 0 ? 'false' : 'true').',
+		readOnly: '.($aCanEdit ? 'false' : 'true').',
 		onKeyEvent: IDE.onCodingKeyEvent
 	  });
 	</script>';

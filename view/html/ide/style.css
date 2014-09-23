@@ -7,9 +7,9 @@ body {
 #info-overlay {
 	display: none;
 	position: fixed;
-	bottom: 20px;
+	bottom: 10px;
 	right: 0;
-	width: 150px;
+	width: 15px;
 	background: #0f0f0f;
 	border: solid 2px #000;
 	color: #fff;
@@ -29,13 +29,23 @@ body {
 	clear: both;
 }
 
+#toolbar a:link,
+#toolbar a:active,
+#toolbar a:visited,
+#toolbar a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
 .ide-button {
-	width: 20px;
 	height: 20px;
-	background: #cfcfcf;
 	padding: 2px;
 	float: left;
-	margin-right: 2px;
+	margin-left: 5px;
+}
+
+.ide-button-dirty {
+	background: #ff0000;
 }
 
 #build-info {
