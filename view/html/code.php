@@ -57,7 +57,7 @@
 								echo '</li>';
 								echo '<li>';
 									echo '<span>Última atualização:</span>';
-									echo '<p>18:23 - 20/11/14</p>';
+									echo '<p>'.($aProgram != null ? date('d/m/y - H:i', $aProgram['last_update']) : 'Nenhuma').'</p>';
 								echo '</li>';
 								echo '<li>';
 									echo '<span>Tempo de desenvolvimento:</span>';

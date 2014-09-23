@@ -31,7 +31,7 @@
 	$aData['challengeId'] 		= $aChallengeId;
 	$aData['isAssignment'] 		= $aChallenge['assignment'] != 0;
 	$aData['program'] 			= $aProgram;
-	$aData['canEdit'] 			= true || $aProgram != null && @$aProgram['grade'] < 0 && (!$aData['isAssignment'] || !challengeIsAssignmentClosed($aChallenge));
+	$aData['canEdit'] 			= true || $aProgram != null && @$aProgram['grade'] < 0 && (!$aChallenge['assignment'] || !challengeIsAssignmentClosed($aChallenge));
 	
 	View::render('ide/index', $aData);
 ?>
