@@ -89,6 +89,61 @@ function challengeFindActivesByUser($theUserId, $thePage, $thePageSize, & $theTo
 	return $aRet;
 }
 
+function challengeFindAssignmentsByUser($theUserInfo) {
+	global $gDb;
+	
+	$aRet 		= array();
+	$aGroupId	= 0;
+	
+	if ($theUserInfo['fk_group'] != null) {
+		$aGroupId = $theUserInfo['fk_group'];
+	}
+	
+	$aQuery = $gDb->prepare("SELECT
+								c.*, p.id AS program_id
+							FROM
+								challenges AS c
+							LEFT JOIN programs AS p
+								ON p.fk_challenge = c.id
+							WHERE
+								(fk_group = ? OR fk_group IS NULL) AND assignment <> 0 AND ".time()." >= start_date
+							");
+	
+	if ($aQuery->execute(array($aGroupId))) {
+		while($aRow = $aQuery->fetch(PDO::FETCH_ASSOC)) {
+			$aRet[$aRow['id']] = $aRow;
+		}
+	}
+	
+	return $aRet;
+}
+
+function challengeIsAssignmentClosed($theChallengeInfo) {
+	return time() >= $theChallengeInfo['deadline_date'];
+}
+
+function challengeCountActiveAssignmentsByUser($theUserInfo) {
+	global $gDb;
+	
+	$aRet 		= array();
+	$aGroupId	= 0;
+
+	if ($theUserInfo['fk_group'] != null) {
+		$aGroupId = $theUserInfo['fk_group'];
+	}
+	
+	if($aGroupId != 0) {
+		$aQuery = $gDb->prepare("SELECT COUNT(*) AS info FROM challenges WHERE (fk_group = ? OR fk_group IS NULL) AND assignment <> 0 AND ".time()." >= start_date AND ".time()." <= deadline_date");
+		
+		if ($aQuery->execute(array($aGroupId))) {
+			$aRow = $aQuery->fetch();
+			$aRet = $aRow['info'];
+		}
+	}
+
+	return $aRet;
+}
+
 function challengeFindByGroup($theGroupId) {
 	global $gDb;
 	

@@ -14,7 +14,7 @@ function layoutNavBar($theBaseUrl) {
 				
 				if (authIsAuthenticated()) {
 					$aUserInfo = userGetById($_SESSION['user']['id']);
-					$aAssignmentCount = $aUserInfo['type'] == USER_LEVEL_STUDENT ? assigmentCountActivesByUser($aUserInfo) : 0;
+					$aAssignmentCount = $aUserInfo['type'] == USER_LEVEL_STUDENT ? challengeCountActiveAssignmentsByUser($aUserInfo) : 0;
 				
 					echo '<ul class="nav navbar-nav">';
 						echo '<li '.($aPage == 'challenges.php' 	? 'class="active"' : '').'><a href="challenges.php">Desafios</a></li>';

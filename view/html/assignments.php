@@ -6,7 +6,6 @@
 	$aData 			= View::data();
 	$aIsProfessor 	= $aData['isProfessor'];
 	$aAssignments	= $aData['assignments'];
-	$aChallenges	= $aData['challenges'];
 	
 	echo '<div class="jumbotron">';
 		echo '<div class="container">';
@@ -30,15 +29,13 @@
 						echo '<thead>';
 							echo '<th style="width: 5%;"></th>';
 							echo '<th>Descrição</th>';
-							echo '<th>Prazo de entregar</th>';
+							echo '<th>Prazo de entrega</th>';
 							echo '<th>Foi entregue?</th>';
 						echo '</thead>';
 						echo '<tbody>';
-							foreach($aAssignments as $aAssignmentId => $aAssignmentInfo) {
-								$aChallenge = $aChallenges[$aAssignmentInfo['fk_challenge']];
-								$aIdChallenge = $aChallenge['id'];
-								
-								if (assigmentIsClosed($aAssignmentInfo)) continue;
+							foreach($aAssignments as $aIdChallenge => $aChallenge) {
+
+								if (challengeIsAssignmentClosed($aChallenge)) continue;
 								
 								echo '<tr>';
 									echo '<td style="width: 4%; text-align: center;">';
@@ -54,10 +51,10 @@
 										echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
 									echo '</td>';
 									echo '<td>';
-										echo date('d/m/Y (h:i)', $aAssignmentInfo['deadline_date']);
+										echo date('d/m/Y (h:i)', $aChallenge['deadline_date']);
 									echo '</td>';
 									echo '<td>';
-										if($aChallenge['hasAnswer']) {
+										if($aChallenge['program_id'] != null) {
 											echo '<span class="label label-success">Sim</span>';
 										} else {
 											echo '<span class="label label-danger">Não</span>';
@@ -87,11 +84,9 @@
 							echo '<th>Foi entregue?</th>';
 						echo '</thead>';
 						echo '<tbody>';
-							foreach($aAssignments as $aAssignmentId => $aAssignmentInfo) {
-								$aChallenge = $aChallenges[$aAssignmentInfo['fk_challenge']];
-								$aIdChallenge = $aChallenge['id'];
-								
-								if (!assigmentIsClosed($aAssignmentInfo)) continue;
+							foreach($aAssignments as $aIdChallenge => $aChallenge) {
+
+								if (!challengeIsAssignmentClosed($aChallenge)) continue;
 								
 								echo '<tr>';
 									echo '<td style="width: 4%; text-align: center;">';
@@ -107,10 +102,10 @@
 										echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
 									echo '</td>';
 									echo '<td>';
-										echo date('d/m/Y (h:i)', $aAssignmentInfo['deadline_date']);
+										echo date('d/m/Y (h:i)', $aChallenge['deadline_date']);
 									echo '</td>';
 									echo '<td>';
-										if($aChallenge['hasAnswer']) {
+										if($aChallenge['program_id'] != null) {
 											echo '<span class="label label-success">Sim</span>';
 										} else {
 											echo '<span class="label label-danger">Não</span>';

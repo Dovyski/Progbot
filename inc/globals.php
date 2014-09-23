@@ -14,7 +14,6 @@ require_once dirname(__FILE__).'/code.php';
 require_once dirname(__FILE__).'/user.php';
 require_once dirname(__FILE__).'/build.php';
 require_once dirname(__FILE__).'/review.php';
-require_once dirname(__FILE__).'/assigment.php';
 
 require_once(dirname(__FILE__).'/libs/markdown/markdown_extended.php');
 

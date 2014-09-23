@@ -37,8 +37,7 @@
 	}
 	
 	// Get information related to assignment for this challenge.
-	$aAssignment 	= assigmentGetByChallengeAndGroup($aChallengeId, $aUserInfo['fk_group']);
-	$aHasAssignment = !assigmentIsClosed($aAssignment);	
+	$aHasAssignment = !challengeIsAssignmentClosed($aChallenge);	
 	
 	$aData['user'] 				= $aUserInfo;
 	$aData['challenge'] 		= $aChallenge;
@@ -48,7 +47,6 @@
 	$aData['isReviewing'] 		= $aIsReviewing;
 	$aData['shouldAutosave'] 	= $aProgram != null && $aProgram['grade'] < 0 && !$aIsReviewing;
 	$aData['tty'] 				= TESTING_TTY_URL;
-	$aData['assignment']		= $aAssignment;
 	$aData['hasAssignment']		= $aHasAssignment;
 	$aData['tab']				= isset($_GET['tab']) ? (int)$_GET['tab'] : 0;
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2014 at 08:28 PM
+-- Generation Time: Sep 23, 2014 at 07:13 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -23,26 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignments`
---
-
-CREATE TABLE IF NOT EXISTS `assignments` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `fk_challenge` int(10) unsigned NOT NULL,
-  `fk_group` int(10) unsigned NOT NULL,
-  `date` int(11) NOT NULL,
-  `start_date` int(11) NOT NULL,
-  `deadline_date` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `start_date` (`start_date`),
-  KEY `deadline_date` (`deadline_date`),
-  KEY `fk_challenge` (`fk_challenge`),
-  KEY `fk_group` (`fk_group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `challenges`
 --
 
@@ -54,6 +34,11 @@ CREATE TABLE IF NOT EXISTS `challenges` (
   `description` text NOT NULL,
   `name` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
+  `start_date` int(11) NOT NULL DEFAULT '0',
+  `assignment` tinyint(4) NOT NULL DEFAULT '0',
+  `deadline_date` int(11) NOT NULL DEFAULT '0',
+  `post_deadline_date` int(11) NOT NULL DEFAULT '0',
+  `allow_post_deadline` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `level` (`level`),
   KEY `fk_category` (`fk_category`),
@@ -134,13 +119,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `assignments`
---
-ALTER TABLE `assignments`
-  ADD CONSTRAINT `fk_group` FOREIGN KEY (`fk_group`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_challenge` FOREIGN KEY (`fk_challenge`) REFERENCES `challenges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `programs`

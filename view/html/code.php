@@ -24,17 +24,9 @@
 	
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
-				echo '<h2>'.$aChallenge['name'].'</h2><br/>';
+				echo '<h2>'.$aChallenge['name'].($aData['hasAssignment'] ? ' <span class="label label-danger">Trabalho <i class="fa fa-send" title="Essa desafio é um trabalho que você precisa entregar até '.date('d/m/Y - h:i', $aChallenge['deadline_date']).'"></i></span>' : '').'</h2><br/>';
 			echo '</div>';
 		echo '</div>';
-		
-		if ($aData['hasAssignment']) {
-			echo '<div class="row">';
-				echo '<div class="col-md-12">';
-					echo '<div class="alert alert-info" role="alert">Esse desafio está vinculado a um trabalho que você precisa entregar. O prazo de entrega é até <strong>'.date('d/m/Y - h:i', $aData['assignment']['deadline_date']).'</strong>.</div>';
-				echo '</div>';
-			echo '</div>';		
-		}
 		
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
