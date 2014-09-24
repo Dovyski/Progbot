@@ -82,7 +82,7 @@
 							echo '</div>';
 							
 							// Student's code 
-							echo '<h4>Solução enviada<a href="#" id="code-review"></a></h4>';
+							echo '<h4>Solução<a href="#" id="code-review"></a></h4>';
 							
 							if ($aProgram != null && $aProgram['code'] != '') {
 								echo '<div>';
@@ -90,7 +90,15 @@
 								echo '</div>';
 							} else {
 								echo '<div>';
-									echo '<div class="alert alert-warning" role="alert">Não há um programa para resolver esse desafio.</div>';
+									echo '<div class="alert alert-warning" role="alert">';
+									echo 'Não há um programa para resolver esse desafio. ';
+									
+									if($aData['canBeEdited']) {
+										echo '<button type="button" class="btn btn-default" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
+											echo '<i class="fa fa-paper-plane"></i> Enviar código';
+										echo '</button>';
+									}
+									echo '</div>';
 								echo '</div>';
 							}
 							

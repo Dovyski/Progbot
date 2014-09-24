@@ -63,7 +63,7 @@ function layoutFooter($theBaseUrl = '.') {
 function layoutToolBar() {
 	echo '<div id="toolbar">';
 		// TODO: add buttons using a generic approach
-		echo '<a href="#" id="btn-save" class="ide-button" onclick="IDE.build();"><i class="fa fa-save"></i> Salvar</a>';
+		echo '<a href="#" id="btn-save" class="ide-button" onclick="IDE.save();"><i class="fa fa-save"></i> Salvar</a>';
 		//echo '<a href="#" id="btn-tty" class="ide-button" onclick="IDE.openTerminal(\''.TESTING_TTY_URL.'\');">[T]</a>';
 		echo '<div id="build-info">AAAA</div>';
 	echo '</div>';

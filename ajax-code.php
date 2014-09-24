@@ -10,14 +10,22 @@ header('Content-Type: text/javascript; charset=iso-8859-1');
 
 switch($aAction) {
 	case 'savecode':
-		$aProgram 	= codeGetById(@$_REQUEST['programId']);
-		$aUser		= userGetById($_SESSION['user']['id']);
-		$aIsOwner	= $aUser['id'] == $aProgram['fk_user'];
-		$aChallenge = challengeGetById($aProgram['fk_challenge']);
-		$aCanEdit	= $aProgram['grade'] < 0 && !$aProgram['locked'] && (!$aChallenge['assignment'] || !challengeIsAssignmentClosed($aChallenge));
-		
-		if($aIsOwner && $aCanEdit && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
-			$aRet['status'] = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
+		$aChallenge = challengeGetById(@$_REQUEST['challenge']);
+
+		if($aChallenge != null) {
+			$aProgram 	= codeGetById(@$_REQUEST['programId']);
+			$aUser		= userGetById($_SESSION['user']['id']);
+			
+			if ($aProgram == null) {
+				$aProgram = codeCreate($aUser['id'], $aChallenge['id']);
+			}
+			
+			$aIsOwner	= $aUser['id'] == $aProgram['fk_user'];
+			$aCanEdit	= codeCanBeEdited($aProgram, $aChallenge);
+			
+			if ($aIsOwner && $aCanEdit && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
+				$aRet['status'] = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
+			}
 		}
 		break;
 		

@@ -8,7 +8,7 @@ function codeSave($theUserId, $theProgramId, $theCode) {
 	$aQuery = $gDb->prepare("UPDATE programs SET code = ?, last_update = ? WHERE id = ? AND fk_user = ?");
 	$aQuery->execute(array($theCode, time(), $theProgramId, $theUserId));
 	
-	return $aQuery->rowCount();
+	return $aQuery->rowCount() != 0;
 }
 
 function codeGrade($theProgramId, $theGrade) {
@@ -57,6 +57,10 @@ function codeCreate($theUserId, $theChallengeId) {
 	}
 	
 	return $aRet;
+}
+
+function codeCanBeEdited($theProgramInfo, $theChallengeInfo) {
+	return $theProgramInfo != null && $theProgramInfo['grade'] < 0 && (!$theChallengeInfo['assignment'] || challengeIsAssignmentActive($theChallengeInfo));
 }
 
 ?>

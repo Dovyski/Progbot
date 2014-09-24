@@ -30,14 +30,11 @@
 	if ($aIsReviewing || challengeCanBeViewedBy($aChallengeId, $aUserInfo)) {
 		$aChallenge = challengeGetById($aChallengeId);
 		$aProgram 	= codeGetProgramByUser($aUserInfo['id'], $aChallengeId);
-
-		if ($aProgram == null && !$aIsReviewing) {
-			$aProgram = codeCreate($aUserInfo['id'], $aChallengeId);
-		}
 	}
 	
 	// Get information related to assignment for this challenge.
-	$aHasAssignment = !challengeIsAssignmentClosed($aChallenge);	
+	$aHasAssignment = $aChallenge['assignment'] != 0;
+	$aAssignmentCanBeAnswered = challengeIsAssignmentActive($aChallenge);
 	
 	$aData['user'] 				= $aUserInfo;
 	$aData['challenge'] 		= $aChallenge;
@@ -48,7 +45,8 @@
 	$aData['shouldAutosave'] 	= $aProgram != null && $aProgram['grade'] < 0 && !$aIsReviewing;
 	$aData['tty'] 				= TESTING_TTY_URL;
 	$aData['hasAssignment']		= $aHasAssignment;
+	$aData['canBeEdited']		= codeCanBeEdited($aProgram, $aChallenge);
 	$aData['tab']				= isset($_GET['tab']) ? (int)$_GET['tab'] : 0;
-	
+
 	View::render('code', $aData);
 ?>

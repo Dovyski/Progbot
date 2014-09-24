@@ -7,13 +7,13 @@ var IDE = new function() {
 	    $('#auraPainelResposta').html('<img src="./img/ajax-loader.gif" align="absmiddle" title="Pensando..."/> <small>Pensando...</small>');
 	};
 	
-	var autoSaveCode = function() {
+	var autoSaveCode = function(theForce) {
 		var aNow = new Date().getTime();
 
-		if(aNow - mAutoSaveLast >= 2000 && mAutoSaveDirty) {
+		if((aNow - mAutoSaveLast >= 2000 && mAutoSaveDirty) || theForce) {
 			mAutoSaveDirty = false;
 			mAutoSaveLast = aNow;
-			
+
 			$('#info-overlay').html('<i class="fa fa-circle-o-notch fa-spin"></i>').fadeIn();
 
 			$.ajax({
@@ -23,7 +23,7 @@ var IDE = new function() {
 			  data: $('#formCode').serialize()
 			})
 			.done(function( msg ) {
-				$('#info-overlay').html('<i class="fa fa-check-circle-o fa-lg"></i>').delay(1000).fadeOut();
+				$('#info-overlay').html(msg.status ? '<i class="fa fa-check-circle-o fa-lg"></i> O código foi salvo com sucesso!' : '<i class="fa fa-exclamation-triangle fa-lg"></i> O código não foi salvo.').delay(1000).fadeOut();
 			})
 			.fail(function(jqXHR, textStatus) {
 				$('#info-overlay').html('<i class="fa fa-exclamation-triangle fa-lg"></i>').delay(1000).fadeOut();
@@ -42,6 +42,11 @@ var IDE = new function() {
 		}
 		
 		editor.save();
+	};
+	
+	this.save = function() {
+		autoSaveCode(true);
+		$('#btn-save').attr('class', 'ide-button');
 	};
 	
 	this.build = function() {

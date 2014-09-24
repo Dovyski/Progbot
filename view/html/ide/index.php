@@ -21,6 +21,7 @@
 	echo '<form action="code.php" method="post" name="formCode" id="formCode">';
 		echo '<input type="hidden" name="action" value="savecode" />';
 		echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
+		echo '<input type="hidden" name="challenge" value="'.$aChallengeId.'" />';
 		echo '<textarea name="code" id="code" style="width: 100%; height: 100%;">'.$aProgram['code'].'</textarea>';
 	echo '</form>'; 
 		
