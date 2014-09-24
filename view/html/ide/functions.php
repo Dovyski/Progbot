@@ -25,14 +25,11 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 		echo '<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">';
 		
 		echo '<!-- Le styles -->';
-		echo '<style>@import url("'.$theBaseUrl.'/js/codemirror/lib/codemirror.css");</style>';
 		echo '<link href="'.$theBaseUrl.'/style.css'.$aRandURLs.'" rel="stylesheet">';
 		
 		echo '<!-- Le scripts -->';
 		echo '<script src="'.$theBaseUrl.'/../js/jquery.js'.$aRandURLs.'"></script>';
-		echo '<script src="'.$theBaseUrl.'/js/codemirror/lib/codemirror.js"></script>';
-		echo '<script src="'.$theBaseUrl.'/js/codemirror/addon/edit/matchbrackets.js"></script>';
-		echo '<script src="'.$theBaseUrl.'/js/codemirror/mode/clike/clike.js"></script>';
+		echo '<script src="'.$theBaseUrl.'/../js/third-party/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>';
 		echo '<script src="'.$theBaseUrl.'/js/ide.js'.$aRandURLs.'"></script>';
 	echo '</head>';
 	

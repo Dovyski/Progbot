@@ -9,6 +9,7 @@ var IDE = new function() {
 	
 	var autoSaveCode = function(theForce) {
 		var aNow = new Date().getTime();
+		var aEditor = ace.edit("ide-code");
 
 		if((aNow - mAutoSaveLast >= 2000 && mAutoSaveDirty) || theForce) {
 			mAutoSaveDirty = false;
@@ -20,7 +21,7 @@ var IDE = new function() {
 			  type: 'POST',
 			  url: 'ajax-code.php',
 			  dataType: 'json',
-			  data: $('#formCode').serialize()
+			  data: $('#formCode').serialize() + '&code=' + aEditor.getValue()
 			})
 			.done(function( msg ) {
 				$('#info-overlay').html(msg.status ? '<i class="fa fa-check-circle-o fa-lg"></i> O código foi salvo com sucesso!' : '<i class="fa fa-exclamation-triangle fa-lg"></i> O código não foi salvo.').delay(1000).fadeOut();
@@ -35,13 +36,9 @@ var IDE = new function() {
 		setInterval(autoSaveCode, 5000);
 	};
 	
-	this.onCodingKeyEvent = function(editor, e) {
-		if(e.type == "keydown") {
-			mAutoSaveDirty = true;
-			$('#btn-save').attr('class', 'ide-button ide-button-dirty');
-		}
-		
-		editor.save();
+	this.onCodingKeyEvent = function(e) {
+		mAutoSaveDirty = true;
+		$('#btn-save').attr('class', 'ide-button ide-button-dirty');
 	};
 	
 	this.save = function() {

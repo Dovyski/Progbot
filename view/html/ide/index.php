@@ -22,19 +22,16 @@
 		echo '<input type="hidden" name="action" value="savecode" />';
 		echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
 		echo '<input type="hidden" name="challenge" value="'.$aChallengeId.'" />';
-		echo '<textarea name="code" id="code" style="width: 100%; height: 100%;">'.$aProgram['code'].'</textarea>';
+		echo '<div id="ide-code">'.htmlspecialchars($aProgram['code']).'</div>';
 	echo '</form>'; 
 		
 	echo '
 	<script>
-	  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-		lineNumbers: true,
-		matchBrackets: true,
-		mode: "text/x-csrc",
-		electricChars : false,
-		readOnly: '.($aCanEdit ? 'false' : 'true').',
-		onKeyEvent: IDE.onCodingKeyEvent
-	  });
+		var editor = ace.edit("ide-code");
+		editor.setTheme("ace/theme/github");
+		editor.getSession().setMode("ace/mode/c_cpp");
+		editor.setReadOnly('.($aCanEdit ? 'false' : 'true').');
+		editor.getSession().on("change", IDE.onCodingKeyEvent);
 	</script>';
 	
 	layoutFooter($aBaseURL);

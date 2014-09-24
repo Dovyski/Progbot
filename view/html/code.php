@@ -37,7 +37,7 @@
 
 						echo '<li style="width: 200px; text-align: right; float: right;">';
 							echo '<button type="button" class="btn btn-success" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
-								echo '<i class="fa fa-paper-plane"></i> Enviar código';
+								echo '<i class="fa fa-paper-plane"></i> Abrir editor';
 							echo '</button>';
 						echo '</li>';
 					echo '</ul>';
@@ -85,8 +85,8 @@
 							echo '<h4>Solução<a href="#" id="code-review"></a></h4>';
 							
 							if ($aProgram != null && $aProgram['code'] != '') {
-								echo '<div>';
-									echo '<textarea name="code" id="code">'.$aProgram['code'].'</textarea>';
+								echo '<div class="code-container">';
+									echo '<div id="code" class="code-editor-container">'.htmlspecialchars($aProgram['code']).'</div>';
 								echo '</div>';
 							} else {
 								echo '<div>';
@@ -146,22 +146,15 @@
 		
 		echo '<script type="text/javascript">CODEBOT.initCodePage();</script>';
 		
-		// Codemirror stuff
 		// TODO: replace with syntax highlighter?
-		echo '<style>@import url("'.$aBaseUrl.'/ide/js/codemirror/lib/codemirror.css");</style>';
-		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/lib/codemirror.js"></script>';
-		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/addon/edit/matchbrackets.js"></script>';
-		echo '<script src="'.$aBaseUrl.'/ide/js/codemirror/mode/clike/clike.js"></script>';
+		echo '<script src="'.$aBaseUrl.'/js/third-party/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>';
 			
 		echo '
 		<script>
-		  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-			lineNumbers: true,
-			matchBrackets: true,
-			mode: "text/x-csrc",
-			electricChars : false,
-			readOnly: true
-		  });
+			var editor = ace.edit("code");
+			editor.setTheme("ace/theme/github");
+			editor.getSession().setMode("ace/mode/c_cpp");
+			editor.setReadOnly(true);
 		</script>';
 	}
 	
