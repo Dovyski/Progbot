@@ -32,22 +32,44 @@ function challengeGetById($theId) {
 
 function challengeCreateOrUpdate($theChallengeId, $theData) {
 	global $gDb;
+
+	$aStartDate				= time();
+	$aDeadlineDate			= strtotime('+7 day');
+	$aPostDeadlineDate		= 0;
 	
-	$aRet			= false;
-	$aId 			= $theChallengeId + 0;
-	$aCategoryId 	= isset($theData['fk_category']) 	? $theData['fk_category'] 	: 0;
-	$aGroupId 		= isset($theData['fk_group']) 		? $theData['fk_group'] 		: 0;
-	$aDate 			= isset($theData['date']) 			? $theData['date'] 			: time();
-	$aDescription 	= isset($theData['description']) 	? $theData['description'] 	: '';
-	$aName 			= isset($theData['name']) 			? $theData['name'] 			: '';
-	$aLevel 		= isset($theData['level']) 			? $theData['level'] 		: 0;
+	if (isset($theData['start_date'])) {
+		$theData['start_date'] = implode('-', explode('/', $theData['start_date']));
+		$aStartDate = strtotime($theData['start_date']);
+	}
 	
-	$aQuery = $gDb->prepare("INSERT INTO challenges (id, fk_category, fk_group, date, description, name, level)
-											VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE fk_category = ?, fk_group = ?, date = ?, description = ?, name = ?, level = ?");
+	if (isset($theData['deadline_date'])) {
+		$theData['deadline_date'] = implode('-', explode('/', $theData['deadline_date']));
+		$aDeadlineDate = strtotime($theData['deadline_date']);
+	}
+	
+	if (isset($theData['post_deadline_date'])) {
+		$aPostDeadlineDate = $aDeadlineDate + $theData['post_deadline_date'] * 24 * 60 * 60;
+	}
+
+	$aRet					= false;
+	$aId 					= $theChallengeId + 0;
+	$aCategoryId 			= isset($theData['fk_category']) 			? $theData['fk_category'] 			: 0;
+	$aGroupId 				= isset($theData['fk_group']) 				? $theData['fk_group'] 				: 0;
+	$aDate 					= isset($theData['date']) 					? $theData['date'] 					: time();
+	$aDescription 			= isset($theData['description']) 			? $theData['description'] 			: '';
+	$aName 					= isset($theData['name']) 					? $theData['name'] 					: '';
+	$aLevel 				= isset($theData['level']) 					? $theData['level'] 				: 0;
+	$aAssignment			= isset($theData['assignment'])				? $theData['assignment']			: 0;
+	$aAllowPostDeadline		= isset($theData['allow_post_deadline'])	? $theData['allow_post_deadline']	: $aPostDeadlineDate != 0;
+	
+	$aQuery = $gDb->prepare("INSERT INTO challenges
+								(id, fk_category, fk_group, date, description, name, level, start_date, assignment, deadline_date, post_deadline_date, allow_post_deadline)
+								VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+								ON DUPLICATE KEY UPDATE fk_category = ?, fk_group = ?, date = ?, description = ?, name = ?, level = ?, start_date = ?, assignment = ?, deadline_date = ?, post_deadline_date = ?, allow_post_deadline = ?");
 
 	if(strlen($aName) > 0 && strlen($aDescription) > 0) {
-		$aParams = array($aId, $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel,
-						 $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel);
+		$aParams = array($aId, $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel, $aStartDate, $aAssignment, $aDeadlineDate, $aPostDeadlineDate, $aAllowPostDeadline,
+						 $aCategoryId, $aGroupId, $aDate, $aDescription, $aName, $aLevel, $aStartDate, $aAssignment, $aDeadlineDate, $aPostDeadlineDate, $aAllowPostDeadline);
 		
 		$aQuery->execute($aParams);
 		$aRet = $aQuery->rowCount();

@@ -23,5 +23,15 @@
 	$aData['challengeInfo'] 	= challengeGetById($aChallengeId);
 	$aData['challengeLevels'] 	= $gChallengeLevels;
 	
+	if ($aData['challengeInfo'] == null) {
+		$aData['challengeInfo'] = array(
+			'start_date' => time(),
+			'deadline_date' => time() + 7 * 24 * 60 * 60,
+			'post_deadline_date' => 0
+		);
+	} else {
+		$aData['postDeadlineDays'] = (int)(($aData['challengeInfo']['post_deadline_date'] - $aData['challengeInfo']['deadline_date']) / (24 * 60 * 60));
+	}
+	
 	View::render('challenges-manager', $aData);
 ?>
