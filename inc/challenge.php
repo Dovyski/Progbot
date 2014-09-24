@@ -84,7 +84,7 @@ function challengeFindActivesByUser($theUserId, $thePage, $thePageSize, & $theTo
 	$thePage	= (int)$thePage;
 	$thePageSize= (int)$thePageSize;
 	$aRet 		= array();
-	$aQuery 	= $gDb->prepare("SELECT COUNT(*) AS count FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL)");
+	$aQuery 	= $gDb->prepare("SELECT COUNT(*) AS count FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL) AND start_date >= " . time());
 	$aUserInfo	= userGetById($theUserId); // TODO: optimize it!
 	$aGroupId	= 0;
 	
@@ -140,8 +140,8 @@ function challengeFindAssignmentsByUser($theUserInfo) {
 	return $aRet;
 }
 
-function challengeIsAssignmentClosed($theChallengeInfo) {
-	return time() >= $theChallengeInfo['deadline_date'];
+function challengeIsAssignmentActive($theChallengeInfo) {
+	return time() >= $theChallengeInfo['start_date'] && (time() <= $theChallengeInfo['deadline_date'] || ($theChallengeInfo['allow_post_deadline'] && time() <= $theChallengeInfo['post_deadline_date']));
 }
 
 function challengeCountActiveAssignmentsByUser($theUserInfo) {

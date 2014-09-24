@@ -3,12 +3,25 @@
 	
 	authAllowAuthenticated();
 	
-	$aUser 				= userGetById($_SESSION['user']['id']);
-	$aAssignments 		= challengeFindAssignmentsByUser($aUser);
+	$aUser 					= userGetById($_SESSION['user']['id']);
+	$aAssignments 			= challengeFindAssignmentsByUser($aUser);
+	$aActiveAssignments 	= array();
+	$aFinishedAssignments 	= array();
+	
+	foreach($aAssignments as $aIdChallenge => $aChallenge) {
+		if (challengeIsAssignmentActive($aChallenge)) {
+			$aActiveAssignments[$aIdChallenge] = $aChallenge;
+			
+		} else {
+			$aFinishedAssignments[$aIdChallenge] = $aChallenge;
+		}
+	}
 
 	View::render('assignments', array(
 		'user' 					=> $aUser,
 		'isProfessor' 			=> $aUser['type'] == USER_LEVEL_PROFESSOR,
-		'assignments' 			=> $aAssignments
+		'assignments' 			=> $aAssignments,
+		'activeAssignments'		=> $aActiveAssignments,
+		'finishedAssignments'	=> $aFinishedAssignments
 	));
 ?>
