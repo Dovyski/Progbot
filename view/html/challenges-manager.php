@@ -63,13 +63,13 @@
 				echo '<label class="control-label">Trabalho?</label>';
 				echo '<select name="assignment" id="assignment" class="form-control col-lg-2">';
 					echo '<option value="0" '.(@$aChallengeInfo['assignment'] == 0 ? 'selected="selected"' : '').'>Não</option>';
-					echo '<option value="1" '.(@$aChallengeInfo['assignment'] == 1 ? 'selected="selected"' : '').'>Sim</option>';
+					echo '<option value="1" '.(@$aChallengeInfo['assignment'] == 1 || $aData['isAssignment'] ? 'selected="selected"' : '').'>Sim</option>';
 				echo '</select>';
 			echo '</div>';
 		echo '</div>';
 		
 		// Assignment panel
-		echo '<div class="row" id="assignment-panel" style="margin-top: 15px; display: '.(@$aChallengeInfo['assignment'] ? 'block' : 'none').';">';
+		echo '<div class="row" id="assignment-panel" style="margin-top: 15px; display: '.(@$aChallengeInfo['assignment'] || $aData['isAssignment'] ? 'block' : 'none').';">';
 			echo '<div class="col-md-2">';
 				echo '<label class="control-label">Data de início</label>';
 				echo '<input type="text" name="start_date" value="'.date('d/m/Y', @$aChallengeInfo['start_date']).'" class="col-lg-6 form-control" /><br/>';

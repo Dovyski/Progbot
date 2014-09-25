@@ -22,6 +22,7 @@
 	$aData['challengeId'] 		= $aChallengeId;
 	$aData['challengeInfo'] 	= challengeGetById($aChallengeId);
 	$aData['challengeLevels'] 	= $gChallengeLevels;
+	$aData['isAssignment'] 		= isset($_REQUEST['assignment']);
 	
 	if ($aData['challengeInfo'] == null) {
 		$aData['challengeInfo'] = array(
