@@ -64,7 +64,13 @@ function layoutUserBar($theUserInfo) {
 				layoutPrintUser($theUserInfo['id'], $theUserInfo, true);
 			echo '</li>';
 			echo '<li class="dropdown">';
-				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i><b class="caret"></b></a>';
+				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i></a>';
+				echo '<ul class="dropdown-menu" role="menu">';
+					echo '<li><a href="logout.php"><i class="fa fa-user"></i> Editar perfil</a></li>';
+				echo '</ul>';				
+			echo '</li>';
+			echo '<li class="dropdown">';
+				echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>';
 				echo '<ul class="dropdown-menu" role="menu">';
 					echo '<li><a href="logout.php"><i class="fa fa-sign-out"></i> Sair</a></li>';
 				echo '</ul>';				

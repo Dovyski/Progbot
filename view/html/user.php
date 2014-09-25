@@ -9,9 +9,9 @@
 	
 	echo '<div class="jumbotron jumbotron-user-profile">';
 		echo '<div class="container">';
-			echo '<img src="http://avatars.io/facebook/dovyski?size=large" class="thumbnail" />';
+			echo '<img src="http://avatars.io/facebook/nonexistentthing?size=large" class="thumbnail" />';
 			echo '<h1>'.$aUser['name'].'</h1>';
-			echo '<p><i class="fa fa-envelope"></i> fernando.bevilacqua@uffs.edu.br</p>';
+			echo '<p><i class="fa fa-envelope"></i> email@uffs.edu.br</p>';
 		echo '</div>';
 	echo '</div>';
 	
