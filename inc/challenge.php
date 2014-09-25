@@ -147,7 +147,7 @@ function challengeIsAssignmentActive($theChallengeInfo) {
 function challengeCountActiveAssignmentsByUser($theUserInfo) {
 	global $gDb;
 	
-	$aRet 		= array();
+	$aRet 		= 0;
 	$aGroupId	= 0;
 
 	if ($theUserInfo['fk_group'] != null) {
