@@ -60,7 +60,7 @@ function codeCreate($theUserId, $theChallengeId) {
 }
 
 function codeCanBeEdited($theProgramInfo, $theChallengeInfo) {
-	return $theProgramInfo != null && $theProgramInfo['grade'] < 0 && (!$theChallengeInfo['assignment'] || challengeIsAssignmentActive($theChallengeInfo));
+	return (!$theChallengeInfo['assignment'] || challengeIsAssignmentActive($theChallengeInfo)) && ($theProgramInfo == null || $theProgramInfo['grade'] < 0);
 }
 
 ?>

@@ -60,10 +60,6 @@
 									echo '<p>'.($aProgram != null ? date('d/m/y - H:i', $aProgram['last_update']) : 'Nenhuma').'</p>';
 								echo '</li>';
 								echo '<li>';
-									echo '<span>Tempo de desenvolvimento:</span>';
-									echo '<p>2h 31min</p>';
-								echo '</li>';
-								echo '<li>';
 									if ($aProgram != null) {
 										echo '<div class="grade-info">';
 											echo ($aIsReviewing ? '<a href="#" id="changeGradeLink" title="Clique para editar a nota">' : '').'<strong>'.($aProgram['grade'] < 0 ? '?' : $aProgram['grade']).'</strong>' . ($aIsReviewing ? ' <i class="fa fa-edit"></i></a>' : '');

@@ -47,7 +47,7 @@ function challengeCreateOrUpdate($theChallengeId, $theData) {
 		$aDeadlineDate = strtotime($theData['deadline_date']);
 	}
 	
-	if (isset($theData['post_deadline_date'])) {
+	if (isset($theData['post_deadline_date']) && $theData['post_deadline_date'] != 0) {
 		$aPostDeadlineDate = $aDeadlineDate + $theData['post_deadline_date'] * 24 * 60 * 60;
 	}
 
