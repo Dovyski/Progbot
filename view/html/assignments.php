@@ -31,16 +31,16 @@
 						echo '<table class="table table-hover">';
 							echo '<thead>';
 								echo '<th style="width: 5%;"></th>';
-								echo '<th>Descrição</th>';
-								echo '<th>Prazo de entrega</th>';
-								echo '<th>Foi entregue?</th>';
+								echo '<th style="width: 50%;">Descrição</th>';
+								echo '<th style="width: 20%;">Prazo de entrega</th>';
+								echo '<th style="width: 15%;">Foi entregue?</th>';
+								echo '<th style="width: 10%;">'.($aIsShowingActiveChallenges ? '' : 'Nota').'</th>';
 							echo '</thead>';
 							echo '<tbody>';
 								foreach($aAssignments as $aIdChallenge => $aChallenge) {
 									echo '<tr>';
-										echo '<td style="width: 4%; text-align: center;">';
-											echo '<i class = "fa fa-book"> </i>';
-											echo '<span class="label label-warning"> '.challengeLevelToString($aChallenge['level']).' </span> '; // TODO: create some standart way to print challenges.
+										echo '<td style="text-align: center;">';
+											echo '<i class = "fa fa-book"></i>';
 										echo '</td>';
 										echo '<td>';
 											echo '<strong><a href="code.php?challenge='.$aIdChallenge.'">'.$aChallenge['name'].'</a></strong>';
@@ -48,18 +48,19 @@
 											if($aIsProfessor) {
 												echo ' <a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="fa fa-edit"></span></a>';
 											}
-											echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
 										echo '</td>';
 										echo '<td>';
 											echo date('d/m/Y (h:i)', $aChallenge['deadline_date']);
 										echo '</td>';
 										echo '<td>';
 											if($aChallenge['program_id'] != null) {
-												echo '<span class="label label-success">Sim</span>';
+												echo '<span class="label label-success">Sim</span> <a href="code.php?challenge='.$aIdChallenge.'&tab=1"><i class="fa fa-send" title="Clique para ver a resposta enviada."></i></a>';
 											} else {
 												echo '<span class="label label-danger">Não</span>';
 											}
 										echo '</td>';
+										
+										echo '<td>'.($aIsShowingActiveChallenges ? '' : '-').'</td>';
 									echo '</tr>';
 								}
 							echo '</tbody>';
