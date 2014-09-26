@@ -84,7 +84,7 @@ function challengeFindActivesByUser($theUserId, $thePage, $thePageSize, & $theTo
 	$thePage	= (int)$thePage;
 	$thePageSize= (int)$thePageSize;
 	$aRet 		= array();
-	$aQuery 	= $gDb->prepare("SELECT COUNT(*) AS count FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL) AND start_date >= " . time());
+	$aQuery 	= $gDb->prepare("SELECT COUNT(*) AS count FROM challenges WHERE id NOT IN (SELECT fk_challenge FROM programs WHERE fk_user = ? AND grade >= 0) AND (fk_group = ? OR fk_group IS NULL) AND start_date <= " . time());
 	$aUserInfo	= userGetById($theUserId); // TODO: optimize it!
 	$aGroupId	= 0;
 	
