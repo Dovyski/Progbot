@@ -30,7 +30,7 @@
 							if($aIsProfessor) {
 								echo ' <a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="fa fa-edit"></span></a>';
 							}
-							echo '<p>'.MarkdownExtended(substr($aRow['description'], 0, strpos($aRow['description'], '.') - 1)).'</p>';
+							echo '<p>'.MarkdownExtended(substr($aRow['description'], 0, strpos($aRow['description'], '.'))).'</p>';
 						echo '</td>';
 					echo '</tr>';
 				}
