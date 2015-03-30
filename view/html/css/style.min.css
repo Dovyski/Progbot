@@ -8,6 +8,8 @@ body{padding:0px;}
 a:link,a:active,a:hover,a:visited{color:#000;}
 .navbar{margin-bottom:0px;}
 .code-tab{min-height:660px;overflow:auto;}
+.code-container{position:relative;width:100%;height:600px;}
+.code-editor-container{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;overflow:auto;}
 .challenge-tab{min-height:320px;}
 .challenge-tab small{color:#9f9f9f;}
 .pagination-block{margin-left:20px;text-align:left;}

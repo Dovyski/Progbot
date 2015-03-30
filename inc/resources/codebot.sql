@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2014 at 07:13 PM
+-- Generation Time: Mar 30, 2015 at 12:46 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `codebot`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -119,6 +132,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `challenges`
+--
+ALTER TABLE `challenges`
+  ADD CONSTRAINT `challenges_ibfk_1` FOREIGN KEY (`fk_category`) REFERENCES `categories` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `programs`
