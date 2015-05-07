@@ -52,6 +52,10 @@ function layoutAdminNavBar($theUserInfo) {
 				echo '<li role="presentation" class="dropdown-header">Trabalhos</li>';
 				echo '<li><a href="challenges-manager.php?assignment=true">Criar trabalho</a></li>';
 				echo '<li><a href="reviews.php?assignment=true">Revisar respostas</a></li>';
+
+				echo '<li class="divider"></li>';
+				echo '<li role="presentation" class="dropdown-header">Usuários e grupos</li>';
+				echo '<li><a href="groups-manager.php">Criar grupo</a></li>';
 			echo '</ul>';
 		echo '</li>';
 	echo '</ul>';
