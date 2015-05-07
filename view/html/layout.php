@@ -55,7 +55,8 @@ function layoutAdminNavBar($theUserInfo) {
 
 				echo '<li class="divider"></li>';
 				echo '<li role="presentation" class="dropdown-header">Usuários e grupos</li>';
-				echo '<li><a href="groups-manager.php">Criar grupo</a></li>';
+				echo '<li><a href="groups-manager.php">Listar grupos</a></li>';
+				echo '<li><a href="groups-manager.php?id=0">Criar grupo</a></li>';
 			echo '</ul>';
 		echo '</li>';
 	echo '</ul>';

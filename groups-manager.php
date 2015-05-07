@@ -19,8 +19,15 @@
 		$aData['createdOrUpdated'] 	= groupCreateOrUpdate($aGroupId, $_POST);
 	}
 
-	$aData['groupId'] 		= $aGroupId;
-	$aData['groupInfo'] 	= groupGetById($aGroupId);
+	$aData['group'] = null;
+	$aData['groups'] = null;
+
+	if($aGroupId != 0) {
+		$aData['group'] = groupGetById($aGroupId);
+
+	} else {
+		$aData['groups'] = groupFindAll();
+	}
 
 	View::render('groups-manager', $aData);
 ?>
