@@ -58,7 +58,7 @@
 			echo '<div class="col-md-12">';
 				echo '<div class="panel panel-default">';
 					echo '<div class="panel-heading">Integrantes do grupo';
-						echo '<a class="pull-right" id="link-add-member" onclick="$(\'#panel-add-member\').show();$(this).hide();"><i class="fa fa-plus-circle"></i> Adicionar integrante</a>';
+						echo '<a class="pull-right" id="link-add-member" onclick="$(\'#panel-add-member\').show();$(this).hide();"><i class="fa fa-user-plus"></i> Adicionar integrante</a>';
 
 						echo '<datalist id="users">';
 							if(count($aUsers) > 0) {
@@ -70,7 +70,7 @@
 
 						echo '<span id="panel-add-member" class="pull-right form-inline" style="margin-top: -6px; display: none;">';
 							echo '<input type="text" list="users" id="user-name" class="form-control" placeholder="Digite o nome"/>';
-							echo '<button class="btn btn-default btn-sm" onclick="CODEBOT.addGroupMember(\'group-members\', '.$aGroup['id'].', \'user-name\');"><i class="fa fa-plus-circle"></i> Adicionar</button>';
+							echo '<button class="btn btn-default btn-sm" onclick="CODEBOT.addGroupMember(\'group-members\', '.$aGroup['id'].', \'user-name\');"><i class="fa fa-user-plus"></i> Adicionar</button>';
 						echo '</span>';
 					echo '</div>';
 					echo '<div id="group-members"><script>CODEBOT.loadGroupMembers(\'group-members\', '.$aGroup['id'].');</script></div>';
