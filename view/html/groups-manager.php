@@ -36,7 +36,7 @@
 
 		echo '<form action="groups-manager.php" method="post" name="formGroups" id="formGroups">';
 			echo '<div class="row">';
-				echo '<div class="col-md-12">';
+				echo '<div class="col-md-8">';
 					echo '<input type="hidden" name="hasValue" value="1" />';
 					echo '<input type="hidden" name="id" value="'.$aGroup['id'].'" />';
 
@@ -45,10 +45,19 @@
 						echo '<input type="text" name="name" value="'.@$aGroup['name'].'" class="col-lg-6 form-control" /><br/>';
 					echo '</div>';
 				echo '</div>';
+
+				echo '<div class="col-md-4">';
+					echo '<label class="control-label">Visibilidade</label>';
+					echo '<select name="level" class="form-control col-lg-2">';
+						echo '<option value="0">Público</option>';
+					echo '</select>';
+				echo '</div>';
 			echo '</div>';
 
 			echo '<div class="row" style="margin-top: 15px;">';
-				echo '<div class="col-md-8">';
+				echo '<div class="col-md-12">';
+					echo '<label class="control-label">Descrição</label>';
+					layoutPrintMarkdownTextarea('description', @$aGroup['description'], array('Texto'), '100px');
 					echo '<input type="submit" name="submit" value="Salvar" class="btn btn-success" />';
 				echo '</div>';
 			echo '</div>';
