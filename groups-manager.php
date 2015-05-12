@@ -19,8 +19,9 @@
 		$aData['createdOrUpdated'] 	= groupCreateOrUpdate($aGroupId, $_POST);
 	}
 
-	$aData['group'] = null;
+	$aData['group']  = null;
 	$aData['groups'] = null;
+	$aData['users']  = userFindAll();
 
 	if($aGroupId != 0) {
 		$aData['group'] = groupGetById($aGroupId);

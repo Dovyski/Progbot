@@ -175,6 +175,17 @@ var CODEBOT = new function() {
 		});
 	};
 
+	this.addGroupMember = function(theContainerId, theGroupId, theFieldWhereUserIdIs) {
+		var aUserName 	= $('#' + theFieldWhereUserIdIs).val();
+		var aDatalist 	= $('#' + theFieldWhereUserIdIs).attr('list');
+
+		var aUserId 	= $('#' + aDatalist).find('option[value="'+aUserName+'"]').data('id');
+
+		if(aUserId) {
+			CODEBOT.changeGroupMember(theContainerId, theGroupId, aUserId, 'add');
+		}
+	};
+
 	this.changeGroupMember = function(theContainerId, theGroupId, theUserId, theAction) {
 		$.ajax({
 		  type: 'POST',

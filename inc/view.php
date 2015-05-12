@@ -9,15 +9,19 @@ class View {
 	public static function data() {
 		return self::$mData;
 	}
-	
+
+	public static function escape($theText) {
+		return htmlspecialchars($theText);
+	}
+
 	public static function baseUrl() {
 		return self::$mBaseUrl;
 	}
-	
+
 	public static function render($theFile, $theData = array(), $theOutput = 'html') {
 		self::$mBaseUrl = 'view/'.$theOutput;
 		self::$mData 	= $theData;
-		
+
 		require_once dirname(__FILE__).'/../'.self::$mBaseUrl.'/'.$theFile.'.php';
 	}
 }

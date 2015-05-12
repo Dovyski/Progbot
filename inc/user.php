@@ -34,6 +34,22 @@ function userFindByGroupId($theGroupId) {
 	return $aRet;
 }
 
+// TODO: improve this, adding LIMIT, etc.
+function userFindAll() {
+	global $gDb;
+
+	$aRet = array();
+	$aQuery = $gDb->prepare("SELECT id, name FROM users WHERE 1");
+
+	if ($aQuery->execute()) {
+		while($aRow = $aQuery->fetch()) {
+			$aRet[$aRow['id']] = $aRow;
+		}
+	}
+
+	return $aRet;
+}
+
 function userChangeGroup($theUserId, $theGroupId) {
 	global $gDb;
 
