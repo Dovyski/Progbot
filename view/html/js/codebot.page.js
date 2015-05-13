@@ -27,7 +27,6 @@ CODEBOT.page = new function() {
 
 			// Get filtering criteria
 			theData.fk_category = $('#category-filter').val() | 0;
-			console.log(theData);
 
 			$.ajax({
 			  type: 'POST',

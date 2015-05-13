@@ -22,7 +22,7 @@
 					echo '<tr>';
 						echo '<td style="width: 4%; text-align: center;">';
 							echo '<i class = "fa fa-'.($aType == 'actives' ? 'book' : 'circle').'" > </i>';
-							echo '<span class="label label-warning"> '.challengeLevelToString($aRow['level']).' </span> '; // TODO: create some standart way to print challenges.
+							echo layoutCreateChallengeLevelBadge($aRow['level']);
 						echo '</td>';
 						echo '<td>';
 							echo '<strong><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a></strong>';
@@ -30,7 +30,11 @@
 							if($aIsProfessor) {
 								echo ' <a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="fa fa-edit"></span></a>';
 							}
-							echo '<p>'.MarkdownExtended(substr($aRow['description'], 0, strpos($aRow['description'], '.'))).'</p>';
+
+							$aPos = strpos($aRow['description'], '.');
+							$aPos = $aPos === false ? strlen($aRow['description']) : $aPos + 1;
+
+							echo '<p>'.MarkdownExtended(substr($aRow['description'], 0, $aPos)).'</p>';
 						echo '</td>';
 					echo '</tr>';
 				}

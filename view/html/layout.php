@@ -199,4 +199,18 @@ function layoutPrintMarkdownTextarea($theFieldName, $theInitialText = '', $theTa
 	echo '<script type="text/javascript">CODEBOT.createMarkdownTextarea(\''.$theFieldName.'\');</script>';
 }
 
+function layoutCreateChallengeLevelBadge($theLevel) {
+	global $gChallengeLevels;
+
+	$aColors = array(
+		CHALLENGE_LEVEL_EASY 	=> 'success',
+		CHALLENGE_LEVEL_MEDIUM 	=> 'warning',
+		CHALLENGE_LEVEL_HARD 	=> 'danger',
+	);
+
+	$aCaption = isset($gChallengeLevels[$theLevel]) ? $gChallengeLevels[$theLevel] : 'Level ' . $theLevel;
+	$aColor = isset($aColors[$theLevel]) ? $aColors[$theLevel] : 'danger';
+
+	echo '<span class="label label-'.$aColor.'"> '.challengeLevelToString($theLevel).' </span> ';
+}
 ?>

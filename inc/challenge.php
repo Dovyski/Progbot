@@ -17,6 +17,11 @@ function challengeLevelToString($theChallengeLevel) {
 	return isset($gChallengeLevels[$theChallengeLevel]) ? $gChallengeLevels[$theChallengeLevel] : 'Level ' . $theChallengeLevel;
 }
 
+function challengeLevelToColor($theChallengeLevel) {
+	global $gChallengeLevels;
+	return isset($gChallengeLevels[$theChallengeLevel]) ? $gChallengeLevels[$theChallengeLevel] : 'Level ' . $theChallengeLevel;
+}
+
 function challengeGetById($theId) {
 	global $gDb;
 
