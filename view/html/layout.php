@@ -121,6 +121,7 @@ function layoutHeader($theTitle, $theBaseUrl = '.') {
 		echo '<script src="'.$theBaseUrl.'/js/jquery.js'.$aRandURLs.'"></script>';
 		echo '<script src="'.$theBaseUrl.'/js/bootstrap.js'.$aRandURLs.'"></script>';
 		echo '<script src="'.$theBaseUrl.'/js/codebot.js'.$aRandURLs.'"></script>';
+		echo '<script src="'.$theBaseUrl.'/js/codebot.page.js'.$aRandURLs.'"></script>';
 	echo '</head>';
 
 	echo '<body>';

@@ -143,22 +143,6 @@ var CODEBOT = new function() {
 		});
 	};
 
-	this.loadChallenges = function(theContainerId, theType, thePage) {
-		$('#' + theContainerId).html('Carregando... <img src="./ajax-loader.gif" title="Loading" align="absmiddle">');
-
-		$.ajax({
-		  type: 'POST',
-		  url: 'ajax-challenges.php',
-		  data: {'type': theType, 'page' : thePage }
-		})
-		.done(function( msg ) {
-			$('#' + theContainerId).html(msg);
-		})
-		.fail(function(jqXHR, textStatus) {
-			$('#' + theContainerId).html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');
-		});
-	};
-
 	this.loadGroupMembers = function(theContainerId, theGroupId) {
 		$('#' + theContainerId).html('Carregando... <img src="./ajax-loader.gif" title="Loading" align="absmiddle">');
 

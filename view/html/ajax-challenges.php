@@ -1,8 +1,8 @@
-<?php 
+<?php
 	require_once dirname(__FILE__).'/layout.php';
 
 	header('Content-Type: text/html; charset=utf8');
-	
+
 	$aData 			= View::data();
 	$aUser 			= $aData['user'];
 	$aIsProfessor 	= $aData['isProfessor'];
@@ -14,7 +14,7 @@
 
 	if (count($aChallenges) == 0) {
 		echo '<p style="padding: 15px;">'.($aType == 'actives' ? 'Não existem desafios ativos no momento.' : 'Você não resolveu desafios até agora.').'</p>';
-		
+
 	} else {
 		echo '<table class="table table-hover">';
 			echo '<tbody>';
@@ -26,7 +26,7 @@
 						echo '</td>';
 						echo '<td>';
 							echo '<strong><a href="code.php?challenge='.$aIdChallenge.'">'.$aRow['name'].'</a></strong>';
-							
+
 							if($aIsProfessor) {
 								echo ' <a href="challenges-manager.php?id='.$aIdChallenge.'" title="Editar desafio"><span class="fa fa-edit"></span></a>';
 							}
@@ -36,21 +36,21 @@
 				}
 			echo '</tbody>';
 		echo '</table>';
-		
+
 		$aBlock = $aType == 'actives' ? 'active-challenges' : 'answered-challenges';
-		
+
 		// Pagination
 		if ($aMaxPages > 1) {
 			echo '<div class="pagination-block">';
 				echo '<ul class="pagination">';
 					if($aPage > 0) {
-						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage - 1).');">Anterior</a></li>';
+						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.page.challenges.load(\''.$aBlock.'\', {type: \''.$aType.'\', page: '.($aPage - 1).'});">Anterior</a></li>';
 					}
 					for ($i = 0; $i < $aMaxPages; $i++ ) {
-						echo '<li class="'.($aPage == $i ? 'active' : '').'"><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.$i.');">'.($i + 1).'</a></li>';
+						echo '<li class="'.($aPage == $i ? 'active' : '').'"><a href="javascript:void(0);" onclick="CODEBOT.page.challenges.load(\''.$aBlock.'\', {type: \''.$aType.'\', page: '.$i.'});">'.($i + 1).'</a></li>';
 					}
 					if($aPage < $aMaxPages - 1) {
-						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.loadChallenges(\''.$aBlock.'\', \''.$aType.'\', '.($aPage + 1).');">Próxima</a></li>';
+						echo '<li><a href="javascript:void(0);" onclick="CODEBOT.page.challenges.load(\''.$aBlock.'\', {type: \''.$aType.'\', page: '.($aPage + 1).'});">Próxima</a></li>';
 					}
 				echo '</ul>';
 			echo '</div>';
