@@ -174,7 +174,7 @@ function layoutPrintUser($theUserId, $theUserInfo = null, $theSimplified = false
 				echo '<a href="user.php?id='.$theUserId.'"><strong>'.$theUserInfo['name'] . '</strong></a><br/>';
 				echo $aRole;
 
-				echo '<small><i class="icon-ok-circle"></i> 10 <i class="icon-briefcase"></i> 3 <i class="icon-fire"></i> 4</small>';
+				echo '<small><i class="fa fa-book"></i> 10 <i class="fa fa-flask"></i> 4</small>';
 			echo '</div>';
 		}
 	}

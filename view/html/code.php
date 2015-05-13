@@ -36,11 +36,13 @@
 						echo '<li '.($aTab == 0 ? 'class="active"' : '').'><a href="#tab-code-desc" data-toggle="tab" class="codeTab">Descrição</a></li>';
 						echo '<li '.($aTab == 1 ? 'class="active"' : '').'><a href="#tab-code-review" data-toggle="tab" class="codeTab">Entrega e Revisão</a></li>';
 
-						echo '<li style="width: 200px; text-align: right; float: right;">';
-							echo '<button type="button" class="btn btn-success" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
-								echo '<i class="fa fa-paper-plane"></i> Abrir editor';
-							echo '</button>';
-						echo '</li>';
+						if(!$aIsReviewing) {
+							echo '<li style="width: 200px; text-align: right; float: right;">';
+								echo '<button type="button" class="btn btn-success" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
+									echo '<i class="fa fa-paper-plane"></i> Abrir editor';
+								echo '</button>';
+							echo '</li>';
+						}
 					echo '</ul>';
 
 					echo '<div class="tab-content code-tab">';

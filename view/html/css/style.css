@@ -164,6 +164,10 @@ a:visited {
           border-radius: 4px 0 4px 0;
 }
 
+.user-info {
+	min-width: 100px;
+}
+
 .user-info img {
 	float: left;
 	width: 40px;
