@@ -1,19 +1,20 @@
-<?php 
+<?php
 	require_once dirname(__FILE__).'/layout.php';
 
 	layoutHeader('Resolução de desafio', View::baseUrl());
-	
+
 	$aData		  = View::data();
 	$aIsReviewing = $aData['isReviewing'];
-	$aChallengeId = $aData['challengeId'];	
+	$aIsOwner	  = $aData['isOwner'];
+	$aChallengeId = $aData['challengeId'];
 	$aChallenge   = $aData['challenge'];
 	$aUserInfo	  = $aData['user'];
 	$aProgram	  = $aData['program'];
 	$aTtyUrl 	  = $aData['tty'];
 	$aTab 	 	  = $aData['tab'];
-	
+
 	echo '<div class="container">';
-	
+
 	if ($aChallenge == null) {
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
@@ -21,13 +22,13 @@
 			echo '</div>';
 		echo '</div>';
 	} else {
-	
+
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
 				echo '<h2>'.$aChallenge['name'].($aData['hasAssignment'] ? ' <span class="label label-danger">Trabalho <i class="fa fa-send" title="Essa desafio é um trabalho que você precisa entregar até '.date('d/m/Y - h:i', $aChallenge['deadline_date']).'"></i></span>' : '').'</h2><br/>';
 			echo '</div>';
 		echo '</div>';
-		
+
 		echo '<div class="row">';
 			echo '<div class="col-md-12">';
 				echo '<div class="tabbable">';
@@ -41,13 +42,13 @@
 							echo '</button>';
 						echo '</li>';
 					echo '</ul>';
-					
+
 					echo '<div class="tab-content code-tab">';
 						// Description tab
 						echo '<div class="tab-pane '.($aTab == 0 ? 'active' : '').'" id="tab-code-desc">';
 							echo '<p>'.MarkdownExtended($aChallenge['description']).'</p>';
 						echo '</div>';
-						
+
 						// Review tab
 						echo '<div class="tab-pane '.($aTab == 1 ? 'active' : '').'" id="tab-code-review">';
 							// Student's info
@@ -76,10 +77,10 @@
 									}
 								echo '</li>';
 							echo '</div>';
-							
-							// Student's code 
+
+							// Student's code
 							echo '<h4>Solução<a href="#" id="code-review"></a></h4>';
-							
+
 							if ($aProgram != null && $aProgram['code'] != '') {
 								echo '<div class="code-container">';
 									echo '<div id="code" class="code-editor-container">'.htmlspecialchars($aProgram['code']).'</div>';
@@ -88,7 +89,7 @@
 								echo '<div>';
 									echo '<div class="alert alert-warning" role="alert">';
 									echo 'Não há um programa para resolver esse desafio. ';
-									
+
 									if($aData['canBeEdited']) {
 										echo '<button type="button" class="btn btn-default" onclick="CODEBOT.openEditor('.$aChallengeId.');">';
 											echo '<i class="fa fa-paper-plane"></i> Enviar código';
@@ -97,11 +98,11 @@
 									echo '</div>';
 								echo '</div>';
 							}
-							
+
 							// Revision
 							echo '<h4>Comentários<a href="#" id="revisions"></a></h4>';
 							$aReviews = $aData['reviews'];
-							
+
 							if (count($aReviews) > 0) {
 								foreach($aReviews as $aReview) {
 									echo '<div class="panel panel-default bloco-desafios">';
@@ -111,7 +112,7 @@
 										echo '</div>';
 										echo '<div class="panel-body">';
 											echo MarkdownExtended($aReview['comment']);
-										echo '</div>';										
+										echo '</div>';
 									echo '</div>';
 								}
 							} else if(!$aIsReviewing) {
@@ -121,10 +122,10 @@
 							}
 
 							// Code review
-							if ($aIsReviewing && $aProgram != null) {
+							if (($aIsReviewing || $aIsOwner) && $aProgram != null) {
 								echo '<div style="width: 100%">';
-									echo '<form action="ajax-code.php" method="post" name="formReview" id="formReview">';
-										echo '<input type="hidden" name="action" value="writereview" />';
+									echo '<form action="#" method="post" name="formComment" id="formComment">';
+										echo '<input type="hidden" name="action" value="writecomment" />';
 										echo '<input type="hidden" name="id" value="" />';
 										echo '<input type="hidden" name="programId" value="'.$aProgram['id'].'" />';
 										layoutPrintMarkdownTextarea('comment', '', array(), '200px');
@@ -137,14 +138,14 @@
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
-		
+
 		$aBaseUrl = View::baseUrl();
-		
+
 		echo '<script type="text/javascript">CODEBOT.initCodePage();</script>';
-		
+
 		// TODO: replace with syntax highlighter?
 		echo '<script src="'.$aBaseUrl.'/js/third-party/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>';
-			
+
 		echo '
 		<script>
 			var editor = ace.edit("code");
@@ -153,8 +154,8 @@
 			editor.setReadOnly(true);
 		</script>';
 	}
-	
+
 	echo '</div>';
-	
+
 	layoutFooter(View::baseUrl());
 ?>

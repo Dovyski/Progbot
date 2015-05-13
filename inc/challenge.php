@@ -172,11 +172,11 @@ function challengeCountActiveAssignmentsByUser($theUserInfo) {
 	return $aRet;
 }
 
-function challengeFindByGroup($theGroupId) {
+function challengeFindByGroup($theGroupId, $theIncludePublic = true) {
 	global $gDb;
 
 	$aRet 		= array();
-	$aQuery 	= $gDb->prepare("SELECT * FROM challenges WHERE fk_group = ?");
+	$aQuery 	= $gDb->prepare("SELECT * FROM challenges WHERE fk_group = ?" . ($theIncludePublic ? " OR fk_group IS NULL" : ""));
 
 	if ($aQuery->execute(array($theGroupId))) {
 		while($aRow = $aQuery->fetch()) {
@@ -261,7 +261,7 @@ function challengeCanBeReviewedBy($theChallengeId, $theUserInfo) {
 	$aRet = false;
 
 	if ($theUserInfo['type'] == USER_LEVEL_PROFESSOR) {
-		$aQuery = $gDb->prepare("SELECT id FROM challenges WHERE id = ? AND fk_group = ?");
+		$aQuery = $gDb->prepare("SELECT id FROM challenges WHERE id = ? AND (fk_group = ? OR fk_group IS NULL)");
 		$aQuery->execute(array($theChallengeId, (int)$theUserInfo['fk_group']));
 
 		$aRet = $aQuery->rowCount() != 0;

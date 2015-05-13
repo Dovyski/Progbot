@@ -40,15 +40,15 @@ var CODEBOT = new function() {
 	};
 
 	this.initCodePage = function() {
-		$('#formReview').on('submit', function() {
+		$('#formComment').on('submit', function() {
 			$.ajax({
 			  type: 'POST',
 			  url: 'ajax-code.php',
 			  dataType: 'json',
-			  data: $('#formReview').serialize()
+			  data: $('#formComment').serialize()
 			})
 			.done(function( msg ) {
-				console.log( "Data Saved: " + msg );
+				console.log("Data Saved: ", msg);
 				window.location.reload(true);
 			})
 			.fail(function(jqXHR, textStatus) {
