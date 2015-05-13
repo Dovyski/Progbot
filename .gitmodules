@@ -1,3 +1,6 @@
 [submodule "view/html/js/third-party/ace"]
 	path = view/html/js/third-party/ace
 	url = https://github.com/ajaxorg/ace-builds/
+[submodule "view/html/ide/codebot"]
+	path = view/html/ide/codebot
+	url = https://github.com/Dovyski/Codebot.git
