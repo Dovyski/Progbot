@@ -24,7 +24,7 @@
 						echo '</td>';
 						echo '<td>';
 							if($aIsProfessor) {
-								echo '<a href="javascript:void(0);" onclick="CODEBOT.changeGroupMember(\'group-members\', '.$aGroup['id'].', '.$aUserId.', \'remove\')" title="Remover usuario do grupo"><i class="fa fa-remove"></i></a>';
+								echo '<a href="javascript:void(0);" onclick="CODEBOT.page.groups.changeMember(\'group-members\', '.$aGroup['id'].', '.$aUserId.', \'remove\')" title="Remover usuario do grupo"><i class="fa fa-remove"></i></a>';
 							}
 						echo '</td>';
 					echo '</tr>';

@@ -143,48 +143,13 @@ var CODEBOT = new function() {
 		});
 	};
 
-	this.loadGroupMembers = function(theContainerId, theGroupId) {
-		$('#' + theContainerId).html('Carregando... <img src="./ajax-loader.gif" title="Loading" align="absmiddle">');
-
-		$.ajax({
-		  type: 'POST',
-		  url: 'ajax-group-members.php',
-		  data: {'group': theGroupId }
-		})
-		.done(function( msg ) {
-			$('#' + theContainerId).html(msg);
-		})
-		.fail(function(jqXHR, textStatus) {
-			$('#' + theContainerId).html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');
-		});
-	};
-
-	this.addGroupMember = function(theContainerId, theGroupId, theFieldWhereUserIdIs) {
-		var aUserName 	= $('#' + theFieldWhereUserIdIs).val();
-		var aDatalist 	= $('#' + theFieldWhereUserIdIs).attr('list');
-
-		var aUserId 	= $('#' + aDatalist).find('option[value="'+aUserName+'"]').data('id');
-
-		if(aUserId) {
-			CODEBOT.changeGroupMember(theContainerId, theGroupId, aUserId, 'add');
-		}
-	};
-
-	this.changeGroupMember = function(theContainerId, theGroupId, theUserId, theAction) {
-		$.ajax({
-		  type: 'POST',
-		  url: 'ajax-group-members.php',
-		  data: {'action': theAction, 'group': theGroupId, 'user' : theUserId }
-		})
-		.done(function( msg ) {
-			$('#' + theContainerId).html(msg);
-		})
-		.fail(function(jqXHR, textStatus) {
-			$('#' + theContainerId).html('<strong>Oops!</strong> Algum erro aconteceu. Tente novamente.');
-		});
-	};
-
 	this.openEditor = function(theChallengeId) {
 		window.open('ide.php?challenge=' + theChallengeId, '_blank', 'toolbar=0,location=0,menubar=0,width=1024,height=768');
 	};
 };
+
+
+$(function() {
+	var aPage = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+	CODEBOT.page.init(aPage);
+})

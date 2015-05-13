@@ -53,13 +53,5 @@
 		echo '</div>';
 	echo '</div>';
 
-	echo "
-	<script>
-		$(function() {
-			CODEBOT.page.enhance();
-			CODEBOT.page.challenges.init();
-		})
-	</script>";
-
 	layoutFooter(View::baseUrl());
 ?>
