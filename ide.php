@@ -1,17 +1,17 @@
-<?php 
+<?php
 	require_once dirname(__FILE__).'/inc/globals.php';
 
 	authAllowAuthenticated();
-	
+
 	$aData		  = array();
 	$aIsReviewing = false;
-	$aChallengeId = $_GET['challenge'];	
-	$aChallenge   = null;	
+	$aChallengeId = $_GET['challenge'];
+	$aChallenge   = null;
 	$aUserId 	  = $_SESSION['user']['id'];
 	$aProgram	  = null;
 
 	$aUserInfo	= userGetById($aUserId);
-	
+
 	if (challengeCanBeViewedBy($aChallengeId, $aUserInfo)) {
 		$aChallenge = challengeGetById($aChallengeId);
 		$aProgram 	= codeGetProgramByUser($aUserInfo['id'], $aChallengeId);
@@ -20,18 +20,18 @@
 			$aProgram = codeCreate($aUserInfo['id'], $aChallengeId);
 		}
 	}
-	
+
 	if ($aChallenge == null) {
-		header('Location: restricted.php');
+		echo 'Desafio invalido!';
 		exit();
 	}
-	
-	$aData['user'] 				= $aUserInfo;
-	$aData['challenge'] 		= $aChallenge;
-	$aData['challengeId'] 		= $aChallengeId;
-	$aData['isAssignment'] 		= $aChallenge['assignment'] != 0;
-	$aData['program'] 			= $aProgram;
-	$aData['canEdit'] 			= codeCanBeEdited($aProgram, $aChallenge);
-	
-	View::render('ide/index', $aData);
+
+	$aParams = '';
+	$aParams .= 'challenge=' 	. $aChallengeId . '&';
+	$aParams .= 'program=' 		. $aProgram['id'] . '&';
+	$aParams .= 'assignment=' 	. ($aChallenge['assignment'] != 0 ? 'true' : 'false') . '&';
+	$aParams .= 'canEdit=' 		. (codeCanBeEdited($aProgram, $aChallenge) ? 'true' : 'false');
+
+	header('Location: view/html/ide/codebot/?' . $aParams);
+	exit();
 ?>
