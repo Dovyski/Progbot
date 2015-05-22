@@ -4,6 +4,7 @@ var ProgbotWebFilesystem = function() {
 
 	// Public properties
 	this.driver = 'Progbot Web Disk FileSystem';
+	this.config = {};
 
 	var runCommand = function(theAction, theParams, theCallback) {
 		$.ajax({
@@ -20,7 +21,10 @@ var ProgbotWebFilesystem = function() {
 	};
 
 	this.init = function() {
-		console.debug('ProgbotWebDiskFilesystem::init()');
+		this.config.challenge = CODEBOT.utils.getURLParamByName('challenge');
+		this.config.programId = CODEBOT.utils.getURLParamByName('program');
+
+		console.debug('ProgbotWebDiskFilesystem::init()', this.config);
 	};
 
     this.move = function(theOldNode, theNewNode, theCallback) {
@@ -62,7 +66,7 @@ var ProgbotWebFilesystem = function() {
 			theCallback(null);
 
 		} else {
-			runCommand('readcode', {programId: theNode.path}, function(theData) {
+			runCommand('readcode', {programId: theNode.path, challenge: this.config.challenge}, function(theData) {
 				theCallback(theData.code);
 			});
 		}
@@ -73,7 +77,7 @@ var ProgbotWebFilesystem = function() {
 			runCommand({method: 'write-codebot', path: theNode.path.replace(/codebot:\/\//, ''), data: theData}, 'json', theCallback);
 
 		} else {
-			runCommand('savecode', {programId: theNode.path, code: theData}, function(theResponse) {
+			runCommand('savecode', {programId: theNode.path, code: theData, challenge: this.config.challenge}, function(theResponse) {
 				console.log(theResponse);
 				theCallback();
 			});

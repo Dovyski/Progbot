@@ -64,7 +64,7 @@ var ProgbotIdePlugin = function() {
         mContext.ui.tabs.openNode({
             data: {
                 name: 'main.c',
-                path: '/main.c',
+                path: mData.program,
             }
         });
     };

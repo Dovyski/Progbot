@@ -10,15 +10,11 @@ header('Content-Type: text/javascript; charset=iso-8859-1');
 
 switch($aAction) {
 	case 'readcode':
-		$aRet['status'] = true;
-		$aRet['code'] = 'ddd';
-		break;
-
 	case 'savecode':
 		$aChallenge = challengeGetById(@$_REQUEST['challenge']);
 
 		if($aChallenge != null) {
-			$aProgram 	= codeGetById(@$_REQUEST['programId']);
+			$aProgram 	= codeGetById(@$_REQUEST['programId'], $aAction == 'readcode');
 			$aUser		= userGetById($_SESSION['user']['id']);
 
 			if ($aProgram == null) {
@@ -29,7 +25,15 @@ switch($aAction) {
 			$aCanEdit	= codeCanBeEdited($aProgram, $aChallenge);
 
 			if ($aIsOwner && $aCanEdit && challengeCanBeViewedBy($aProgram['fk_challenge'], $aUser)) {
-				$aRet['status'] = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
+				if($aAction == 'savecode') {
+					$aRet['status'] = codeSave($aUser['id'], $aProgram['id'], @$_REQUEST['code']);
+
+				} else {
+					$aRet['status'] = true;
+					$aRet['code'] = $aProgram['code'];
+				}
+			} else {
+				$aRet['msg'] = 'A operação não pode ser realizada.';
 			}
 		}
 		break;
