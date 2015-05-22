@@ -1,44 +1,16 @@
 var ProgbotWebFilesystem = function() {
 	// Constants
-	const API_URL = 'plugins/ide-web/api/?';
+	const API_URL = '../../../../ajax-code.php';
 
 	// Public properties
 	this.driver = 'Progbot Web Disk FileSystem';
 
-	// Private properties
-	var mDisk = '';
-	var mProjectPath = '';
-
-	// From here: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Sending_and_Receiving_Binary_Data
-	var readBinary = function(thePath, theCallback) {
-		var aReq = new XMLHttpRequest();
-		var aUrl = API_URL +
-				   'class=disk&method=read&mount=' + encodeURI(mDisk + '/' + mProjectPath) +
-				   '&path=' + thePath;
-
-		aReq.open('GET', aUrl, true);
-		aReq.responseType = 'blob';
-
-		aReq.onload = function(theEvent) {
-			var aBlob = aReq.response;
-			theCallback(aBlob);
-		};
-
-		aReq.onreadystatechange = function() {
-			//console.log(aReq);
-		};
-
-		aReq.send();
-	};
-
-	var runCommand = function(theParams, theDataType, theCallback) {
-		var aParams = $.extend({mount: mDisk + '/' + mProjectPath}, theParams);
-
+	var runCommand = function(theAction, theParams, theCallback) {
 		$.ajax({
-			url: API_URL + 'class=disk',
-			method: 'get',
-			data: aParams,
-			dataType: theDataType
+			url: API_URL + '?action=' + theAction,
+			method: 'post',
+			data: theParams,
+			dataType: 'json'
 		}).done(function(theData) {
 			theCallback(theData);
 
@@ -47,29 +19,12 @@ var ProgbotWebFilesystem = function() {
 		});
 	};
 
-	this.setProjectPath = function(thePath) {
-		mProjectPath = thePath;
-	}
-
 	this.init = function() {
-		mDisk = CODEBOT.utils.getURLParamByName('challenge');
-
-		if(!mDisk) {
-			alert('It looks like you directly visited this link without a valid disk information. You will not be able to perform any IO operation, such as opening a project. Go to https://web.codebot.com to fix the problem.');
-		}
-
-		console.log('ProgbotWebDiskFilesystem::init() - disk id = ' + mDisk);
+		console.debug('ProgbotWebDiskFilesystem::init()');
 	};
 
     this.move = function(theOldNode, theNewNode, theCallback) {
-		runCommand({method: 'mv', old: theOldNode.path, new: theNewNode.path}, 'text', function(theResponse) {
-			if(theResponse.success) {
-				theOldNode.path = theNewNode.path;
-				theCallback();
-			} else {
-				theCallback(theResponse.msg);
-			}
-		});
+		theCallback();
     };
 
     this.getTempDirectory = function(theCallback) {
@@ -78,10 +33,23 @@ var ProgbotWebFilesystem = function() {
 
     this.readDirectory = function(theNode, theCallback) {
 		if(theNode.path.indexOf('codebot://') != -1) {
-			runCommand({method: 'lsCodebot', path: theNode.path.replace(/codebot:\/\//, '')}, 'json', theCallback);
+			var aPath = theNode.path.replace(/codebot:\/\//, '');
 
+			if(aPath == './plugins') {
+				theCallback([{
+					'name':'Project',
+					'title':'Project',
+					'path':'/',
+					'folder':'true',
+					'key':'root',
+					'expanded':true,
+					'children': [
+						{'name':'progbot.ide.web.js', 'title':'progbot.ide.web.js', 'path':'../progbot.ide.web.js'}
+					]
+				}]);
+			}
 		} else {
-			runCommand({method: 'ls', path: theNode.path}, 'json', theCallback);
+			theCallback();
 		}
     };
 
@@ -91,10 +59,12 @@ var ProgbotWebFilesystem = function() {
 
 	this.readFile = function(theNode, theCallback) {
 		if(theNode.path.indexOf('codebot://') != -1) {
-			runCommand({method: 'read-codebot', path: theNode.path.replace(/codebot:\/\//, '')}, 'text', theCallback);
+			theCallback(null);
 
 		} else {
-			readBinary(theNode.path, theCallback);
+			runCommand('readcode', {programId: theNode.path}, function(theData) {
+				theCallback(theData.code);
+			});
 		}
 	};
 
@@ -103,36 +73,22 @@ var ProgbotWebFilesystem = function() {
 			runCommand({method: 'write-codebot', path: theNode.path.replace(/codebot:\/\//, ''), data: theData}, 'json', theCallback);
 
 		} else {
-			runCommand(
-				{
-					method: 'write',
-					path: theNode.path,
-					data: theData
-				},
-				'json',
-				function(theResponse) {
-					console.log(theResponse);
-					theCallback();
-				}
-			);
+			runCommand('savecode', {programId: theNode.path, code: theData}, function(theResponse) {
+				console.log(theResponse);
+				theCallback();
+			});
 		}
 	};
 
 	this.createFile = function(theName, theNode, theData, theCallback) {
-		runCommand({method: 'write', path: theNode.path + '/' + theName, data: theData}, 'json', theCallback);
+		theCallback();
 	};
 
     this.delete = function(theNode, theCallback) {
-		runCommand({method: 'rm', path: theNode.path}, 'json', function(theResponse) {
-			theCallback(theResponse.success ? null : theResponse.msg);
-		});
+		theCallback();
 	};
 
 	this.createDirectory = function(theName, theNode, theCallback) {
-		runCommand({method: 'mkdir', path: theNode.path + '/' + theName}, 'json', theCallback);
-	};
-
-	this.getAPIEndpoint = function() {
-		return API_URL + 'class=disk&mount=' + mDisk + '/' + mProjectPath;
+		theCallback();
 	};
 };

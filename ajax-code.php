@@ -9,6 +9,11 @@ $aRet = array('status' => false);
 header('Content-Type: text/javascript; charset=iso-8859-1');
 
 switch($aAction) {
+	case 'readcode':
+		$aRet['status'] = true;
+		$aRet['code'] = 'ddd';
+		break;
+
 	case 'savecode':
 		$aChallenge = challengeGetById(@$_REQUEST['challenge']);
 
